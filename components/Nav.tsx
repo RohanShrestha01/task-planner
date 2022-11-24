@@ -25,7 +25,7 @@ export default function Nav() {
 
   return (
     <nav>
-      <ul className="flex gap-8">
+      <ul className="flex gap-4">
         {navItems.map((navItem, i) => (
           <li
             key={i}
