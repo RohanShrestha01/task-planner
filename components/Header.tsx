@@ -23,10 +23,10 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between transition-[background-color] duration-500 dark:bg-darkSlateBg py-1 px-4 bg-lightVioletBg">
+    <header className="flex items-center justify-between transition-[background-color] duration-500 dark:bg-lightNeutralBg py-1 px-4 bg-lightVioletBg font-medium">
       <Link href="/" className="flex items-center gap-3">
         <Lottie animationData={calendarAnimation} className="h-12" />
-        <h1>Task Planner</h1>
+        <h1 className="font-serif text-xl font-bold">Task Planner</h1>
       </Link>
       <Nav />
       <div className="flex gap-6 items-center">

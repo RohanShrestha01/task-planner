@@ -34,7 +34,7 @@ export default function Nav() {
           >
             <Link
               href={navItem.link}
-              className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-slateHover py-2 px-4 rounded-full"
+              className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover py-2 px-4 rounded-full"
             >
               <Lottie
                 className="lottie h-7"

@@ -9,7 +9,7 @@ export default function SignInButton() {
     <button
       onMouseEnter={() => lottieRef.current?.play()}
       onMouseLeave={() => lottieRef.current?.stop()}
-      className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-slateHover px-4 py-2 rounded-full border border-blackText dark:border-whiteText hover:border-violetHover dark:hover:border-slateHover"
+      className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover px-4 py-2 rounded-full border border-neutral-500 hover:border-violetHover dark:hover:border-neutralHover"
     >
       <Lottie
         animationData={avatarAnimation}

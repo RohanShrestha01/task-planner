@@ -5,7 +5,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body className="bg-darkVioletBg dark:bg-lightSlateBg text-blackText dark:text-whiteText transition-[background-color] duration-500">
+        <body className="bg-darkVioletBg dark:bg-darkNeutralBg text-blackText dark:text-whiteText transition-[background-color] duration-500 font-sans">
           <div id="backdrop" />
           <div id="overlay" />
           <Main />
