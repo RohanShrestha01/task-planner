@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { LottieRefCurrentProps } from 'lottie-react';
 
 import ThemedLottie from './ThemedLottie';
@@ -9,6 +10,8 @@ import calendarAnimation from '../public/lotties/calendar.json';
 export default function Nav() {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);
   const calendarLottieRef = useRef<LottieRefCurrentProps>(null);
+
+  const { pathname } = useRouter();
 
   const navItems = [
     {
@@ -27,7 +30,7 @@ export default function Nav() {
 
   return (
     <nav>
-      <ul className="flex gap-4">
+      <ul className="flex gap-8">
         {navItems.map((navItem, i) => (
           <li
             key={i}
@@ -36,7 +39,11 @@ export default function Nav() {
           >
             <Link
               href={navItem.link}
-              className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover py-2 px-4 rounded-full"
+              className={`flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover py-2 px-4 rounded-full border-2 transition-[border-color] duration-500 ${
+                pathname === navItem.link
+                  ? 'border-violet-600 dark:border-neutral-400'
+                  : 'border-lightVioletBg dark:border-lightNeutralBg'
+              }`}
             >
               <ThemedLottie
                 className="h-7"

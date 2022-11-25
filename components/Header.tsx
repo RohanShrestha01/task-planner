@@ -11,10 +11,12 @@ export default function Header() {
   return (
     <header className="flex transition-[background-color] duration-500 dark:bg-lightNeutralBg py-1 px-10 bg-lightVioletBg font-medium">
       <div className="flex items-center flex-grow justify-between">
-        <div className="flex items-center gap-10">
-          <Link href="/" className="flex items-center gap-3">
+        <div className="flex items-center gap-14">
+          <Link href="/" className="flex items-center gap-4">
             <Lottie animationData={calendarAnimation} className="h-12" />
-            <h1 className="font-serif text-xl font-bold">Task Planner</h1>
+            <h1 className="font-serif text-xl font-bold text-violet-600 dark:text-whiteText">
+              Task Planner
+            </h1>
           </Link>
           <Nav />
         </div>

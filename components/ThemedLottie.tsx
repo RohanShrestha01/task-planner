@@ -4,8 +4,7 @@ import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
 
 export default function ThemedLottie(props: any) {
-  const { systemTheme, theme } = useTheme();
-  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const { resolvedTheme, theme } = useTheme();
 
   const { animationData, lottieRef, className } = props;
 
@@ -17,7 +16,7 @@ export default function ThemedLottie(props: any) {
   return (
     <Lottie
       animationData={
-        currentTheme === 'dark' ? animationDataLight : animationData
+        resolvedTheme === 'dark' ? animationDataLight : animationData
       }
       autoplay={false}
       loop={false}

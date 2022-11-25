@@ -21,6 +21,8 @@ module.exports = {
         lightVioletBg: colors.violet[100],
         darkVioletBg: colors.violet[200],
         violetHover: colors.violet[300],
+        violetHoverDark: colors.violet[400],
+        neutralHoverLight: colors.neutral[600],
         neutralHover: colors.neutral[700],
         lightNeutralBg: colors.neutral[800],
         darkNeutralBg: colors.neutral[900],

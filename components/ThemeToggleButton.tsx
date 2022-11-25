@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 import themeToggleAnimation from '../public/lotties/themeToggle.json';
 
 export default function ThemeToggleButton() {
-  const { systemTheme, theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
@@ -15,11 +15,9 @@ export default function ThemeToggleButton() {
 
   if (!mounted) return <div className="h-9 w-9" />;
 
-  const currentTheme = theme === 'system' ? systemTheme : theme;
-
   const themeToggleHandler = () => {
     lottieRef.current?.setSpeed(1.75);
-    if (currentTheme === 'dark') {
+    if (resolvedTheme === 'dark') {
       lottieRef.current?.playSegments([0, 40], true);
       setTheme('light');
     } else {
@@ -36,7 +34,7 @@ export default function ThemeToggleButton() {
       loop={false}
       lottieRef={lottieRef}
       onDOMLoaded={() => {
-        if (currentTheme === 'light') lottieRef.current?.goToAndStop(40, true);
+        if (resolvedTheme === 'light') lottieRef.current?.goToAndStop(40, true);
       }}
       onClick={themeToggleHandler}
     />

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::selection {
+  @apply bg-violet-600 text-whiteText;
+}
