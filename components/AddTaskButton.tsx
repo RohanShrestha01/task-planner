@@ -3,13 +3,13 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import plusAnimation from '../public/lotties/plus.json';
 
-export default function AddListButton() {
+export default function AddTaskButton() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
   return (
-    <section
-      className="w-64 bg-violet-500 hover:bg-violet-600 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-whiteText flex gap-2 item-center rounded cursor-pointer px-4 py-2 self-start"
+    <button
       onMouseEnter={() => lottieRef.current?.play()}
+      className="flex gap-2 mt-4 justify-center hover:bg-violetHoverDark rounded-full py-2 dark:hover:bg-neutralHover"
     >
       <Lottie
         animationData={plusAnimation}
@@ -17,9 +17,9 @@ export default function AddListButton() {
         loop={false}
         lottieRef={lottieRef}
         onComplete={() => lottieRef.current?.stop()}
-        className="h-4 self-center stroke-white fill-white"
+        className="h-4 self-center dark:stroke-white dark:fill-white stroke-black fill-black"
       />
-      <h2 className="font-medium flex items-center">Add another list</h2>
-    </section>
+      <span>Add new task</span>
+    </button>
   );
 }
