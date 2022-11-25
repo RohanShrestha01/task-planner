@@ -39,7 +39,7 @@ export default function Nav() {
           >
             <Link
               href={navItem.link}
-              className={`flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover py-2 px-4 rounded-full border-2 transition-[border-color] duration-500 ${
+              className={`flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover py-1 px-4 rounded-full border-2 transition-[border-color] duration-500 ${
                 pathname === navItem.link
                   ? 'border-violet-600 dark:border-neutral-400'
                   : 'border-lightVioletBg dark:border-lightNeutralBg'
