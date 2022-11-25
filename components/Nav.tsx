@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import Link from 'next/link';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { LottieRefCurrentProps } from 'lottie-react';
+
+import ThemedLottie from './ThemedLottie';
 import tasksAnimation from '../public/lotties/tasks.json';
 import calendarAnimation from '../public/lotties/calendar.json';
-import { useRef } from 'react';
 
 export default function Nav() {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);
@@ -36,11 +38,9 @@ export default function Nav() {
               href={navItem.link}
               className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover py-2 px-4 rounded-full"
             >
-              <Lottie
-                className="lottie h-7"
+              <ThemedLottie
+                className="h-7"
                 animationData={navItem.lottie}
-                autoplay={false}
-                loop={false}
                 lottieRef={navItem.lottieRef}
               />
               <span>{navItem.name}</span>

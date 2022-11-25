@@ -1,5 +1,7 @@
 import { useRef } from 'react';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { LottieRefCurrentProps } from 'lottie-react';
+
+import ThemedLottie from './ThemedLottie';
 import avatarAnimation from '../public/lotties/avatar.json';
 
 export default function SignInButton() {
@@ -11,12 +13,10 @@ export default function SignInButton() {
       onMouseLeave={() => lottieRef.current?.stop()}
       className="flex items-center gap-2 hover:bg-violetHover dark:hover:bg-neutralHover px-4 py-2 rounded-full border border-neutral-500 hover:border-violetHover dark:hover:border-neutralHover"
     >
-      <Lottie
+      <ThemedLottie
         animationData={avatarAnimation}
-        autoplay={false}
-        loop={false}
         lottieRef={lottieRef}
-        className="lottie h-7"
+        className="h-7"
       />
       <span>Sign In</span>
     </button>
