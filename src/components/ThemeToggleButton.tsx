@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 
-import themeToggleAnimation from '../public/lotties/themeToggle.json';
+import themeToggleAnimation from '../../public/lotties/themeToggle.json';
 
 export default function ThemeToggleButton() {
   const { resolvedTheme, setTheme } = useTheme();

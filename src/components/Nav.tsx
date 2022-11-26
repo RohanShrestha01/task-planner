@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { LottieRefCurrentProps } from 'lottie-react';
 
 import ThemedLottie from './ThemedLottie';
-import tasksAnimation from '../public/lotties/tasks.json';
-import calendarAnimation from '../public/lotties/calendar.json';
+import tasksAnimation from '../../public/lotties/tasks.json';
+import calendarAnimation from '../../public/lotties/calendar.json';
 
 export default function Nav() {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);

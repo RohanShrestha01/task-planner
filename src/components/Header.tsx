@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
-import calendarAnimation from '../public/calendarLogo.json';
+import calendarAnimation from '../../public/calendarLogo.json';
 import Nav from './Nav';
 import SignInButton from './SignInButton';
 import Search from './Search';

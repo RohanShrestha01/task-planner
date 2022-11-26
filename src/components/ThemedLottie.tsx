@@ -1,12 +1,20 @@
-import Lottie from 'lottie-react';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { replaceColor } from 'lottie-colorify';
 import { useTheme } from 'next-themes';
-import { useMemo } from 'react';
+import { RefObject, useMemo } from 'react';
 
-export default function ThemedLottie(props: any) {
-  const { resolvedTheme, theme } = useTheme();
+interface Props {
+  animationData: any;
+  lottieRef: RefObject<LottieRefCurrentProps>;
+  className: string;
+}
 
-  const { animationData, lottieRef, className } = props;
+export default function ThemedLottie({
+  animationData,
+  lottieRef,
+  className,
+}: Props) {
+  const { resolvedTheme } = useTheme();
 
   const animationDataLight = useMemo(
     () => replaceColor([0, 0, 0], [255, 255, 255], animationData),

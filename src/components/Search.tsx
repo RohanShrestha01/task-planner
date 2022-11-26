@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
-import searchAnimation from '../public/lotties/search.json';
-import crossAnimation from '../public/lotties/cross.json';
+import searchAnimation from '../../public/lotties/search.json';
+import crossAnimation from '../../public/lotties/cross.json';
 
 export default function Search() {
   const [crossShow, setCrossShow] = useState(false);

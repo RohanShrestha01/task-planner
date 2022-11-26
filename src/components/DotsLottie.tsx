@@ -3,7 +3,7 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import { replaceColor } from 'lottie-colorify';
 import { useTheme } from 'next-themes';
 
-import dotsAnimation from '../public/lotties/dots.json';
+import dotsAnimation from '../../public/lotties/dots.json';
 
 interface Props {
   size?: string;

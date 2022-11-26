@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { LottieRefCurrentProps } from 'lottie-react';
 
 import ThemedLottie from './ThemedLottie';
-import avatarAnimation from '../public/lotties/avatar.json';
+import avatarAnimation from '../../public/lotties/avatar.json';
 
 export default function SignInButton() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);

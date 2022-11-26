@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
-import plusAnimation from '../public/lotties/plus.json';
+import plusAnimation from '../../public/lotties/plus.json';
 
 export default function AddListButton() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);

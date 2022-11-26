@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import DotsLottie from './DotsLottie';
-import checkBoxAnimation from '../public/lotties/checkBox.json';
+import checkBoxAnimation from '../../public/lotties/checkBox.json';
 
 export default function TaskCard() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
