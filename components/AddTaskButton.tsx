@@ -19,7 +19,7 @@ export default function AddTaskButton() {
         onComplete={() => lottieRef.current?.stop()}
         className="h-4 self-center dark:stroke-white dark:fill-white stroke-black fill-black"
       />
-      <span>Add new task</span>
+      <span className="text-sm">Add new task</span>
     </button>
   );
 }
