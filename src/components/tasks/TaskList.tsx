@@ -1,5 +1,5 @@
 import AddTaskButton from './AddTaskButton';
-import DotsLottie from './DotsLottie';
+import DotsLottie from '../DotsLottie';
 import TaskCards from './TaskCards';
 
 export default function TaskList() {

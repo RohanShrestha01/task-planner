@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
-import DotsLottie from './DotsLottie';
-import checkBoxAnimation from '../../public/lotties/checkBox.json';
+import DotsLottie from '../DotsLottie';
+import checkBoxAnimation from '../../../public/lotties/checkBox.json';
 
 export default function TaskCard() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
@@ -39,7 +39,9 @@ export default function TaskCard() {
         </p>
       </div>
       <div className="flex items-center justify-between pr-2">
-        <span className="text-sm text-violet-600">Tomorrow 12:00 PM</span>
+        <span className="text-sm text-violet-700 dark:text-violet-400">
+          Tomorrow 12:00 PM
+        </span>
         <Lottie
           animationData={checkBoxAnimation}
           loop={false}
