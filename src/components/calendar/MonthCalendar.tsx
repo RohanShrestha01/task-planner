@@ -45,7 +45,11 @@ export default function Calendar(props: any) {
     useCalendar(props, state);
 
   return (
-    <div {...calendarProps} ref={ref} className="inline-block">
+    <div
+      {...calendarProps}
+      ref={ref}
+      className="inline-block bg-lightVioletBg dark:bg-lightNeutralBg rounded pb-4 px-2 transition-[background-color] duration-500"
+    >
       <div className="flex items-center justify-between py-4 px-2">
         <h2 className="font-bold">{title}</h2>
         <div className="flex gap-2">
