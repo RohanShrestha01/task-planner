@@ -3,19 +3,32 @@ import { useCalendar } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
 import { useCalendarState } from '@react-stately/calendar';
 import { GregorianCalendar } from '@internationalized/date';
-import { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { replaceColor } from 'lottie-colorify';
+import { useTheme } from 'next-themes';
 
-import ThemedLottie from '../ThemedLottie';
 import chevronLeftAnimation from '../../../public/lotties/chevronLeft.json';
 import chevronRightAnimation from '../../../public/lotties/chevronRight.json';
 import CalendarGrid from './CalendarGrid';
 import Button from './Button';
 
 const createCalendar = () => new GregorianCalendar();
+const chevronLeftAnimationLight = replaceColor(
+  [0, 0, 0],
+  [255, 255, 255],
+  chevronLeftAnimation
+);
+const chevronRightAnimationLight = replaceColor(
+  [0, 0, 0],
+  [255, 255, 255],
+  chevronRightAnimation
+);
 
 export default function Calendar(props: any) {
   const chevronLeftLottieRef = useRef<LottieRefCurrentProps>(null);
   const chevronRightLottieRef = useRef<LottieRefCurrentProps>(null);
+
+  const { resolvedTheme } = useTheme();
 
   const chevronStyle =
     'h-7 hover:bg-violet-300 dark:hover:bg-violet-600 rounded-full flex items-center justify-center';
@@ -32,23 +45,39 @@ export default function Calendar(props: any) {
     useCalendar(props, state);
 
   return (
-    <div {...calendarProps} ref={ref} id="calendar" className="inline-block">
+    <div {...calendarProps} ref={ref} className="inline-block">
       <div className="flex items-center justify-between py-4 px-2">
         <h2 className="font-bold">{title}</h2>
         <div className="flex gap-2">
           <Button {...prevButtonProps}>
-            <ThemedLottie
-              animationData={chevronLeftAnimation}
+            <Lottie
+              animationData={
+                resolvedTheme === 'dark'
+                  ? chevronLeftAnimationLight
+                  : chevronLeftAnimation
+              }
+              autoplay={false}
+              loop={false}
               lottieRef={chevronLeftLottieRef}
-              type="click"
+              onClick={() =>
+                chevronLeftLottieRef.current?.playSegments([0, 30], true)
+              }
               className={chevronStyle}
             />
           </Button>
           <Button {...nextButtonProps}>
-            <ThemedLottie
-              animationData={chevronRightAnimation}
+            <Lottie
+              animationData={
+                resolvedTheme === 'dark'
+                  ? chevronRightAnimationLight
+                  : chevronRightAnimation
+              }
+              autoplay={false}
+              loop={false}
               lottieRef={chevronRightLottieRef}
-              type="click"
+              onClick={() =>
+                chevronRightLottieRef.current?.playSegments([0, 30], true)
+              }
               className={chevronStyle}
             />
           </Button>

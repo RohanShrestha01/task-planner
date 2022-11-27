@@ -1,29 +1,44 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { replaceColor } from 'lottie-colorify';
+import { useTheme } from 'next-themes';
 
-import ThemedLottie from './ThemedLottie';
 import tasksAnimation from '../../public/lotties/tasks.json';
 import calendarAnimation from '../../public/lotties/calendar.json';
+
+const tasksAnimationLight = replaceColor(
+  [0, 0, 0],
+  [255, 255, 255],
+  tasksAnimation
+);
+const calendarAnimationLight = replaceColor(
+  [0, 0, 0],
+  [255, 255, 255],
+  calendarAnimation
+);
 
 export default function Nav() {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);
   const calendarLottieRef = useRef<LottieRefCurrentProps>(null);
 
   const { pathname } = useRouter();
+  const { resolvedTheme } = useTheme();
 
   const navItems = [
     {
       link: '/',
       name: 'Tasks',
       lottie: tasksAnimation,
+      lottieLight: tasksAnimationLight,
       lottieRef: tasksLottieRef,
     },
     {
       link: '/calendar',
       name: 'Calendar',
       lottie: calendarAnimation,
+      lottieLight: calendarAnimationLight,
       lottieRef: calendarLottieRef,
     },
   ];
@@ -45,10 +60,16 @@ export default function Nav() {
                   : 'border-lightVioletBg dark:border-lightNeutralBg'
               }`}
             >
-              <ThemedLottie
-                className="h-7"
-                animationData={navItem.lottie}
+              <Lottie
+                animationData={
+                  resolvedTheme === 'dark'
+                    ? navItem.lottieLight
+                    : navItem.lottie
+                }
+                autoplay={false}
+                loop={false}
                 lottieRef={navItem.lottieRef}
+                className="h-7"
               />
               <span>{navItem.name}</span>
             </Link>

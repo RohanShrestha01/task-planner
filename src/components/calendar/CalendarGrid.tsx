@@ -17,7 +17,7 @@ export default function CalendarGrid({ state, ...props }: Props) {
   const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
-    <table {...gridProps} id="calendar-table">
+    <table {...gridProps}>
       <thead {...headerProps} className="text-violet-600 dark:text-violet-400">
         <tr>
           {weekDays.map((day, index) => (
