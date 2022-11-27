@@ -1,12 +1,14 @@
 import { useRef } from 'react';
 import { useCalendarCell } from '@react-aria/calendar';
 import { CalendarState } from '@react-stately/calendar';
-import { CalendarDate } from '@internationalized/date';
+import { CalendarDate, today, getLocalTimeZone } from '@internationalized/date';
 
 interface Props {
   state: CalendarState;
   date: CalendarDate;
 }
+
+const todayDate = today(getLocalTimeZone());
 
 export default function CalendarCell({ state, date }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,7 +18,6 @@ export default function CalendarCell({ state, date }: Props) {
     isSelected,
     isOutsideVisibleRange,
     isDisabled,
-    isUnavailable,
     formattedDate,
   } = useCalendarCell({ date }, state, ref);
 
@@ -34,7 +35,11 @@ export default function CalendarCell({ state, date }: Props) {
           isDisabled
             ? 'hover:bg-transparent dark:hover:bg-transparent cursor-default text-gray-400'
             : ''
-        } ${isUnavailable ? '' : ''}`}
+        } ${
+          date.compare(todayDate) === 0
+            ? 'border border-blackText dark:border-whiteText'
+            : ''
+        }`}
       >
         {formattedDate}
       </div>

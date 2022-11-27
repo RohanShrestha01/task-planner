@@ -17,16 +17,16 @@ export default function Header() {
         <div className="flex items-center gap-14">
           <Link
             href="/"
-            onMouseEnter={() => lottieRef.current?.pause()}
-            onMouseLeave={() => lottieRef.current?.play()}
-            className="flex items-center gap-4"
+            onMouseEnter={() => lottieRef.current?.setSpeed(3)}
+            onMouseLeave={() => lottieRef.current?.setSpeed(1)}
+            className="group flex items-center gap-4"
           >
             <Lottie
               animationData={calendarAnimation}
               lottieRef={lottieRef}
               className="h-12"
             />
-            <h1 className="font-serif text-xl font-bold text-violet-600 dark:text-violet-400">
+            <h1 className="font-serif text-xl font-bold text-violet-600 dark:text-violet-400 group-hover:text-violet-700 dark:group-hover:text-violet-300">
               Task Planner
             </h1>
           </Link>

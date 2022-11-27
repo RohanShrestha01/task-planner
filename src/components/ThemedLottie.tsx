@@ -7,12 +7,14 @@ interface Props {
   animationData: any;
   lottieRef: RefObject<LottieRefCurrentProps>;
   className: string;
+  type?: string;
 }
 
 export default function ThemedLottie({
   animationData,
   lottieRef,
   className,
+  type = 'default',
 }: Props) {
   const { resolvedTheme } = useTheme();
 
@@ -29,6 +31,9 @@ export default function ThemedLottie({
       autoplay={false}
       loop={false}
       lottieRef={lottieRef}
+      onClick={() => {
+        if (type === 'click') lottieRef.current?.playSegments([0, 30], true);
+      }}
       className={className}
     />
   );
