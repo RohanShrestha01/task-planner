@@ -20,11 +20,13 @@ export default function Calendar(props: any) {
     useCalendar(props, state);
 
   return (
-    <div {...calendarProps} ref={ref} id="calendar">
-      <div>
-        <h2>{title}</h2>
-        <Button {...prevButtonProps}>&lt;</Button>
-        <Button {...nextButtonProps}>&gt;</Button>
+    <div {...calendarProps} ref={ref} id="calendar" className="inline-block">
+      <div className="flex justify-between py-4 px-2">
+        <h2 className="font-bold">{title}</h2>
+        <div className="flex gap-4">
+          <Button {...prevButtonProps}>&lt;</Button>
+          <Button {...nextButtonProps}>&gt;</Button>
+        </div>
       </div>
       <CalendarGrid state={state} />
     </div>

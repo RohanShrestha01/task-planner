@@ -26,7 +26,7 @@ export default function Header() {
               lottieRef={lottieRef}
               className="h-12"
             />
-            <h1 className="font-serif text-xl font-bold text-violet-600 dark:text-whiteText">
+            <h1 className="font-serif text-xl font-bold text-violet-600 dark:text-violet-400">
               Task Planner
             </h1>
           </Link>

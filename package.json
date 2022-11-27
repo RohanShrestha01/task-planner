@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@internationalized/date": "^3.0.1",
     "@next/font": "^13.0.5",
     "@react-aria/button": "^3.6.3",
     "@react-aria/calendar": "^3.0.4",
+    "@react-aria/i18n": "^3.6.2",
     "@react-stately/calendar": "^3.0.4",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",

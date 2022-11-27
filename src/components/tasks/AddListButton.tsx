@@ -8,7 +8,7 @@ export default function AddListButton() {
 
   return (
     <section
-      className="w-64 bg-violet-500 hover:bg-violet-600 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-whiteText flex gap-2 item-center rounded cursor-pointer px-4 py-2 self-start"
+      className="w-64 bg-violet-500 hover:bg-violet-600 dark:bg-violet-700 dark:hover:bg-violet-600 text-whiteText flex gap-2 item-center rounded cursor-pointer px-4 py-2 self-start"
       onMouseEnter={() => lottieRef.current?.play()}
     >
       <Lottie
