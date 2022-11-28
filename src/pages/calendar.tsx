@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { today, getLocalTimeZone } from '@internationalized/date';
 
 import MonthCalendar from '../components/calendar/MonthCalendar';
-import CreateTaskButton from '../components/calendar/CreateTaskButton';
-import CalendarPageHeader from '../components/calendar/CalendarPageHeader';
+import MainCalendar from '../components/calendar/MainCalendar';
+import AddButton from '../components/AddButton';
 
 export default function CalendarPage() {
   const [value, setValue] = useState(today(getLocalTimeZone()));
 
   return (
-    <main className="py-8 px-6 flex gap-12">
+    <main className="flex gap-12 px-6 py-8">
       <aside className="flex-grow">
-        <CalendarPageHeader selectedValue={value} setSelectedValue={setValue} />
-        <section></section>
+        <MainCalendar selectedValue={value} setSelectedValue={setValue} />
       </aside>
       <aside className="flex flex-col gap-8">
         <MonthCalendar
@@ -20,7 +19,12 @@ export default function CalendarPage() {
           value={value}
           onChange={setValue}
         />
-        <CreateTaskButton />
+        <AddButton
+          className="justify-center rounded-full btn-primary"
+          lottieColor="white"
+          text="Create Task"
+          textStyle="font-medium"
+        />
       </aside>
     </main>
   );

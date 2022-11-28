@@ -5,6 +5,12 @@ import { useTheme } from 'next-themes';
 
 import dotsAnimation from '../../public/lotties/dots.json';
 
+const dotsAnimationLight = replaceColor(
+  [0, 0, 0],
+  [255, 255, 255],
+  dotsAnimation
+);
+
 interface Props {
   size?: string;
   setCardHover?: Dispatch<SetStateAction<boolean>> | null;
@@ -20,9 +26,7 @@ export default function DotsLottie({
   return (
     <Lottie
       animationData={
-        resolvedTheme === 'dark'
-          ? replaceColor([0, 0, 0], [255, 255, 255], dotsAnimation)
-          : dotsAnimation
+        resolvedTheme === 'dark' ? dotsAnimationLight : dotsAnimation
       }
       autoplay={false}
       lottieRef={lottieRef}
@@ -36,7 +40,7 @@ export default function DotsLottie({
       }}
       className={`${
         size === 'small' ? 'h-5' : size === 'normal' ? 'h-6' : ''
-      } cursor-pointer hover:bg-violetHoverDark dark:hover:bg-neutralHoverLight rounded-full px-3`}
+      } cursor-pointer hover:bg-violetHover dark:hover:bg-neutralHover rounded-full px-3`}
     />
   );
 }

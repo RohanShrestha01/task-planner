@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .select-color {
+    @apply bg-primary hover:bg-primaryHover dark:bg-primaryDark dark:hover:bg-primaryHover text-whiteText;
+  }
+
+  .btn-primary {
+    @apply flex items-center gap-2 px-4 py-2 select-color;
+  }
+
+  .btn-text {
+    @apply flex justify-center gap-2 py-2 hover:bg-violetHover dark:hover:bg-neutralHover;
+  }
+
+  .bg-transition {
+    @apply transition-[background-color] duration-500 dark:bg-lightNeutralBg bg-lightVioletBg;
+  }
+}
+
 ::selection {
   @apply bg-violet-600 text-whiteText;
 }

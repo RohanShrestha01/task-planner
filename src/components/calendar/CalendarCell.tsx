@@ -29,8 +29,8 @@ export default function CalendarCell({ state, date }: Props) {
         hidden={isOutsideVisibleRange}
         className={`h-8 w-8 text-sm flex items-center justify-center rounded-full outline-none ${
           isSelected
-            ? 'bg-violet-600 hover:bg-violet-700 dark:bg-violet-800 dark:hover:bg-violet-900 text-whiteText'
-            : 'hover:bg-violet-300 dark:hover:bg-violet-600'
+            ? 'select-color'
+            : 'hover:bg-violetHover dark:hover:bg-violetHoverDark'
         } ${
           isDisabled
             ? 'hover:bg-transparent dark:hover:bg-transparent cursor-default text-gray-400'

@@ -46,7 +46,7 @@ export default function ChevronLottie({ type, clickHandler }: Props) {
         if (clickHandler) clickHandler();
       }}
       className={
-        'h-7 hover:bg-violet-300 dark:hover:bg-violet-600 rounded-full flex items-center justify-center cursor-pointer'
+        'h-7 hover:bg-violetHover dark:hover:bg-violetHoverDark rounded-full flex items-center justify-center cursor-pointer'
       }
     />
   );

@@ -26,9 +26,9 @@ export default function Calendar(props: any) {
     <div
       {...calendarProps}
       ref={ref}
-      className="inline-block bg-lightVioletBg dark:bg-lightNeutralBg rounded pb-4 px-2 transition-[background-color] duration-500"
+      className="inline-block px-2 pb-4 rounded bg-transition"
     >
-      <div className="flex items-center justify-between py-4 px-2">
+      <div className="flex items-center justify-between px-2 py-4">
         <h2 className="font-bold">{title}</h2>
         <div className="flex gap-2">
           <Button {...prevButtonProps}>

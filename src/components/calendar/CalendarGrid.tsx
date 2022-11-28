@@ -18,7 +18,10 @@ export default function CalendarGrid({ state, ...props }: Props) {
 
   return (
     <table {...gridProps}>
-      <thead {...headerProps} className="text-violet-600 dark:text-violet-400">
+      <thead
+        {...headerProps}
+        className="text-violetText dark:text-violetTextLight"
+      >
         <tr>
           {weekDays.map((day, index) => (
             <th key={index}>{day}</th>

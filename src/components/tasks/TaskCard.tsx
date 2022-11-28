@@ -22,24 +22,24 @@ export default function TaskCard() {
 
   return (
     <article
-      className={`bg-lightVioletBg dark:bg-lightNeutralBg transition-[background-color] duration-500 cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 ${
+      className={`bg-transition cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 ${
         allowHover && 'hover:bg-violetHover dark:hover:bg-neutralHover'
       }`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="text-sm rounded-full bg-violet-300 text-violet-900 font-medium px-2 py-1">
+        <h3 className="px-2 py-1 text-sm font-medium rounded-full bg-violet-300 text-violet-900">
           UI Design
         </h3>
         <DotsLottie size="small" setCardHover={setAllowHover} />
       </div>
       <div>
         <h2 className="font-medium text-[15px]">Complete frontend</h2>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           Finish building tasks page and calendar page UI
         </p>
       </div>
       <div className="flex items-center justify-between pr-2">
-        <span className="text-sm text-violet-700 dark:text-violet-400">
+        <span className="text-sm text-violet-700 dark:text-violetTextLight">
           Tomorrow 12:00 PM
         </span>
         <Lottie
@@ -50,7 +50,7 @@ export default function TaskCard() {
           onClick={checkBoxClickHandler}
           onMouseEnter={() => setAllowHover(false)}
           onMouseLeave={() => setAllowHover(true)}
-          className="h-7 transition-transform duration-200 hover:scale-110"
+          className="transition-transform duration-200 h-7 hover:scale-110"
         />
       </div>
     </article>

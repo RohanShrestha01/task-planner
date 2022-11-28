@@ -12,21 +12,21 @@ export default function Header() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
   return (
-    <header className="flex transition-[background-color] duration-500 dark:bg-lightNeutralBg py-1 px-10 bg-lightVioletBg font-medium">
-      <div className="flex items-center flex-grow justify-between">
+    <header className="flex px-10 py-1 font-medium bg-transition">
+      <div className="flex items-center justify-between flex-grow">
         <div className="flex items-center gap-14">
           <Link
             href="/"
             onMouseEnter={() => lottieRef.current?.setSpeed(3)}
             onMouseLeave={() => lottieRef.current?.setSpeed(1)}
-            className="group flex items-center gap-4"
+            className="flex items-center gap-4 group"
           >
             <Lottie
               animationData={calendarAnimation}
               lottieRef={lottieRef}
               className="h-12"
             />
-            <h1 className="font-serif text-xl font-bold text-violet-600 dark:text-violet-400 group-hover:text-violet-700 dark:group-hover:text-violet-300">
+            <h1 className="font-serif text-xl font-bold text-violetText dark:text-violetTextLight group-hover:text-violet-700 dark:group-hover:text-violet-300">
               Task Planner
             </h1>
           </Link>
@@ -34,7 +34,7 @@ export default function Header() {
         </div>
         <Search />
       </div>
-      <div className="flex gap-10 items-center pl-20">
+      <div className="flex items-center gap-10 pl-20">
         <ThemeToggleButton />
         <SignInButton />
       </div>
