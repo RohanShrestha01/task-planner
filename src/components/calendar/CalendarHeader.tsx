@@ -1,13 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
-import { CalendarDate, DateDuration } from '@internationalized/date';
+import { DateDuration } from '@internationalized/date';
 
 import ChevronLottie from '../ChevronLottie';
 import { convertNumToMonth } from '../../utils';
+import { Props } from './MainCalendar';
 
-interface Props {
-  selectedValue: CalendarDate;
-  setSelectedValue: Dispatch<SetStateAction<CalendarDate>>;
-  setFocusedValue: Dispatch<SetStateAction<CalendarDate>>;
+interface HeaderProps extends Props {
   viewValue: string;
 }
 
@@ -16,7 +13,7 @@ export default function CalendarHeader({
   setSelectedValue,
   setFocusedValue,
   viewValue,
-}: Props) {
+}: HeaderProps) {
   const selectedMonth = convertNumToMonth(selectedValue.month);
 
   let duration: DateDuration;
