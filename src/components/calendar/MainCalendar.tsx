@@ -1,20 +1,32 @@
 import * as Tabs from '@radix-ui/react-tabs';
+import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { CalendarDate } from '@internationalized/date';
 
 import AddButton from '../AddButton';
 import CalendarHeader from './CalendarHeader';
-import { Props } from './CalendarHeader';
+import DayView from './DayView';
+import WeekView from './WeekView';
+import MonthView from './MonthView';
+
+export interface Props {
+  selectedValue: CalendarDate;
+  setSelectedValue: Dispatch<SetStateAction<CalendarDate>>;
+}
 
 export default function MainCalendar(props: Props) {
+  const [viewValue, setViewValue] = useState('day');
+
   const tabs = [
-    { trigger: 'Day', value: 'tab1', content: 'Day View' },
-    { trigger: 'Week', value: 'tab2', content: 'Week View' },
-    { trigger: 'Month', value: 'tab3', content: 'Month View' },
+    { trigger: 'Day', value: 'day', View: DayView },
+    { trigger: 'Week', value: 'week', View: WeekView },
+    { trigger: 'Month', value: 'month', View: MonthView },
   ];
 
   return (
-    <Tabs.Root defaultValue="tab1" className="flex flex-col">
+    <Tabs.Root value={viewValue} onValueChange={setViewValue}>
       <section className="flex items-center justify-between">
-        <CalendarHeader {...props} />
+        <CalendarHeader {...props} viewValue={viewValue} />
         <Tabs.List className="flex rounded bg-transition">
           {tabs.map(({ trigger, value }, i) => (
             <Tabs.Trigger
@@ -32,11 +44,13 @@ export default function MainCalendar(props: Props) {
           text="Add"
         />
       </section>
-      {tabs.map(({ value, content }, i) => (
-        <section key={i}>
-          <Tabs.Content value={value}>{content}</Tabs.Content>
-        </section>
-      ))}
+      <section className="mt-4">
+        {tabs.map(({ value, View }, i) => (
+          <Tabs.Content value={value} key={i}>
+            <View {...props} />
+          </Tabs.Content>
+        ))}
+      </section>
     </Tabs.Root>
   );
 }

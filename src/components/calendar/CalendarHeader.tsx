@@ -1,26 +1,32 @@
 import { Dispatch, SetStateAction } from 'react';
-import { CalendarDate } from '@internationalized/date';
+import { CalendarDate, DateDuration } from '@internationalized/date';
 
 import ChevronLottie from '../ChevronLottie';
 import { convertNumToMonth } from '../../utils';
 
-export interface Props {
+interface Props {
   selectedValue: CalendarDate;
   setSelectedValue: Dispatch<SetStateAction<CalendarDate>>;
+  viewValue: string;
 }
 
 export default function CalendarHeader({
   selectedValue,
   setSelectedValue,
+  viewValue,
 }: Props) {
   const selectedMonth = convertNumToMonth(selectedValue.month);
 
-  const chevronLeftClickHandler = () => {
-    setSelectedValue(prevValue => prevValue.subtract({ months: 1 }));
-  };
-  const chevronRightClickHandler = () => {
-    setSelectedValue(prevValue => prevValue.add({ months: 1 }));
-  };
+  let duration: DateDuration;
+  if (viewValue === 'day') duration = { days: 1 };
+  else if (viewValue === 'week') duration = { weeks: 1 };
+  else if (viewValue === 'month') duration = { months: 1 };
+
+  const chevronLeftClickHandler = () =>
+    setSelectedValue(prevValue => prevValue.subtract(duration));
+
+  const chevronRightClickHandler = () =>
+    setSelectedValue(prevValue => prevValue.add(duration));
 
   return (
     <div className="flex justify-between basis-[300px]">

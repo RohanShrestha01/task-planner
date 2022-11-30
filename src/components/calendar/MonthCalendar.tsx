@@ -10,7 +10,7 @@ import ChevronLottie from '../ChevronLottie';
 
 const createCalendar = () => new GregorianCalendar();
 
-export default function Calendar(props: any) {
+export default function MonthCalendar(props: any) {
   const { locale } = useLocale();
   const state = useCalendarState({
     ...props,
