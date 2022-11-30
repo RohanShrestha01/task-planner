@@ -7,12 +7,14 @@ import { convertNumToMonth } from '../../utils';
 interface Props {
   selectedValue: CalendarDate;
   setSelectedValue: Dispatch<SetStateAction<CalendarDate>>;
+  setFocusedValue: Dispatch<SetStateAction<CalendarDate>>;
   viewValue: string;
 }
 
 export default function CalendarHeader({
   selectedValue,
   setSelectedValue,
+  setFocusedValue,
   viewValue,
 }: Props) {
   const selectedMonth = convertNumToMonth(selectedValue.month);
@@ -23,10 +25,18 @@ export default function CalendarHeader({
   else if (viewValue === 'month') duration = { months: 1 };
 
   const chevronLeftClickHandler = () =>
-    setSelectedValue(prevValue => prevValue.subtract(duration));
+    setSelectedValue(prevValue => {
+      const newValue = prevValue.subtract(duration);
+      setFocusedValue(newValue);
+      return newValue;
+    });
 
   const chevronRightClickHandler = () =>
-    setSelectedValue(prevValue => prevValue.add(duration));
+    setSelectedValue(prevValue => {
+      const newValue = prevValue.add(duration);
+      setFocusedValue(newValue);
+      return newValue;
+    });
 
   return (
     <div className="flex justify-between basis-[300px]">

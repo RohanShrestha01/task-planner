@@ -12,6 +12,7 @@ import MonthView from './MonthView';
 export interface Props {
   selectedValue: CalendarDate;
   setSelectedValue: Dispatch<SetStateAction<CalendarDate>>;
+  setFocusedValue: Dispatch<SetStateAction<CalendarDate>>;
 }
 
 export default function MainCalendar(props: Props) {
