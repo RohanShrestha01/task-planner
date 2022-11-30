@@ -1,13 +1,14 @@
 import * as Tabs from '@radix-ui/react-tabs';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Dispatch, SetStateAction } from 'react';
-import { CalendarDate } from '@internationalized/date';
+import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
-import AddButton from '../AddButton';
 import CalendarHeader from './CalendarHeader';
 import DayView from './DayView';
 import WeekView from './WeekView';
 import MonthView from './MonthView';
+import todayAnimation from '../../../public/lotties/today.json';
 
 export interface Props {
   selectedValue: CalendarDate;
@@ -24,6 +25,15 @@ export default function MainCalendar(props: Props) {
     { trigger: 'Month', value: 'month', View: MonthView },
   ];
 
+  const lottieRef = useRef<LottieRefCurrentProps>(null);
+
+  const todayClickHandler = () => {
+    lottieRef.current?.play();
+    const todayDate = today(getLocalTimeZone());
+    props.setSelectedValue(todayDate);
+    props.setFocusedValue(todayDate);
+  };
+
   return (
     <Tabs.Root value={viewValue} onValueChange={setViewValue}>
       <section className="flex items-center justify-between">
@@ -39,11 +49,17 @@ export default function MainCalendar(props: Props) {
             </Tabs.Trigger>
           ))}
         </Tabs.List>
-        <AddButton
-          className="flex-row-reverse rounded btn-primary"
-          lottieColor="white"
-          text="Add"
-        />
+        <button className="rounded btn-primary" onClick={todayClickHandler}>
+          <Lottie
+            animationData={todayAnimation}
+            autoplay={false}
+            loop={false}
+            lottieRef={lottieRef}
+            onComplete={() => lottieRef.current?.stop()}
+            className="h-6"
+          />
+          <span>Today</span>
+        </button>
       </section>
       <section className="mt-4">
         {tabs.map(({ value, View }, i) => (
