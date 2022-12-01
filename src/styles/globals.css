@@ -23,3 +23,23 @@
 ::selection {
   @apply bg-violet-600 text-whiteText;
 }
+
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply rounded-r dark:bg-lightNeutralBg bg-lightVioletBg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-primary dark:bg-primaryDark;
+}
+
+::-webkit-scrollbar-thumb:active {
+  @apply bg-primaryHover;
+}
+
+html {
+  @apply overflow-hidden;
+}

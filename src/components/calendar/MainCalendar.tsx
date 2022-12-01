@@ -61,7 +61,7 @@ export default function MainCalendar(props: Props) {
           <span>Today</span>
         </button>
       </section>
-      <section className="mt-4">
+      <section className="mt-4 overflow-y-scroll h-[calc(100vh-145px)] rounded">
         {tabs.map(({ value, View }, i) => (
           <Tabs.Content value={value} key={i}>
             <View {...props} />

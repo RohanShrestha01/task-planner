@@ -10,7 +10,7 @@ export default function CalendarPage() {
   const [focusedValue, setFocusedValue] = useState(today(getLocalTimeZone()));
 
   return (
-    <main className="flex gap-12 px-6 py-8">
+    <main className="flex gap-12 px-6 pt-8">
       <aside className="flex-grow">
         <MainCalendar
           selectedValue={value}
