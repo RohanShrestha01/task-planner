@@ -2,7 +2,7 @@ import { hours } from './WeekView';
 
 export default function DayView() {
   return (
-    <table className="w-full text-center bg-transition">
+    <table className="w-full text-center">
       <tbody>
         <tr className="h-5"></tr>
         {hours.map((time, i) => (

@@ -29,7 +29,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply rounded-r dark:bg-lightNeutralBg bg-lightVioletBg;
+  @apply rounded-r bg-inherit;
 }
 
 ::-webkit-scrollbar-thumb {
