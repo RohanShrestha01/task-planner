@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { useCalendar } from '@react-aria/calendar';
-import { useLocale } from '@react-aria/i18n';
 import { useCalendarState } from '@react-stately/calendar';
 import { GregorianCalendar } from '@internationalized/date';
 
@@ -11,10 +10,9 @@ import ChevronLottie from '../ChevronLottie';
 const createCalendar = () => new GregorianCalendar();
 
 export default function MonthCalendar(props: any) {
-  const { locale } = useLocale();
   const state = useCalendarState({
     ...props,
-    locale,
+    locale: 'en-US',
     createCalendar,
   });
 

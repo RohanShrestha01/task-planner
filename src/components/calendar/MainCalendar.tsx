@@ -63,7 +63,7 @@ export default function MainCalendar(props: Props) {
       </section>
       <section className="mt-4 overflow-y-auto h-[calc(100vh-145px)] rounded bg-transition">
         {tabs.map(({ value, View }, i) => (
-          <Tabs.Content value={value} key={i}>
+          <Tabs.Content value={value} key={i} className="h-full">
             <View {...props} />
           </Tabs.Content>
         ))}

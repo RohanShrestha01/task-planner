@@ -41,5 +41,5 @@
 }
 
 html {
-  @apply overflow-hidden;
+  @apply overflow-hidden select-none;
 }
