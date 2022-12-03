@@ -8,6 +8,7 @@ interface Props {
   className: string;
   lottieColor: 'white' | 'black';
   textStyle?: string;
+  clickHandler: () => void;
 }
 
 export default function AddButton({
@@ -15,6 +16,7 @@ export default function AddButton({
   className,
   lottieColor,
   textStyle = '',
+  clickHandler,
 }: Props) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
@@ -22,6 +24,7 @@ export default function AddButton({
     <button
       className={className}
       onMouseEnter={() => lottieRef.current?.play()}
+      onClick={clickHandler}
     >
       <Lottie
         animationData={plusAnimation}

@@ -31,6 +31,7 @@ export default function CalendarPage() {
           lottieColor="white"
           text="Create Task"
           textStyle="font-medium"
+          clickHandler={() => {}}
         />
       </aside>
     </main>

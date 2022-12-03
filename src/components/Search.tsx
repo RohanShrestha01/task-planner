@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import searchAnimation from '../../public/lotties/search.json';
-import crossAnimation from '../../public/lotties/cross.json';
+import crossIntroAnimation from '../../public/lotties/crossIntro.json';
 
 export default function Search() {
   const [crossShow, setCrossShow] = useState(false);
@@ -12,7 +12,7 @@ export default function Search() {
   return (
     <form
       onMouseEnter={() => searchLottieRef.current?.play()}
-      className="flex items-center relative"
+      className="relative flex items-center"
     >
       <Lottie
         animationData={searchAnimation}
@@ -20,7 +20,7 @@ export default function Search() {
         autoplay={false}
         lottieRef={searchLottieRef}
         onComplete={() => searchLottieRef.current?.stop()}
-        className="h-7 absolute left-3"
+        className="absolute h-7 left-3"
       />
       <input
         type="text"
@@ -29,7 +29,7 @@ export default function Search() {
         onChange={e =>
           e.target.value ? setCrossShow(true) : setCrossShow(false)
         }
-        className="rounded-full px-12 py-2 bg-inherit border border-neutral-500 text-sm placeholder:text-neutral-500 focus:outline-none focus:border-blackText dark:focus:border-whiteText"
+        className="px-12 py-2 rounded-full input"
       />
       <button
         type="reset"
@@ -38,7 +38,7 @@ export default function Search() {
       >
         {crossShow && (
           <Lottie
-            animationData={crossAnimation}
+            animationData={crossIntroAnimation}
             loop={false}
             lottieRef={crossLottieRef}
             className="h-7"

@@ -27,7 +27,7 @@ export default function TaskCard() {
       }`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="px-2 py-1 text-sm font-medium rounded-full bg-violet-300 text-violet-900">
+        <h3 className="px-2 py-1 text-sm font-medium bg-blue-300 rounded-full text-blackText">
           UI Design
         </h3>
         <DotsLottie size="small" setCardHover={setAllowHover} />

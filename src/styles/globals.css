@@ -18,6 +18,10 @@
   .bg-transition {
     @apply transition-[background-color] duration-500 dark:bg-lightNeutralBg bg-lightVioletBg;
   }
+
+  .input {
+    @apply text-sm border border-neutral-500 placeholder:text-neutral-500 bg-inherit focus:outline-none focus:border-violetText dark:focus:border-violetTextLight caret-violetText dark:caret-violetTextLight;
+  }
 }
 
 ::selection {
