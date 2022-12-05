@@ -19,6 +19,7 @@ export default function CalendarCell({ state, date }: Props) {
     isOutsideVisibleRange,
     isDisabled,
     formattedDate,
+    isFocused,
   } = useCalendarCell({ date }, state, ref);
 
   return (
@@ -28,6 +29,10 @@ export default function CalendarCell({ state, date }: Props) {
         ref={ref}
         hidden={isOutsideVisibleRange}
         className={`h-8 w-8 text-sm flex items-center justify-center rounded-full outline-none ${
+          isFocused && !isSelected
+            ? 'bg-violetHover dark:bg-violetHoverDark'
+            : ''
+        } ${
           isSelected
             ? 'select-color'
             : 'hover:bg-violetHover dark:hover:bg-violetHoverDark'

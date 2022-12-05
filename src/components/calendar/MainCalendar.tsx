@@ -38,7 +38,7 @@ export default function MainCalendar(props: Props) {
     <Tabs.Root value={viewValue} onValueChange={setViewValue}>
       <section className="flex items-center justify-between">
         <CalendarHeader {...props} viewValue={viewValue} />
-        <Tabs.List className="flex rounded bg-transition">
+        <Tabs.List className="flex rounded shadow-md bg-transition">
           {tabs.map(({ trigger, value }, i) => (
             <Tabs.Trigger
               value={value}
@@ -49,7 +49,10 @@ export default function MainCalendar(props: Props) {
             </Tabs.Trigger>
           ))}
         </Tabs.List>
-        <button className="rounded btn-primary" onClick={todayClickHandler}>
+        <button
+          className="rounded shadow-md btn-primary"
+          onClick={todayClickHandler}
+        >
           <Lottie
             animationData={todayAnimation}
             autoplay={false}
@@ -61,7 +64,7 @@ export default function MainCalendar(props: Props) {
           <span>Today</span>
         </button>
       </section>
-      <section className="mt-4 overflow-y-auto h-[calc(100vh-145px)] rounded bg-transition">
+      <section className="mt-4 overflow-y-auto h-[calc(100vh-145px)] rounded bg-transition shadow-md">
         {tabs.map(({ value, View }, i) => (
           <Tabs.Content value={value} key={i} className="h-full">
             <View {...props} />

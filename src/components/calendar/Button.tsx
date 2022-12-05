@@ -6,7 +6,11 @@ export default function Button(props: any) {
   const { buttonProps } = useButton(props, ref);
 
   return (
-    <button {...buttonProps} ref={ref} className="outline-none">
+    <button
+      {...buttonProps}
+      ref={ref}
+      className="rounded-full outline-none focus-visible:bg-violetHover dark:focus-visible:bg-violetHoverDark"
+    >
       {props.children}
     </button>
   );

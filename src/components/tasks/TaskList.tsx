@@ -1,6 +1,7 @@
 import DotsLottie from '../DotsLottie';
 import TaskCards from './TaskCards';
 import AddTask from './AddTask';
+import DropdownOptions from './DropdownOptions';
 
 export default function TaskList() {
   const headings = ['To Do', 'Doing', 'In Review'];
@@ -13,9 +14,11 @@ export default function TaskList() {
             <h2 className="flex-grow text-lg font-semibold cursor-pointer">
               {heading}
             </h2>
-            <DotsLottie />
+            <DropdownOptions heading="List Actions">
+              <DotsLottie />
+            </DropdownOptions>
           </div>
-          <div className="flex-grow overflow-y-auto mt-1.5">
+          <div className="flex-grow overflow-hidden hover:overflow-y-auto mt-1.5 pb-1.5">
             <TaskCards />
             <AddTask />
           </div>

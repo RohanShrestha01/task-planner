@@ -8,7 +8,7 @@ export default function AddTask() {
 
   return showBtn ? (
     <AddButton
-      className="w-full mt-4 rounded btn-text"
+      className="w-[calc(100%-16px)] mt-4 mr-2 rounded btn-text"
       lottieColor="black"
       text="Add new task"
       textStyle="text-sm"

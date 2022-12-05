@@ -3,6 +3,7 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import DotsLottie from '../DotsLottie';
 import checkBoxAnimation from '../../../public/lotties/checkBox.json';
+import DropdownOptions from './DropdownOptions';
 
 export default function TaskCard() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
@@ -22,15 +23,17 @@ export default function TaskCard() {
 
   return (
     <article
-      className={`bg-transition cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 ${
+      className={`bg-transition cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 shadow-md ${
         allowHover && 'hover:bg-violetHover dark:hover:bg-neutralHover'
       }`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="px-2 py-1 text-sm font-medium bg-blue-300 rounded-full text-blackText">
+        <h3 className="px-2 py-1 text-sm font-medium bg-blue-300 rounded-full shadow-md text-blackText">
           UI Design
         </h3>
-        <DotsLottie size="small" setCardHover={setAllowHover} />
+        <DropdownOptions heading="Card Actions">
+          <DotsLottie size="small" setCardHover={setAllowHover} />
+        </DropdownOptions>
       </div>
       <div>
         <h2 className="font-medium text-[15px]">Complete frontend</h2>

@@ -24,7 +24,7 @@ export default function MonthCalendar(props: any) {
     <div
       {...calendarProps}
       ref={ref}
-      className="inline-block px-2 pb-4 rounded bg-transition"
+      className="inline-block px-2 pb-4 rounded shadow-md bg-transition"
     >
       <div className="flex items-center justify-between px-2 py-4">
         <h2 className="font-bold">{title}</h2>

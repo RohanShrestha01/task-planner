@@ -12,7 +12,7 @@ export default function Header() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
   return (
-    <header className="flex px-10 py-1 font-medium bg-transition">
+    <header className="flex px-10 py-1 font-medium shadow-md bg-transition">
       <div className="flex items-center justify-between flex-grow">
         <div className="flex items-center gap-14">
           <Link

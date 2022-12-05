@@ -27,7 +27,7 @@ export default function CalendarPage() {
           onFocusChange={setFocusedValue}
         />
         <AddButton
-          className="justify-center rounded-full btn-primary"
+          className="justify-center rounded-full shadow-md btn-primary"
           lottieColor="white"
           text="Create Task"
           textStyle="font-medium"

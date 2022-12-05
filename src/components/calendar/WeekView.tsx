@@ -41,7 +41,7 @@ export default function WeekView({
 
   return (
     <table className="w-full text-center table-fixed">
-      <thead className="sticky top-0 z-10 shadow-lg bg-transition">
+      <thead className="sticky top-0 z-10 shadow-md bg-transition">
         <tr>
           <td className="w-16"></td>
           {weekViewHead}

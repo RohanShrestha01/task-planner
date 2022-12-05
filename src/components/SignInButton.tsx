@@ -10,7 +10,7 @@ export default function SignInButton() {
     <button
       onMouseEnter={() => lottieRef.current?.play()}
       onMouseLeave={() => lottieRef.current?.stop()}
-      className="rounded-full btn-primary"
+      className="rounded-full shadow-md btn-primary"
     >
       <Lottie
         animationData={avatarAnimation}

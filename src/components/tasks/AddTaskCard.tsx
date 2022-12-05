@@ -47,7 +47,7 @@ export default function AddTaskCard({ setShowBtn }: Props) {
   return (
     <form
       ref={formRef}
-      className="flex flex-col gap-3 px-4 py-4 mt-4 mr-2 rounded bg-transition w-72"
+      className="flex flex-col gap-3 px-4 py-4 mt-4 mr-2 rounded shadow-md bg-transition w-72"
     >
       <div className="flex items-center justify-between">
         <h2 className="font-medium">Create New Card</h2>
