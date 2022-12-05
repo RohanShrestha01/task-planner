@@ -4,15 +4,10 @@ import { useTheme } from 'next-themes';
 import { useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import { getLocalTimeZone, now } from '@internationalized/date';
 
-import crossHoverAnimation from '../../../public/lotties/crossHover.json';
 import tagAnimation from '../../../public/lotties/tag.json';
 import { assertIsNode } from '../../utils';
+import CrossLottie from '../CrossLottie';
 
-const crossHoverAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  crossHoverAnimation
-);
 const tagAnimationLight = replaceColor(
   [0, 0, 0],
   [255, 255, 255],
@@ -26,7 +21,6 @@ interface Props {
 }
 
 export default function AddTaskCard({ setShowBtn }: Props) {
-  const crossLottieRef = useRef<LottieRefCurrentProps>(null);
   const tagLottieRef = useRef<LottieRefCurrentProps>(null);
   const { resolvedTheme } = useTheme();
 
@@ -51,25 +45,13 @@ export default function AddTaskCard({ setShowBtn }: Props) {
     >
       <div className="flex items-center justify-between">
         <h2 className="font-medium">Create New Card</h2>
-        <Lottie
-          animationData={
-            resolvedTheme === 'dark'
-              ? crossHoverAnimationLight
-              : crossHoverAnimation
-          }
-          autoplay={false}
-          loop={false}
-          lottieRef={crossLottieRef}
-          onMouseEnter={() => crossLottieRef.current?.play()}
-          onComplete={() => crossLottieRef.current?.stop()}
-          onClick={() => setShowBtn(true)}
-          className="h-6 cursor-pointer"
-        />
+        <CrossLottie clickHandler={() => setShowBtn(true)} />
       </div>
       <input
         type="text"
         placeholder="Enter title of task"
         required
+        autoFocus
         className="w-full px-2 py-1 rounded input"
       />
       <textarea
