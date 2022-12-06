@@ -31,7 +31,11 @@ export default function TaskCard() {
         <h3 className="px-2 py-1 text-sm font-medium bg-blue-300 rounded-full shadow-md text-blackText">
           UI Design
         </h3>
-        <DropdownOptions heading="Card Actions">
+        <DropdownOptions
+          heading="Card Actions"
+          editHandler={() => console.log('Card Edit!')}
+          deleteHandler={() => console.log('Card Deleted!')}
+        >
           <DotsLottie size="small" setCardHover={setAllowHover} />
         </DropdownOptions>
       </div>

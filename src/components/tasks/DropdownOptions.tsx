@@ -18,10 +18,14 @@ const trashAnimationLight = replaceColor(
   trashAnimation
 );
 
-export default function DropdownOptions(props: {
+interface Props {
   heading: string;
+  editHandler: () => void;
+  deleteHandler: () => void;
   children: ReactNode;
-}) {
+}
+
+export default function DropdownOptions(props: Props) {
   const { resolvedTheme } = useTheme();
   const dropdownItems = [
     {
@@ -30,6 +34,7 @@ export default function DropdownOptions(props: {
       animationDuration: 60,
       title: 'Edit',
       lottieRef: useRef<LottieRefCurrentProps>(null),
+      clickHandler: props.editHandler,
     },
     {
       animation: trashAnimation,
@@ -37,6 +42,7 @@ export default function DropdownOptions(props: {
       animationDuration: 5,
       title: 'Delete',
       lottieRef: useRef<LottieRefCurrentProps>(null),
+      clickHandler: props.deleteHandler,
     },
   ];
 
@@ -60,6 +66,7 @@ export default function DropdownOptions(props: {
                 animationDuration,
                 title,
                 lottieRef,
+                clickHandler,
               },
               i
             ) => (
@@ -73,6 +80,7 @@ export default function DropdownOptions(props: {
                   lottieRef.current?.setDirection(-1);
                   lottieRef.current?.play();
                 }}
+                onClick={clickHandler}
               >
                 <Lottie
                   autoplay={false}
