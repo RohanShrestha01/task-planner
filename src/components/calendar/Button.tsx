@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-import { useButton } from '@react-aria/button';
+import { type AriaButtonProps, useButton } from '@react-aria/button';
 
-export default function Button(props: any) {
+export default function Button(props: AriaButtonProps<'button'>) {
   const ref = useRef<HTMLButtonElement>(null);
   const { buttonProps } = useButton(props, ref);
 

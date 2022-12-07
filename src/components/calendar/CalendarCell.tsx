@@ -1,7 +1,11 @@
 import { useRef } from 'react';
 import { useCalendarCell } from '@react-aria/calendar';
-import { CalendarState } from '@react-stately/calendar';
-import { CalendarDate, today, getLocalTimeZone } from '@internationalized/date';
+import { type CalendarState } from '@react-stately/calendar';
+import {
+  type CalendarDate,
+  today,
+  getLocalTimeZone,
+} from '@internationalized/date';
 
 interface Props {
   state: CalendarState;

@@ -1,5 +1,5 @@
 import {
-  CalendarDate,
+  type CalendarDate,
   getWeeksInMonth,
   startOfWeek,
   startOfMonth,

@@ -1,6 +1,6 @@
 import { startOfWeek } from '@internationalized/date';
 
-import { Props } from './MainCalendar';
+import { type Props } from './MainCalendar';
 
 export const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 /* prettier-ignore */

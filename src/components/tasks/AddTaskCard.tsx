@@ -1,7 +1,7 @@
 import { replaceColor } from 'lottie-colorify';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
-import { useRef, useEffect, Dispatch, SetStateAction } from 'react';
+import { useRef, useEffect, type Dispatch, type SetStateAction } from 'react';
 import { getLocalTimeZone, now } from '@internationalized/date';
 
 import tagAnimation from '../../../public/lotties/tag.json';

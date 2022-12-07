@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
 import calendarAnimation from '../../public/calendarLogo.json';
 import Nav from './Nav';

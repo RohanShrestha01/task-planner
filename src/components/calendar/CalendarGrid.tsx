@@ -1,6 +1,6 @@
 import { useCalendarGrid } from '@react-aria/calendar';
 import { getWeeksInMonth } from '@internationalized/date';
-import { CalendarState } from '@react-stately/calendar';
+import { type CalendarState } from '@react-stately/calendar';
 
 import CalendarCell from './CalendarCell';
 

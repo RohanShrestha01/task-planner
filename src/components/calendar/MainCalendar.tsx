@@ -1,8 +1,12 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import { useRef, useState } from 'react';
-import { Dispatch, SetStateAction } from 'react';
-import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { type Dispatch, type SetStateAction } from 'react';
+import {
+  type CalendarDate,
+  getLocalTimeZone,
+  today,
+} from '@internationalized/date';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
 import CalendarHeader from './CalendarHeader';
 import DayView from './DayView';

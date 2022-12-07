@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { replaceColor } from 'lottie-colorify';
 import { useTheme } from 'next-themes';
 

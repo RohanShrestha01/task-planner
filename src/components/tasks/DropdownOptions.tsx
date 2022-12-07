@@ -1,8 +1,8 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { replaceColor } from 'lottie-colorify';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
-import { ReactNode, useRef } from 'react';
+import { type ReactNode, useRef } from 'react';
 
 import editAnimation from '../../../public/lotties/edit.json';
 import trashAnimation from '../../../public/lotties/trash.json';

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 
 import themeToggleAnimation from '../../public/lotties/themeToggle.json';
@@ -28,7 +28,7 @@ export default function ThemeToggleButton() {
 
   return (
     <Lottie
-      className="h-9 cursor-pointer hover:scale-110 transition-transform duration-200"
+      className="transition-transform duration-200 cursor-pointer h-9 hover:scale-110"
       animationData={themeToggleAnimation}
       autoplay={false}
       loop={false}

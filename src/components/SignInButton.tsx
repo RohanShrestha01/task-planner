@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
 import avatarAnimation from '../../public/lotties/avatar.json';
 

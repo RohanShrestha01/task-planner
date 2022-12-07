@@ -1,5 +1,5 @@
 import { replaceColor } from 'lottie-colorify';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
 

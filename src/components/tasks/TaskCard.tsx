@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
 import DotsLottie from '../DotsLottie';
 import checkBoxAnimation from '../../../public/lotties/checkBox.json';

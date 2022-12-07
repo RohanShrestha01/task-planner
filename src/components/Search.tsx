@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import searchAnimation from '../../public/lotties/search.json';
 import crossIntroAnimation from '../../public/lotties/crossIntro.json';
 

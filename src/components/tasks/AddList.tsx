@@ -1,4 +1,4 @@
-import { useEffect, useRef, Dispatch, SetStateAction } from 'react';
+import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
 
 import AddButton from '../../components/AddButton';
 import CrossLottie from '../../components/CrossLottie';

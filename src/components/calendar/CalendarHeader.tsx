@@ -1,8 +1,8 @@
-import { DateDuration } from '@internationalized/date';
+import { type DateDuration } from '@internationalized/date';
 
 import ChevronLottie from '../ChevronLottie';
 import { convertNumToMonth } from '../../utils';
-import { Props } from './MainCalendar';
+import { type Props } from './MainCalendar';
 
 interface HeaderProps extends Props {
   viewValue: string;
