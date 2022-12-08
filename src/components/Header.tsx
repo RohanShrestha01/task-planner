@@ -1,12 +1,12 @@
+import { useRef } from 'react';
 import Link from 'next/link';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
 import calendarAnimation from '../../public/calendarLogo.json';
 import Nav from './Nav';
-import SignInButton from './SignInButton';
 import Search from './Search';
 import ThemeToggleButton from './ThemeToggleButton';
-import { useRef } from 'react';
+import SignInDialog from './SignInDialog';
 
 export default function Header() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
@@ -36,7 +36,7 @@ export default function Header() {
       </div>
       <div className="flex items-center gap-10 pl-20">
         <ThemeToggleButton />
-        <SignInButton />
+        <SignInDialog />
       </div>
     </header>
   );

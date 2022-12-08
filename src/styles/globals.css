@@ -22,6 +22,14 @@
   .input {
     @apply text-sm border border-neutral-500 placeholder:text-neutral-500 bg-inherit focus:outline-none focus:border-violetText dark:focus:border-violetTextLight caret-violetText dark:caret-violetTextLight;
   }
+
+  .overlay {
+    @apply fixed inset-0 bg-black/50;
+  }
+
+  .modal-content {
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-lightVioletBg dark:bg-lightNeutralBg rounded-md shadow-lg w-[90vw] max-w-md max-h-[85vh];
+  }
 }
 
 ::selection {

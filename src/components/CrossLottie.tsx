@@ -14,7 +14,7 @@ const crossHoverAnimationLight = replaceColor(
 export default function CrossLottie({
   clickHandler,
 }: {
-  clickHandler: () => void;
+  clickHandler?: () => void;
 }) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const { resolvedTheme } = useTheme();
