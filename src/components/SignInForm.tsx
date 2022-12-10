@@ -6,13 +6,13 @@ import { replaceColor } from 'lottie-colorify';
 import emailAnimation from '../../public/lotties/email.json';
 import lockAnimation from '../../public/lotties/lock.json';
 import radioBtnAnimation from '../../public/lotties/radioButton.json';
-import avatarAnimation from '../../public/lotties/avatar.json';
+import avatarAnimationLight from '../../public/lotties/avatar.json';
 import eyeAnimation from '../../public/lotties/eye.json';
 
-const avatarAnimationLight = replaceColor(
-  [0, 0, 0],
+const avatarAnimation = replaceColor(
   [255, 255, 255],
-  avatarAnimation
+  [0, 0, 0],
+  avatarAnimationLight
 );
 const emailAnimationLight = replaceColor(
   [0, 0, 0],
@@ -157,7 +157,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
               ref={input.inputRef}
               className="w-full bg-transparent outline-none py-1 border-b-2 border-blackText dark:border-whiteText transition-all duration-500 focus:border-violetText dark:focus:border-violetTextLight caret-violetText dark:caret-violetTextLight peer text-[15px]"
             />
-            <span className="absolute left-0 py-1 text-neutral-500 pointer-events-none transition-all duration-500 peer-focus:-translate-y-5 peer-focus:text-violetText dark:peer-focus:text-violetTextLight peer-focus:text-xs peer-valid:-translate-y-5 peer-valid:text-xs">
+            <span className="absolute left-0 py-1 text-neutral-500 pointer-events-none transition-all duration-500 peer-focus:-translate-y-5 peer-focus:text-violetText dark:peer-focus:text-violetTextLight peer-focus:scale-75 peer-valid:-translate-y-5 peer-valid:scale-75 origin-left">
               {input.title}
             </span>
             {type === 'signup' && input.type === 'password' && (

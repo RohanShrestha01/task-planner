@@ -2,10 +2,11 @@ import * as Dialog from '@radix-ui/react-dialog';
 import * as Tabs from '@radix-ui/react-tabs';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useRef, useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 import avatarAnimation from '../../public/lotties/avatar.json';
 import CrossLottie from './CrossLottie';
-import { GithubSvg, GoogleSvg } from '../icons/AllSVGs';
+import { GithubSvg, GoogleSvg } from '../icons/AllSvgs';
 import SignInForm from './SignInForm';
 
 export default function SignInDialog() {
@@ -53,10 +54,16 @@ export default function SignInDialog() {
               </Tabs.Trigger>
             </Tabs.List>
             <div className="flex gap-8">
-              <button className="btn-primary rounded-full p-2">
+              <button
+                className="btn-primary rounded-full p-2"
+                onClick={() => signIn('google')}
+              >
                 <GoogleSvg className="fill-white h-6" />
               </button>
-              <button className="btn-primary rounded-full p-2">
+              <button
+                className="btn-primary rounded-full p-2"
+                onClick={() => signIn('github')}
+              >
                 <GithubSvg className="h-6" />
               </button>
             </div>
