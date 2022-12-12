@@ -1,15 +1,11 @@
-import { replaceColor } from 'lottie-colorify';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
 
-import crossHoverAnimation from '../../public/lotties/crossHover.json';
-
-const crossHoverAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  crossHoverAnimation
-);
+import {
+  crossHoverAnimation,
+  crossHoverAnimationLight,
+} from '../icons/AllLotties';
 
 export default function CrossLottie({
   clickHandler,

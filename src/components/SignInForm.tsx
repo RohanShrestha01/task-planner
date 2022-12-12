@@ -1,69 +1,21 @@
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { replaceColor } from 'lottie-colorify';
 import { z } from 'zod';
 
-import emailAnimation from '../../public/lotties/email.json';
-import lockAnimation from '../../public/lotties/lock.json';
-import radioBtnAnimation from '../../public/lotties/radioButton.json';
-import avatarAnimationLight from '../../public/lotties/avatar.json';
-import eyeAnimation from '../../public/lotties/eye.json';
-
-const avatarAnimation = replaceColor(
-  [255, 255, 255],
-  [0, 0, 0],
-  avatarAnimationLight
-);
-const emailAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  emailAnimation
-);
-const lockAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  lockAnimation
-);
-const radioBtnAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  radioBtnAnimation
-);
-const eyeAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  eyeAnimation
-);
-
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
-
-const registerSchema = z
-  .object({
-    username: z.string().trim().min(1).max(32),
-    email: z.string().email(),
-    password: z.string().min(8),
-    confirmPassword: z.string().min(8),
-  })
-  .superRefine(({ password, confirmPassword }, ctx) => {
-    if (password !== confirmPassword) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password and Confirm Password must match',
-        path: ['password'],
-      });
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password and Confirm Password must match',
-        path: ['confirmPassword'],
-      });
-    }
-  });
-
-type FlattenedErrors = z.inferFlattenedErrors<typeof registerSchema>;
+import {
+  avatarAnimation,
+  avatarAnimationLight,
+  emailAnimation,
+  emailAnimationLight,
+  eyeAnimation,
+  eyeAnimationLight,
+  lockAnimation,
+  lockAnimationLight,
+  radioBtnAnimation,
+  radioBtnAnimationLight,
+} from '../icons/AllLotties';
+import { loginSchema, registerSchema, FlattenedErrors } from '../utils';
 
 export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
   const radioBtnLottieRef = useRef<LottieRefCurrentProps>(null);

@@ -1,17 +1,10 @@
 import * as Avatar from '@radix-ui/react-avatar';
-import { replaceColor } from 'lottie-colorify';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useSession, signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
 
-import logoutAnimation from '../../public/lotties/logout.json';
-
-const logoutAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  logoutAnimation
-);
+import { logoutAnimation, logoutAnimationLight } from '../icons/AllLotties';
 
 export default function Profile() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);

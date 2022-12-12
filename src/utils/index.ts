@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export const convertNumToMonth = (num: number) => {
   switch (num) {
     case 1:
@@ -32,3 +34,30 @@ export function assertIsNode(e: EventTarget | null): asserts e is Node {
     throw new Error(`Node expected`);
   }
 }
+
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+export const registerSchema = loginSchema
+  .extend({
+    username: z.string().trim().min(1).max(32),
+    confirmPassword: z.string().min(8),
+  })
+  .superRefine(({ password, confirmPassword }, ctx) => {
+    if (password !== confirmPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password and Confirm Password must match',
+        path: ['password'],
+      });
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password and Confirm Password must match',
+        path: ['confirmPassword'],
+      });
+    }
+  });
+
+export type FlattenedErrors = z.inferFlattenedErrors<typeof registerSchema>;

@@ -1,21 +1,13 @@
 import { useRef } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
-import { replaceColor } from 'lottie-colorify';
 import { useTheme } from 'next-themes';
 
-import chevronLeftAnimation from '../../public/lotties/chevronLeft.json';
-import chevronRightAnimation from '../../public/lotties/chevronRight.json';
-
-const chevronLeftAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  chevronLeftAnimation
-);
-const chevronRightAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  chevronRightAnimation
-);
+import {
+  chevronLeftAnimation,
+  chevronLeftAnimationLight,
+  chevronRightAnimation,
+  chevronRightAnimationLight,
+} from '../icons/AllLotties';
 
 interface Props {
   type: string;

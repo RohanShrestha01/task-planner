@@ -2,22 +2,14 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
-import { replaceColor } from 'lottie-colorify';
 import { useTheme } from 'next-themes';
 
-import tasksAnimation from '../../public/lotties/tasks.json';
-import calendarAnimation from '../../public/lotties/calendar.json';
-
-const tasksAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  tasksAnimation
-);
-const calendarAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  calendarAnimation
-);
+import {
+  calendarAnimation,
+  calendarAnimationLight,
+  tasksAnimation,
+  tasksAnimationLight,
+} from '../icons/AllLotties';
 
 export default function Nav() {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);

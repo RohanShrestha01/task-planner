@@ -1,18 +1,12 @@
-import { replaceColor } from 'lottie-colorify';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 import { useRef, useEffect, type Dispatch, type SetStateAction } from 'react';
 import { getLocalTimeZone, now } from '@internationalized/date';
 
-import tagAnimation from '../../../public/lotties/tag.json';
+import { tagAnimation, tagAnimationLight } from '../../icons/AllLotties';
 import { assertIsNode } from '../../utils';
 import CrossLottie from '../CrossLottie';
 
-const tagAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  tagAnimation
-);
 /* prettier-ignore */
 const colors = ['#fda4af','#f9a8d4','#f0abfc','#d8b4fe','#c4b5fd','#a5b4fc','#93c5fd','#7dd3fc','#67e8f9','#5eead4','#6ee7b7','#86efac','#bef264','#fde047','#fcd34d','#fdba74','#fca5a5','#cbd5e1'];
 

@@ -1,22 +1,14 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { replaceColor } from 'lottie-colorify';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 import { type ReactNode, useRef } from 'react';
 
-import editAnimation from '../../../public/lotties/edit.json';
-import trashAnimation from '../../../public/lotties/trash.json';
-
-const editAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  editAnimation
-);
-const trashAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  trashAnimation
-);
+import {
+  editAnimation,
+  editAnimationLight,
+  trashAnimation,
+  trashAnimationLight,
+} from '../../icons/AllLotties';
 
 interface Props {
   heading: string;

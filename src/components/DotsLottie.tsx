@@ -1,15 +1,8 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
-import { replaceColor } from 'lottie-colorify';
 import { useTheme } from 'next-themes';
 
-import dotsAnimation from '../../public/lotties/dots.json';
-
-const dotsAnimationLight = replaceColor(
-  [0, 0, 0],
-  [255, 255, 255],
-  dotsAnimation
-);
+import { dotsAnimation, dotsAnimationLight } from '../icons/AllLotties';
 
 interface Props {
   size?: string;
