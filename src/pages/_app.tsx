@@ -30,6 +30,18 @@ const MyApp: AppType<{ session: Session | null }> = ({
             `}
           </style>
           <Head>
+            <link
+              rel="icon"
+              type="image/x-icon"
+              media="(prefers-color-scheme: dark)"
+              href="favicon.ico"
+            />
+            <link
+              rel="icon"
+              type="image/x-icon"
+              media="(prefers-color-scheme: light)"
+              href="favicon-black.ico"
+            />
             <title>Task Planner Webapp</title>
           </Head>
           <Header />

@@ -73,9 +73,6 @@ export default function SignInDialog() {
             <Tabs.Content value="login" className="w-full">
               <SignInForm type="login" />
             </Tabs.Content>
-            <button className="btn-primary justify-center rounded-md w-56 py-3 text-sm">
-              {value === 'signup' ? 'SIGN UP' : 'LOG IN'}
-            </button>
           </Tabs.Root>
         </Dialog.Content>
       </Dialog.Portal>
