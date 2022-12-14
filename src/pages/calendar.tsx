@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { today, getLocalTimeZone } from '@internationalized/date';
+import { GetServerSideProps } from 'next';
+import { unstable_getServerSession } from 'next-auth/next';
 
 import MonthCalendar from '../components/calendar/MonthCalendar';
 import MainCalendar from '../components/calendar/MainCalendar';
 import AddButton from '../components/AddButton';
+import { authOptions } from './api/auth/[...nextauth]';
 
 export default function CalendarPage() {
   const [value, setValue] = useState(today(getLocalTimeZone()));
@@ -37,3 +40,12 @@ export default function CalendarPage() {
     </main>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  return { props: { session } };
+};

@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { GetServerSideProps } from 'next';
+import { unstable_getServerSession } from 'next-auth/next';
 
 import TaskList from '../components/tasks/TaskList';
 import AddButton from '../components/AddButton';
 import AddList from '../components/tasks/AddList';
+import { authOptions } from './api/auth/[...nextauth]';
 
 export default function Home() {
   const [showBtn, setShowBtn] = useState(true);
@@ -24,3 +27,12 @@ export default function Home() {
     </main>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  return { props: { session } };
+};

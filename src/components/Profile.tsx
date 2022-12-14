@@ -13,13 +13,16 @@ export default function Profile() {
 
   return (
     <div className="flex items-center gap-2.5">
-      <Avatar.Root className="h-10 w-10 rounded-full shadow">
+      <Avatar.Root className="w-10 h-10 rounded-full shadow">
         <Avatar.Image
           src={data?.user?.image!}
           alt={data?.user?.name!}
-          className="rounded-full w-full h-full object-cover"
+          className="object-cover w-full h-full rounded-full"
         />
-        <Avatar.Fallback className="w-full h-full flex items-center justify-center rounded-full transition-[background-color] duration-500 bg-darkVioletBg dark:bg-darkNeutralBg font-medium">
+        <Avatar.Fallback
+          className="w-full h-full flex items-center justify-center rounded-full transition-[background-color] duration-500 bg-darkVioletBg dark:bg-darkNeutralBg font-medium"
+          delayMs={100}
+        >
           {data?.user?.name
             ?.match(/\b(\w)/g)
             ?.join('')
@@ -27,7 +30,7 @@ export default function Profile() {
         </Avatar.Fallback>
       </Avatar.Root>
       <article className="flex flex-col self-stretch justify-evenly max-w-[160px] whitespace-nowrap">
-        <span className="text-sm overflow-hidden text-ellipsis">
+        <span className="overflow-hidden text-sm text-ellipsis">
           {data?.user?.name}
         </span>
         <span className="text-[10px] overflow-hidden text-ellipsis">

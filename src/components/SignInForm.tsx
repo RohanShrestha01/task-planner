@@ -2,6 +2,7 @@ import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { z } from 'zod';
+import { signIn } from 'next-auth/react';
 
 import {
   avatarAnimation,
@@ -119,7 +120,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
     }
   };
 
-  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const formSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const loginData = {
       email: emailInputRef?.current?.value,
@@ -137,7 +138,21 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
     const schema = type === 'login' ? loginSchema : registerSchema;
     try {
       const result = schema.parse(formData);
-      console.log(result);
+      if (type === 'login') {
+        const response = await signIn('credentials', {
+          redirect: false,
+          ...result,
+        });
+        console.log(response);
+      } else {
+        const response = await fetch('/api/auth/signup', {
+          method: 'POST',
+          body: JSON.stringify(result),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        const data = await response.json();
+        if (!response.ok) console.log(data.message || 'Something Went Wrong!');
+      }
     } catch (err) {
       if (err instanceof z.ZodError) setErrors(err.flatten());
     }
@@ -145,12 +160,12 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
 
   return (
     <form
-      className="flex flex-col items-center gap-8 w-full"
+      className="flex flex-col items-center w-full gap-8"
       onSubmit={formSubmitHandler}
     >
       {inputs.map((input, i) => (
         <div key={i} className="flex flex-col w-full gap-2">
-          <div className="flex gap-4 items-center w-full">
+          <div className="flex items-center w-full gap-4">
             <Lottie
               animationData={
                 resolvedTheme === 'dark'
@@ -162,7 +177,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
               loop={false}
               className="h-6"
             />
-            <div className="relative flex-grow flex items-center gap-4">
+            <div className="relative flex items-center flex-grow gap-4">
               <input
                 type={input.type}
                 name={input.name}
@@ -173,7 +188,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
                 ref={input.inputRef}
                 className="w-full bg-transparent outline-none py-1 border-b-2 border-blackText dark:border-whiteText transition-all duration-500 focus:border-violetText dark:focus:border-violetTextLight caret-violetText dark:caret-violetTextLight peer text-[15px]"
               />
-              <span className="absolute left-0 py-1 text-neutral-500 pointer-events-none transition-all duration-500 peer-focus:-translate-y-5 peer-focus:text-violetText dark:peer-focus:text-violetTextLight peer-focus:scale-75 peer-valid:-translate-y-5 peer-valid:scale-75 origin-left">
+              <span className="absolute left-0 py-1 transition-all duration-500 origin-left pointer-events-none text-neutral-500 peer-focus:-translate-y-5 peer-focus:text-violetText dark:peer-focus:text-violetTextLight peer-focus:scale-75 peer-valid:-translate-y-5 peer-valid:scale-75">
                 {input.title}
               </span>
               {type === 'signup' && input.type === 'password' && (
@@ -201,7 +216,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
           {errors?.fieldErrors[
             input.name as keyof typeof errors.fieldErrors
           ] && (
-            <span className="text-xs ml-10 text-red-500">
+            <span className="ml-10 text-xs text-red-500">
               {
                 errors.fieldErrors[
                   input.name as keyof typeof errors.fieldErrors
@@ -230,7 +245,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
           <span className="text-sm">Show Password</span>
         </div>
       )}
-      <button className="btn-primary justify-center rounded-md w-56 py-3 text-sm mt-2">
+      <button className="justify-center w-56 py-3 mt-2 text-sm rounded-md btn-primary">
         {type === 'signup' ? 'SIGN UP' : 'LOG IN'}
       </button>
     </form>
