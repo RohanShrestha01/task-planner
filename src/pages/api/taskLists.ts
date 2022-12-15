@@ -18,6 +18,8 @@ export default async function taskLists(
     });
 
     res.status(200).json(taskLists);
-    return;
+  } else if (req.method === 'POST') {
+    await prisma.taskList.create({ data: { heading: req.body, userId: id } });
+    res.status(200).json({ message: 'Task list created' });
   }
 }
