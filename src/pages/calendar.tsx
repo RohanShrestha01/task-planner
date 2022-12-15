@@ -7,6 +7,7 @@ import MonthCalendar from '../components/calendar/MonthCalendar';
 import MainCalendar from '../components/calendar/MainCalendar';
 import AddButton from '../components/AddButton';
 import { authOptions } from './api/auth/[...nextauth]';
+import createGuestUser from '../lib/createGuestUser';
 
 export default function CalendarPage() {
   const [value, setValue] = useState(today(getLocalTimeZone()));
@@ -47,5 +48,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     context.res,
     authOptions
   );
+
+  if (!context.req.cookies['guestUserId'] && !session)
+    await createGuestUser(context.res);
+
   return { props: { session } };
 };

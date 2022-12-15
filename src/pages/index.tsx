@@ -6,6 +6,7 @@ import TaskList from '../components/tasks/TaskList';
 import AddButton from '../components/AddButton';
 import AddList from '../components/tasks/AddList';
 import { authOptions } from './api/auth/[...nextauth]';
+import createGuestUser from '../lib/createGuestUser';
 
 export default function Home() {
   const [showBtn, setShowBtn] = useState(true);
@@ -34,5 +35,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     context.res,
     authOptions
   );
+
+  if (!context.req.cookies['guestUserId'] && !session)
+    await createGuestUser(context.res);
+
   return { props: { session } };
 };
