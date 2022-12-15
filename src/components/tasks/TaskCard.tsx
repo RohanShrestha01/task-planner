@@ -4,10 +4,12 @@ import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import DotsLottie from '../DotsLottie';
 import checkBoxAnimation from '../../../public/lotties/checkBox.json';
 import DropdownOptions from './DropdownOptions';
+import type { Task } from '../../types';
+import { convertNumToMonth } from '../../utils';
 
-export default function TaskCard() {
+export default function TaskCard({ task }: { task: Task }) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(task.isCompleted);
   const [allowHover, setAllowHover] = useState(true);
 
   const checkBoxClickHandler = () => {
@@ -21,6 +23,18 @@ export default function TaskCard() {
     lottieRef.current?.play();
   };
 
+  const tagColorClass = 'bg-[' + task.tagColor + ']';
+  const deadline = new Date(task.deadline);
+  const formattedDeadline =
+    deadline.getDate() +
+    ' ' +
+    convertNumToMonth(deadline.getMonth()).slice(0, 3) +
+    ' ' +
+    deadline.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
   return (
     <article
       className={`bg-transition cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 shadow-md ${
@@ -28,8 +42,13 @@ export default function TaskCard() {
       }`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="px-2 py-1 text-sm font-medium bg-blue-300 rounded-full shadow-md text-blackText">
-          UI Design
+        <h3
+          className={
+            'px-2 py-1 text-sm font-medium rounded-full shadow-md text-blackText ' +
+            tagColorClass
+          }
+        >
+          {task.tagTitle}
         </h3>
         <DropdownOptions
           heading="Card Actions"
@@ -40,14 +59,12 @@ export default function TaskCard() {
         </DropdownOptions>
       </div>
       <div>
-        <h2 className="font-medium text-[15px]">Complete frontend</h2>
-        <p className="mt-1 text-sm">
-          Finish building tasks page and calendar page UI
-        </p>
+        <h2 className="font-medium text-[15px]">{task.title}</h2>
+        <p className="mt-1 text-sm">{task.description}</p>
       </div>
       <div className="flex items-center justify-between pr-2">
         <span className="text-sm text-violet-700 dark:text-violetTextLight">
-          Tomorrow 12:00 PM
+          {formattedDeadline}
         </span>
         <Lottie
           animationData={checkBoxAnimation}

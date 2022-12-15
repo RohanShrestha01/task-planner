@@ -26,6 +26,8 @@ export const convertNumToMonth = (num: number) => {
       return 'November';
     case 12:
       return 'December';
+    default:
+      return 'Invalid Month';
   }
 };
 
