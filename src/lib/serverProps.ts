@@ -6,16 +6,6 @@ import { authOptions } from '../pages/api/auth/[...nextauth]';
 import createGuestUser from './createGuestUser';
 import prisma from './prismadb';
 
-let id = '';
-
-const getTaskLists = async () => {
-  const taskLists = await prisma.taskList.findMany({
-    where: { userId: id },
-    include: { tasks: true },
-  });
-  return JSON.parse(JSON.stringify(taskLists));
-};
-
 const getServerSideProps: GetServerSideProps = async context => {
   const session = await unstable_getServerSession(
     context.req,
@@ -23,10 +13,18 @@ const getServerSideProps: GetServerSideProps = async context => {
     authOptions
   );
 
-  id = session?.user?.id || context.req.cookies['guestUserId'] || '';
+  let id = session?.user?.id || context.req.cookies['guestUserId'] || '';
 
   if (!context.req.cookies['guestUserId'] && !session)
     id = await createGuestUser(context.res);
+
+  const getTaskLists = async () => {
+    const taskLists = await prisma.taskList.findMany({
+      where: { userId: id },
+      include: { tasks: true },
+    });
+    return JSON.parse(JSON.stringify(taskLists));
+  };
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(['taskLists'], getTaskLists);
