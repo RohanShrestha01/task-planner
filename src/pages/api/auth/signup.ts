@@ -3,6 +3,7 @@ import { hash } from 'bcrypt';
 
 import { registerSchema } from '../../../utils';
 import prisma from '../../../lib/prismadb';
+import seedDefaultData from '../../../lib/seedDefaultData';
 
 type Data = {
   message?: string;
@@ -27,13 +28,14 @@ export default async function handler(
       return res.status(409).json({ message: 'User already exists' });
 
     const hashedPassword = await hash(signupData.password, 12);
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         name: signupData.username,
         email: signupData.email,
         password: hashedPassword,
       },
     });
+    await seedDefaultData(newUser.id);
 
     res.status(201).json({ message: 'User created!' });
   } catch (err) {

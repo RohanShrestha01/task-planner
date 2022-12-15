@@ -4,13 +4,19 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
-import prisma from '../../../lib/prismadb';
 
+import prisma from '../../../lib/prismadb';
 import { loginSchema } from '../../../utils';
+import seedDefaultData from '../../../lib/seedDefaultData';
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: 'jwt' },
   adapter: PrismaAdapter(prisma),
+  events: {
+    createUser: async message => {
+      await seedDefaultData(message.user.id);
+    },
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,

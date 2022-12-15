@@ -43,14 +43,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   password      String?
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  taskLists     TaskList[]
 }
 
 model VerificationToken {
@@ -59,4 +60,29 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// For storing tasks of user
+model TaskList {
+  id      String @id @default(cuid())
+  heading String
+  tasks   Task[]
+  User    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+
+  @@index([userId])
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  deadline    DateTime
+  tagTitle    String
+  tagColor    String
+  isCompleted Boolean  @default(false)
+  TaskList    TaskList @relation(fields: [taskListId], references: [id], onDelete: Cascade)
+  taskListId  String
+
+  @@index([taskListId])
 }
