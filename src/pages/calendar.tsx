@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { today, getLocalTimeZone } from '@internationalized/date';
-import { GetServerSideProps } from 'next';
-import { unstable_getServerSession } from 'next-auth/next';
+import type { InferGetServerSidePropsType } from 'next';
 
 import MonthCalendar from '../components/calendar/MonthCalendar';
 import MainCalendar from '../components/calendar/MainCalendar';
 import AddButton from '../components/AddButton';
-import { authOptions } from './api/auth/[...nextauth]';
-import createGuestUser from '../lib/createGuestUser';
+import getServerSideProps from '../lib/serverProps';
 
-export default function CalendarPage() {
+export default function CalendarPage(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   const [value, setValue] = useState(today(getLocalTimeZone()));
   const [focusedValue, setFocusedValue] = useState(today(getLocalTimeZone()));
 
@@ -42,15 +42,4 @@ export default function CalendarPage() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
-
-  if (!context.req.cookies['guestUserId'] && !session)
-    await createGuestUser(context.res);
-
-  return { props: { session } };
-};
+export { getServerSideProps };

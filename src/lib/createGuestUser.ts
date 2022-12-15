@@ -22,4 +22,6 @@ export default async function createGuestUser(
       path: '/',
     })
   );
+
+  return id;
 }

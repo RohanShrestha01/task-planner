@@ -12,6 +12,13 @@ import seedDefaultData from '../../../lib/seedDefaultData';
 export const authOptions: NextAuthOptions = {
   session: { strategy: 'jwt' },
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    // Include user.id on session
+    session({ session, user }) {
+      if (session.user) session.user.id = user.id;
+      return session;
+    },
+  },
   events: {
     createUser: async message => {
       await seedDefaultData(message.user.id);
