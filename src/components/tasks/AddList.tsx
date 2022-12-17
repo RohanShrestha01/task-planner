@@ -1,9 +1,9 @@
 import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import AddButton from '../../components/AddButton';
 import CrossLottie from '../../components/CrossLottie';
 import { assertIsNode } from '../../utils';
+import useMutateTasks from '../../hooks/useMutateTasks';
 
 interface Props {
   setShowBtn: Dispatch<SetStateAction<boolean>>;
@@ -24,20 +24,16 @@ export default function AddList({ setShowBtn }: Props) {
     return () => document.body.removeEventListener('mousedown', closeAddList);
   }, [setShowBtn]);
 
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: () =>
-      fetch('api/taskLists', {
-        method: 'POST',
-        body: JSON.stringify(inputRef.current?.value),
-        headers: { 'Content-Type': 'application/json' },
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['taskLists'] });
-      setShowBtn(true);
-    },
+  const mutation = useMutateTasks({
+    method: 'POST',
+    url: 'api/taskLists',
+    queryKey: ['taskLists'],
   });
+
+  const addClickHandler = () => {
+    mutation.mutate({ heading: inputRef.current?.value!, tasks: [] });
+    setShowBtn(true);
+  };
 
   return (
     <section className="self-start" ref={listRef}>
@@ -56,7 +52,7 @@ export default function AddList({ setShowBtn }: Props) {
         text="Add List"
         lottieColor="black"
         textStyle="text-sm"
-        clickHandler={() => mutation.mutate()}
+        clickHandler={addClickHandler}
       />
     </section>
   );

@@ -14,10 +14,11 @@ interface Props {
   heading: string;
   editHandler: () => void;
   deleteHandler: () => void;
+  modal?: boolean;
   children: ReactNode;
 }
 
-export default function DropdownOptions(props: Props) {
+export default function DropdownOptions({ modal = true, ...props }: Props) {
   const { resolvedTheme } = useTheme();
   const dropdownItems = [
     {
@@ -39,13 +40,16 @@ export default function DropdownOptions(props: Props) {
   ];
 
   return (
-    <DropdownMenu.Root>
+    <DropdownMenu.Root modal={modal}>
       <DropdownMenu.Trigger className="rounded-full outline-none focus-visible:bg-violetHover dark:focus-visible:bg-neutralHover">
         {props.children}
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="p-2 border rounded shadow-md bg-lightVioletBg dark:bg-lightNeutralBg border-violetHover dark:border-neutralHover">
+        <DropdownMenu.Content
+          className="p-2 border rounded shadow-md bg-lightVioletBg dark:bg-lightNeutralBg border-violetHover dark:border-neutralHover"
+          onCloseAutoFocus={e => e.preventDefault()}
+        >
           <DropdownMenu.Label className="px-5">
             {props.heading}
           </DropdownMenu.Label>

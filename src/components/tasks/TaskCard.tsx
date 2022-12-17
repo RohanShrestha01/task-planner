@@ -23,7 +23,6 @@ export default function TaskCard({ task }: { task: Task }) {
     lottieRef.current?.play();
   };
 
-  const tagColorClass = 'bg-[' + task.tagColor + ']';
   const deadline = new Date(task.deadline);
   const formattedDeadline =
     deadline.getDate() +
@@ -43,9 +42,9 @@ export default function TaskCard({ task }: { task: Task }) {
     >
       <div className="flex items-center justify-between">
         <h3
+          style={{ backgroundColor: task.tagColor }}
           className={
-            'px-2 py-1 text-sm font-medium rounded-full shadow-md text-blackText ' +
-            tagColorClass
+            'px-2 py-1 text-sm font-medium rounded-full shadow-md text-blackText'
           }
         >
           {task.tagTitle}

@@ -18,9 +18,9 @@ export default function TaskList() {
     <>
       {headings.map((heading, i) => (
         <section className="flex flex-col w-[304px]" key={i}>
-          <ListHeading heading={heading} />
+          <ListHeading heading={heading} listId={data[i].id} />
           <div className="flex-grow overflow-hidden hover:overflow-y-auto mt-1.5 pb-1.5">
-            <TaskCards index={i} />
+            <TaskCards tasks={data[i].tasks} />
             <AddTask />
           </div>
         </section>

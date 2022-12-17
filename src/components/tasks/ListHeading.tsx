@@ -1,10 +1,34 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import DotsLottie from '../DotsLottie';
 import DropdownOptions from './DropdownOptions';
+import useMutateTasks from '../../hooks/useMutateTasks';
 
-export default function ListHeading({ heading }: { heading: string }) {
+type Props = {
+  heading: string;
+  listId: string;
+};
+
+export default function ListHeading({ heading, listId }: Props) {
   const [showInput, setShowInput] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const patchMutation = useMutateTasks({
+    url: 'api/taskLists',
+    method: 'PATCH',
+    queryKey: ['taskLists'],
+  });
+
+  const deleteMutation = useMutateTasks({
+    url: 'api/taskLists',
+    method: 'DELETE',
+    queryKey: ['taskLists'],
+  });
+
+  const inputBlurHandler = () => {
+    patchMutation.mutate({ heading: inputRef.current?.value!, id: listId });
+    setShowInput(false);
+  };
 
   return (
     <div className="flex items-center h-10 pr-4">
@@ -16,8 +40,9 @@ export default function ListHeading({ heading }: { heading: string }) {
           autoFocus
           spellCheck={false}
           onFocus={e => e.target.select()}
-          onBlur={() => setShowInput(false)}
+          onBlur={inputBlurHandler}
           maxLength={18}
+          ref={inputRef}
         />
       ) : (
         <h2
@@ -29,8 +54,9 @@ export default function ListHeading({ heading }: { heading: string }) {
       )}
       <DropdownOptions
         heading="List Actions"
-        editHandler={() => console.log('List Edit!')}
-        deleteHandler={() => console.log('List Deleted!')}
+        editHandler={() => setShowInput(true)}
+        deleteHandler={() => deleteMutation.mutate({ id: listId })}
+        modal={false}
       >
         <DotsLottie />
       </DropdownOptions>

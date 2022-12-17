@@ -9,7 +9,7 @@ type Data = {
   message?: string;
 };
 
-export default async function handler(
+export default async function signupHandler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
