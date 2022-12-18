@@ -38,6 +38,7 @@ export default async function tasksHandler(
         deadline: req.body.deadline,
         tagTitle: req.body.tagTitle,
         tagColor: req.body.tagColor,
+        isCompleted: req.body.isCompleted,
       },
     });
 

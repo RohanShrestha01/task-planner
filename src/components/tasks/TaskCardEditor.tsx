@@ -64,6 +64,7 @@ export default function TaskCardEditor({
       tagColor: target.tagColor.value,
       taskListId: listId,
       id: type === 'edit' && task ? task.id : '',
+      isCompleted: type === 'edit' && task ? task.isCompleted : false,
       onMutateSuccess: () => setShowEditor(false),
     });
   };

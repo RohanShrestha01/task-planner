@@ -21,14 +21,17 @@ export default function TaskCard({ task, listId }: Props) {
   const [showEditor, setShowEditor] = useState(false);
 
   const deleteMutaion = useMutateTasks({ method: 'DELETE', url: 'api/tasks' });
+  const patchMutation = useMutateTasks({ method: 'PATCH', url: 'api/tasks' });
 
   const checkBoxClickHandler = () => {
     if (checked) {
       lottieRef.current?.setDirection(-1);
       setChecked(false);
+      patchMutation.mutate({ ...task, isCompleted: false });
     } else {
       lottieRef.current?.setDirection(1);
       setChecked(true);
+      patchMutation.mutate({ ...task, isCompleted: true });
     }
     lottieRef.current?.play();
   };
@@ -95,6 +98,9 @@ export default function TaskCard({ task, listId }: Props) {
           onClick={checkBoxClickHandler}
           onMouseEnter={() => setAllowHover(false)}
           onMouseLeave={() => setAllowHover(true)}
+          onDOMLoaded={() =>
+            checked === true && lottieRef.current?.goToAndStop(29, true)
+          }
           className="transition-transform duration-200 h-7 hover:scale-110"
         />
       </div>
