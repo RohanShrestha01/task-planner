@@ -37,6 +37,7 @@ export default function useMutateTasks({ url, method, queryKey }: Props) {
       queryClient.setQueryData(queryKey, (oldTaskLists: any) =>
         updateData(oldTaskLists, newTaskList)
       );
+      if (newTaskList.onMutateSuccess) newTaskList.onMutateSuccess();
       // Return a context object with the snapshotted value
       return { previousTaskLists };
     },

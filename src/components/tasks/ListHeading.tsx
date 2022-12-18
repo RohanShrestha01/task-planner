@@ -11,6 +11,7 @@ type Props = {
 
 export default function ListHeading({ heading, listId }: Props) {
   const [showInput, setShowInput] = useState(false);
+  const [newHeading, setNewHeading] = useState(heading);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const patchMutation = useMutateTasks({
@@ -26,6 +27,9 @@ export default function ListHeading({ heading, listId }: Props) {
   });
 
   const inputBlurHandler = () => {
+    const validInput = inputRef.current?.reportValidity();
+    if (!validInput) return;
+    setNewHeading(inputRef.current?.value!);
     patchMutation.mutate({ heading: inputRef.current?.value!, id: listId });
     setShowInput(false);
   };
@@ -35,7 +39,7 @@ export default function ListHeading({ heading, listId }: Props) {
       {showInput ? (
         <input
           type="text"
-          defaultValue={heading}
+          defaultValue={newHeading}
           className="flex-grow py-0.5 text-lg font-semibold bg-transparent rounded outline-none caret-violetText dark:caret-violetTextLight outline-violetText dark:outline-violetTextLight"
           autoFocus
           spellCheck={false}
@@ -43,13 +47,15 @@ export default function ListHeading({ heading, listId }: Props) {
           onBlur={inputBlurHandler}
           maxLength={18}
           ref={inputRef}
+          required
+          onKeyUp={e => e.key === 'Enter' && inputBlurHandler()}
         />
       ) : (
         <h2
           className="flex items-center flex-grow h-10 text-lg font-semibold rounded cursor-pointer"
           onClick={() => setShowInput(true)}
         >
-          {heading}
+          {newHeading}
         </h2>
       )}
       <DropdownOptions

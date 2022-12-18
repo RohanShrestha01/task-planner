@@ -31,8 +31,13 @@ export default function AddList({ setShowBtn }: Props) {
   });
 
   const addClickHandler = () => {
-    mutation.mutate({ heading: inputRef.current?.value!, tasks: [] });
-    setShowBtn(true);
+    const validInput = inputRef.current?.reportValidity();
+    if (!validInput) return;
+    mutation.mutate({
+      heading: inputRef.current?.value!,
+      tasks: [],
+      onMutateSuccess: () => setShowBtn(true),
+    });
   };
 
   return (
@@ -44,6 +49,9 @@ export default function AddList({ setShowBtn }: Props) {
           placeholder="Enter list title"
           autoFocus
           ref={inputRef}
+          spellCheck={false}
+          required
+          onKeyUp={e => e.key === 'Enter' && addClickHandler()}
         />
         <CrossLottie clickHandler={() => setShowBtn(true)} />
       </div>
