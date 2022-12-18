@@ -182,7 +182,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
                 type={input.type}
                 name={input.name}
                 required
-                spellCheck={false}
+                spellCheck="false"
                 onClick={() => input.lottieRef.current?.play()}
                 onBlur={() => input.lottieRef.current?.stop()}
                 ref={input.inputRef}

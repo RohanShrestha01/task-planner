@@ -6,15 +6,17 @@ import { getLocalTimeZone, now } from '@internationalized/date';
 import { tagAnimation, tagAnimationLight } from '../../icons/AllLotties';
 import { assertIsNode } from '../../utils';
 import CrossLottie from '../CrossLottie';
+import useMutateTasks from '../../hooks/useMutateTasks';
 
 /* prettier-ignore */
 const colors = ['#fda4af','#f9a8d4','#f0abfc','#d8b4fe','#c4b5fd','#a5b4fc','#93c5fd','#7dd3fc','#67e8f9','#5eead4','#6ee7b7','#86efac','#bef264','#fde047','#fcd34d','#fdba74','#fca5a5','#cbd5e1'];
 
 interface Props {
   setShowBtn: Dispatch<SetStateAction<boolean>>;
+  listId: string;
 }
 
-export default function AddTaskCard({ setShowBtn }: Props) {
+export default function AddTaskCard({ setShowBtn, listId }: Props) {
   const tagLottieRef = useRef<LottieRefCurrentProps>(null);
   const { resolvedTheme } = useTheme();
 
@@ -32,10 +34,37 @@ export default function AddTaskCard({ setShowBtn }: Props) {
       document.body.removeEventListener('mousedown', closeAddTaskCard);
   }, [setShowBtn]);
 
+  const mutation = useMutateTasks({ url: 'api/tasks', method: 'POST' });
+
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Define types for form values
+    const target = e.target as typeof e.target & {
+      title: { value: string };
+      description: { value: string };
+      deadline: { value: string };
+      tagTitle: { value: string };
+      tagColor: { value: string };
+    };
+    const formValues = {
+      title: target.title.value,
+      description: target.description.value,
+      deadline: new Date(target.deadline.value),
+      tagTitle: target.tagTitle.value,
+      tagColor: target.tagColor.value,
+      taskListId: listId,
+    };
+    mutation.mutate({
+      task: formValues,
+      onMutateSuccess: () => setShowBtn(true),
+    });
+  };
+
   return (
     <form
       ref={formRef}
       className="flex flex-col gap-3 px-4 py-4 mt-4 mr-2 rounded shadow-md bg-transition w-72"
+      onSubmit={submitHandler}
     >
       <div className="flex items-center justify-between">
         <h2 className="font-medium">Create New Card</h2>
@@ -47,12 +76,14 @@ export default function AddTaskCard({ setShowBtn }: Props) {
         required
         autoFocus
         className="w-full px-2 py-1 rounded input"
+        name="title"
       />
       <textarea
         rows={2}
         placeholder="Enter description of task"
         required
         className="w-full px-2 py-1 rounded resize-none input"
+        name="description"
       />
       <div>
         <label htmlFor="deadline" className="mb-1 text-sm font-medium">
@@ -88,12 +119,17 @@ export default function AddTaskCard({ setShowBtn }: Props) {
           placeholder="Enter Tag"
           maxLength={18}
           className="pl-8 py-0.5 input w-44 pr-2"
+          required
+          onFocus={e => e.target.select()}
+          defaultValue="Personal Task"
+          name="tagTitle"
         />
         <input
           type="color"
           list="presetColors"
           defaultValue="#93c5fd"
           className="w-14 bg-inherit"
+          name="tagColor"
         />
         <datalist id="presetColors">
           {colors.map((color, i) => (

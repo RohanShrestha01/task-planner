@@ -17,13 +17,11 @@ export default function ListHeading({ heading, listId }: Props) {
   const patchMutation = useMutateTasks({
     url: 'api/taskLists',
     method: 'PATCH',
-    queryKey: ['taskLists'],
   });
 
   const deleteMutation = useMutateTasks({
     url: 'api/taskLists',
     method: 'DELETE',
-    queryKey: ['taskLists'],
   });
 
   const inputBlurHandler = () => {
@@ -42,7 +40,7 @@ export default function ListHeading({ heading, listId }: Props) {
           defaultValue={newHeading}
           className="flex-grow py-0.5 text-lg font-semibold bg-transparent rounded outline-none caret-violetText dark:caret-violetTextLight outline-violetText dark:outline-violetTextLight"
           autoFocus
-          spellCheck={false}
+          spellCheck="false"
           onFocus={e => e.target.select()}
           onBlur={inputBlurHandler}
           maxLength={18}

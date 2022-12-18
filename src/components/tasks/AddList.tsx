@@ -24,11 +24,7 @@ export default function AddList({ setShowBtn }: Props) {
     return () => document.body.removeEventListener('mousedown', closeAddList);
   }, [setShowBtn]);
 
-  const mutation = useMutateTasks({
-    method: 'POST',
-    url: 'api/taskLists',
-    queryKey: ['taskLists'],
-  });
+  const mutation = useMutateTasks({ method: 'POST', url: 'api/taskLists' });
 
   const addClickHandler = () => {
     const validInput = inputRef.current?.reportValidity();
@@ -49,7 +45,7 @@ export default function AddList({ setShowBtn }: Props) {
           placeholder="Enter list title"
           autoFocus
           ref={inputRef}
-          spellCheck={false}
+          spellCheck="false"
           required
           onKeyUp={e => e.key === 'Enter' && addClickHandler()}
         />

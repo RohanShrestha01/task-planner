@@ -47,7 +47,7 @@ export default async function seedDefaultData(id: string) {
       taskLists: {
         create: defaultData.map(({ heading, task }) => ({
           heading,
-          tasks: { create: task },
+          tasks: { create: { userId: id, ...task } },
         })),
       },
     },
