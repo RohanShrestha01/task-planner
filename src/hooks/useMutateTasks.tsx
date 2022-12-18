@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-type Props = {
+interface Props {
   url: string;
   method: 'POST' | 'PATCH' | 'DELETE';
-};
+}
 
 export default function useMutateTasks({ url, method }: Props) {
   const queryClient = useQueryClient();
@@ -25,6 +25,17 @@ export default function useMutateTasks({ url, method }: Props) {
       return oldData.map((taskList: any) =>
         taskList.id === newData.taskListId
           ? { ...taskList, tasks: [...taskList.tasks, newData] }
+          : taskList
+      );
+    else if (method === 'PATCH')
+      return oldData.map((taskList: any) =>
+        taskList.id === newData.taskListId
+          ? {
+              ...taskList,
+              tasks: taskList.tasks.map((task: any) =>
+                task.id === newData.id ? newData : task
+              ),
+            }
           : taskList
       );
     else if (method === 'DELETE')

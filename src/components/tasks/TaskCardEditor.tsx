@@ -7,34 +7,44 @@ import { tagAnimation, tagAnimationLight } from '../../icons/AllLotties';
 import { assertIsNode } from '../../utils';
 import CrossLottie from '../CrossLottie';
 import useMutateTasks from '../../hooks/useMutateTasks';
+import type { Task } from '../../types';
 
 /* prettier-ignore */
 const colors = ['#fda4af','#f9a8d4','#f0abfc','#d8b4fe','#c4b5fd','#a5b4fc','#93c5fd','#7dd3fc','#67e8f9','#5eead4','#6ee7b7','#86efac','#bef264','#fde047','#fcd34d','#fdba74','#fca5a5','#cbd5e1'];
 
 interface Props {
-  setShowBtn: Dispatch<SetStateAction<boolean>>;
+  setShowEditor: Dispatch<SetStateAction<boolean>>;
   listId: string;
+  task?: Task;
+  type?: string;
 }
 
-export default function AddTaskCard({ setShowBtn, listId }: Props) {
+export default function TaskCardEditor({
+  setShowEditor,
+  listId,
+  task,
+  type = 'add',
+}: Props) {
   const tagLottieRef = useRef<LottieRefCurrentProps>(null);
   const { resolvedTheme } = useTheme();
 
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    const closeAddTaskCard = ({ target }: MouseEvent) => {
+    const closeTaskCardEditor = ({ target }: MouseEvent) => {
       assertIsNode(target);
       if (formRef.current?.contains(target)) return;
-      setShowBtn(true);
+      setShowEditor(false);
     };
 
-    document.body.addEventListener('mousedown', closeAddTaskCard);
+    document.body.addEventListener('mousedown', closeTaskCardEditor);
     return () =>
-      document.body.removeEventListener('mousedown', closeAddTaskCard);
-  }, [setShowBtn]);
+      document.body.removeEventListener('mousedown', closeTaskCardEditor);
+  }, [setShowEditor]);
 
-  const mutation = useMutateTasks({ url: 'api/tasks', method: 'POST' });
+  const postMutation = useMutateTasks({ url: 'api/tasks', method: 'POST' });
+  const patchMutation = useMutateTasks({ url: 'api/tasks', method: 'PATCH' });
+  const mutation = type === 'edit' ? patchMutation : postMutation;
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,17 +56,15 @@ export default function AddTaskCard({ setShowBtn, listId }: Props) {
       tagTitle: { value: string };
       tagColor: { value: string };
     };
-    const formValues = {
+    mutation.mutate({
       title: target.title.value,
       description: target.description.value,
       deadline: new Date(target.deadline.value),
       tagTitle: target.tagTitle.value,
       tagColor: target.tagColor.value,
       taskListId: listId,
-    };
-    mutation.mutate({
-      task: formValues,
-      onMutateSuccess: () => setShowBtn(true),
+      id: type === 'edit' && task ? task.id : '',
+      onMutateSuccess: () => setShowEditor(false),
     });
   };
 
@@ -67,8 +75,10 @@ export default function AddTaskCard({ setShowBtn, listId }: Props) {
       onSubmit={submitHandler}
     >
       <div className="flex items-center justify-between">
-        <h2 className="font-medium">Create New Card</h2>
-        <CrossLottie clickHandler={() => setShowBtn(true)} />
+        <h2 className="font-medium">
+          {type === 'edit' ? 'Edit Card' : 'Create New Card'}
+        </h2>
+        <CrossLottie clickHandler={() => setShowEditor(false)} />
       </div>
       <input
         type="text"
@@ -77,6 +87,7 @@ export default function AddTaskCard({ setShowBtn, listId }: Props) {
         autoFocus
         className="w-full px-2 py-1 rounded input"
         name="title"
+        defaultValue={type === 'edit' && task ? task.title : ''}
       />
       <textarea
         rows={2}
@@ -84,6 +95,7 @@ export default function AddTaskCard({ setShowBtn, listId }: Props) {
         required
         className="w-full px-2 py-1 rounded resize-none input"
         name="description"
+        defaultValue={type === 'edit' && task ? task.description : ''}
       />
       <div>
         <label htmlFor="deadline" className="mb-1 text-sm font-medium">
@@ -94,11 +106,16 @@ export default function AddTaskCard({ setShowBtn, listId }: Props) {
           type="datetime-local"
           name="deadline"
           required
-          defaultValue={now(getLocalTimeZone())
-            .add({ days: 1 })
-            .toString()
-            .slice(0, 16)}
-          min={now(getLocalTimeZone()).toString().slice(0, 16)}
+          defaultValue={
+            type === 'edit' && task
+              ? task.deadline.slice(0, 16)
+              : now(getLocalTimeZone()).add({ days: 1 }).toString().slice(0, 16)
+          }
+          min={
+            type === 'edit' && task
+              ? task.deadline.slice(0, 16)
+              : now(getLocalTimeZone()).toString().slice(0, 16)
+          }
           className="w-full px-2 py-1 input"
         />
       </div>
@@ -121,13 +138,15 @@ export default function AddTaskCard({ setShowBtn, listId }: Props) {
           className="pl-8 py-0.5 input w-44 pr-2"
           required
           onFocus={e => e.target.select()}
-          defaultValue="Personal Task"
+          defaultValue={
+            type === 'edit' && task ? task.tagTitle : 'Personal Task'
+          }
           name="tagTitle"
         />
         <input
           type="color"
           list="presetColors"
-          defaultValue="#93c5fd"
+          defaultValue={type === 'edit' && task ? task.tagColor : '#93c5fd'}
           className="w-14 bg-inherit"
           name="tagColor"
         />

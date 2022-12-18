@@ -1,20 +1,20 @@
 import { useState } from 'react';
 
 import AddButton from '../AddButton';
-import AddTaskCard from './AddTaskCard';
+import TaskCardEditor from './TaskCardEditor';
 
 export default function AddTask({ listId }: { listId: string }) {
-  const [showBtn, setShowBtn] = useState(true);
+  const [showEditor, setShowEditor] = useState(false);
 
-  return showBtn ? (
+  return showEditor ? (
+    <TaskCardEditor setShowEditor={setShowEditor} listId={listId} />
+  ) : (
     <AddButton
       className="mt-4 rounded w-72 btn-text"
       lottieColor="black"
       text="Add new task"
       textStyle="text-sm"
-      clickHandler={() => setShowBtn(false)}
+      clickHandler={() => setShowEditor(true)}
     />
-  ) : (
-    <AddTaskCard setShowBtn={setShowBtn} listId={listId} />
   );
 }

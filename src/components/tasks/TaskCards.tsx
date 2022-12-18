@@ -1,10 +1,10 @@
 import TaskCard from './TaskCard';
 import type { Task } from '../../types';
 
-type Props = {
+interface Props {
   tasks: Task[];
   listId: string;
-};
+}
 
 export default function TaskCards({ tasks, listId }: Props) {
   return (

@@ -4,10 +4,10 @@ import DotsLottie from '../DotsLottie';
 import DropdownOptions from './DropdownOptions';
 import useMutateTasks from '../../hooks/useMutateTasks';
 
-type Props = {
+interface Props {
   heading: string;
   listId: string;
-};
+}
 
 export default function ListHeading({ heading, listId }: Props) {
   const [showInput, setShowInput] = useState(false);

@@ -7,16 +7,18 @@ import DropdownOptions from './DropdownOptions';
 import type { Task } from '../../types';
 import { convertNumToMonth } from '../../utils';
 import useMutateTasks from '../../hooks/useMutateTasks';
+import TaskCardEditor from './TaskCardEditor';
 
-type Props = {
+interface Props {
   task: Task;
   listId: string;
-};
+}
 
 export default function TaskCard({ task, listId }: Props) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [checked, setChecked] = useState(task.isCompleted);
   const [allowHover, setAllowHover] = useState(true);
+  const [showEditor, setShowEditor] = useState(false);
 
   const deleteMutaion = useMutateTasks({ method: 'DELETE', url: 'api/tasks' });
 
@@ -42,6 +44,16 @@ export default function TaskCard({ task, listId }: Props) {
       minute: '2-digit',
     });
 
+  if (showEditor)
+    return (
+      <TaskCardEditor
+        setShowEditor={setShowEditor}
+        listId={listId}
+        type="edit"
+        task={task}
+      />
+    );
+
   return (
     <article
       className={`bg-transition cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 shadow-md ${
@@ -59,7 +71,7 @@ export default function TaskCard({ task, listId }: Props) {
         </h3>
         <DropdownOptions
           heading="Card Actions"
-          editHandler={() => console.log('Card Edit!')}
+          editHandler={() => setShowEditor(true)}
           deleteHandler={() =>
             deleteMutaion.mutate({ id: task.id, taskListId: listId })
           }
