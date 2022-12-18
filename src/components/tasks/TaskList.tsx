@@ -20,7 +20,7 @@ export default function TaskList() {
         <section className="flex flex-col w-[304px]" key={i}>
           <ListHeading heading={heading} listId={data[i].id} />
           <div className="flex-grow overflow-hidden hover:overflow-y-auto mt-1.5 pb-1.5">
-            <TaskCards tasks={data[i].tasks} />
+            <TaskCards tasks={data[i].tasks} listId={data[i].id} />
             <AddTask listId={data[i].id} />
           </div>
         </section>

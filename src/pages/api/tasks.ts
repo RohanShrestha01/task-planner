@@ -17,5 +17,11 @@ export default async function tasksHandler(
     });
 
     res.status(200).json(createdTask);
+  } else if (req.method === 'DELETE') {
+    const deletedTask = await prisma.task.delete({
+      where: { id: req.body.id },
+    });
+
+    res.status(200).json(deletedTask);
   }
 }

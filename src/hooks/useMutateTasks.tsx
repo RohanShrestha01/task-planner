@@ -27,6 +27,17 @@ export default function useMutateTasks({ url, method }: Props) {
           ? { ...taskList, tasks: [...taskList.tasks, newData] }
           : taskList
       );
+    else if (method === 'DELETE')
+      return oldData.map((taskList: any) =>
+        taskList.id === newData.taskListId
+          ? {
+              ...taskList,
+              tasks: taskList.tasks.filter(
+                (task: any) => task.id !== newData.id
+              ),
+            }
+          : taskList
+      );
   };
 
   const updateData = url === 'api/taskLists' ? updateTaskList : updateTask;

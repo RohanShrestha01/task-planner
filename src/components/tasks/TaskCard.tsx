@@ -6,11 +6,19 @@ import checkBoxAnimation from '../../../public/lotties/checkBox.json';
 import DropdownOptions from './DropdownOptions';
 import type { Task } from '../../types';
 import { convertNumToMonth } from '../../utils';
+import useMutateTasks from '../../hooks/useMutateTasks';
 
-export default function TaskCard({ task }: { task: Task }) {
+type Props = {
+  task: Task;
+  listId: string;
+};
+
+export default function TaskCard({ task, listId }: Props) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [checked, setChecked] = useState(task.isCompleted);
   const [allowHover, setAllowHover] = useState(true);
+
+  const deleteMutaion = useMutateTasks({ method: 'DELETE', url: 'api/tasks' });
 
   const checkBoxClickHandler = () => {
     if (checked) {
@@ -52,7 +60,9 @@ export default function TaskCard({ task }: { task: Task }) {
         <DropdownOptions
           heading="Card Actions"
           editHandler={() => console.log('Card Edit!')}
-          deleteHandler={() => console.log('Card Deleted!')}
+          deleteHandler={() =>
+            deleteMutaion.mutate({ id: task.id, taskListId: listId })
+          }
         >
           <DotsLottie size="small" setCardHover={setAllowHover} />
         </DropdownOptions>
