@@ -12,11 +12,11 @@ export default function Home(
   const [showBtn, setShowBtn] = useState(true);
 
   return (
-    <main className="flex gap-10 px-12 py-8 h-[calc(100vh-56px)]">
+    <main className="flex gap-10 mx-auto py-8 h-[calc(100vh-56px)] w-[calc(100vw-96px)] overflow-y-auto">
       <TaskList />
       {showBtn ? (
         <AddButton
-          className="self-start rounded shadow-md w-72 btn-primary"
+          className="self-start rounded shadow-md w-72 btn-primary shrink-0"
           lottieColor="white"
           text="Add another list"
           textStyle="font-medium"

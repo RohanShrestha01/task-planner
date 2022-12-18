@@ -37,11 +37,11 @@
 }
 
 ::-webkit-scrollbar {
-  @apply w-2;
+  @apply w-2 h-2.5;
 }
 
 ::-webkit-scrollbar-track {
-  @apply rounded-r bg-inherit;
+  @apply rounded-full bg-inherit;
 }
 
 ::-webkit-scrollbar-thumb {
