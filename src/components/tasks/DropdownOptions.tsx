@@ -9,6 +9,7 @@ import {
   trashAnimation,
   trashAnimationLight,
 } from '../../icons/AllLotties';
+import DeleteAlertDialog from './DeleteAlertDialog';
 
 interface Props {
   heading: string;
@@ -38,6 +39,33 @@ export default function DropdownOptions({ modal = true, ...props }: Props) {
       clickHandler: props.deleteHandler,
     },
   ];
+  type Item = typeof dropdownItems[number];
+
+  const DropdownMenuItem = ({ item }: { item: Item }) => (
+    <DropdownMenu.Item
+      className="flex items-center gap-2 py-1 px-5 rounded hover:bg-violetHover dark:hover:bg-neutralHover cursor-pointer text-[15px] dark:focus-visible:bg-neutralHover focus-visible:bg-violetHover outline-none"
+      onMouseEnter={() =>
+        item.lottieRef.current?.playSegments([0, item.animationDuration], true)
+      }
+      onMouseLeave={() => {
+        item.lottieRef.current?.setDirection(-1);
+        item.lottieRef.current?.play();
+      }}
+      onClick={item.title === 'Delete' ? () => {} : item.clickHandler}
+      onSelect={item.title === 'Delete' ? e => e.preventDefault() : () => {}}
+    >
+      <Lottie
+        autoplay={false}
+        loop={false}
+        animationData={
+          resolvedTheme === 'dark' ? item.animationLight : item.animation
+        }
+        lottieRef={item.lottieRef}
+        className="h-6"
+      />
+      <span>{item.title}</span>
+    </DropdownMenu.Item>
+  );
 
   return (
     <DropdownMenu.Root modal={modal}>
@@ -54,41 +82,13 @@ export default function DropdownOptions({ modal = true, ...props }: Props) {
             {props.heading}
           </DropdownMenu.Label>
           <DropdownMenu.Separator className="h-px m-2 bg-violetText dark:bg-violetTextLight" />
-          {dropdownItems.map(
-            (
-              {
-                animation,
-                animationLight,
-                animationDuration,
-                title,
-                lottieRef,
-                clickHandler,
-              },
-              i
-            ) => (
-              <DropdownMenu.Item
-                className="flex items-center gap-2 py-1 px-5 rounded hover:bg-violetHover dark:hover:bg-neutralHover cursor-pointer text-[15px] dark:focus-visible:bg-neutralHover focus-visible:bg-violetHover outline-none"
-                key={i}
-                onMouseEnter={() =>
-                  lottieRef.current?.playSegments([0, animationDuration], true)
-                }
-                onMouseLeave={() => {
-                  lottieRef.current?.setDirection(-1);
-                  lottieRef.current?.play();
-                }}
-                onClick={clickHandler}
-              >
-                <Lottie
-                  autoplay={false}
-                  loop={false}
-                  animationData={
-                    resolvedTheme === 'dark' ? animationLight : animation
-                  }
-                  lottieRef={lottieRef}
-                  className="h-6"
-                />
-                <span>{title}</span>
-              </DropdownMenu.Item>
+          {dropdownItems.map((item, i) =>
+            item.title === 'Delete' ? (
+              <DeleteAlertDialog clickHandler={item.clickHandler} key={i}>
+                <DropdownMenuItem item={item} />
+              </DeleteAlertDialog>
+            ) : (
+              <DropdownMenuItem item={item} key={i} />
             )
           )}
           <DropdownMenu.Arrow className="fill-violetHover dark:fill-neutralHover" />
