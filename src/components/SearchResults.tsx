@@ -43,7 +43,7 @@ export default function SearchResults({ search }: { search: string }) {
 
   return (
     <section
-      className="absolute top-14 w-[274px] rounded dark:bg-lightNeutralBg bg-lightVioletBg shadow-md z-50"
+      className="absolute top-14 w-[274px] rounded dark:bg-lightNeutralBg bg-lightVioletBg border border-violetText dark:border-violetTextLight shadow-md z-50 overflow-hidden"
       ref={sectionRef}
     >
       {isLoading ? (
@@ -71,14 +71,18 @@ export default function SearchResults({ search }: { search: string }) {
           </div>
         </div>
       ) : (
-        <>
+        <div className="flex flex-col gap-2 p-2">
           {data.map((task: Task) => (
-            <article key={task.id}>
-              <h3>{task.title}</h3>
-              <p>{task.description}</p>
+            <article
+              key={task.id}
+              style={{ backgroundColor: task.tagColor }}
+              className="px-2 py-1 text-black rounded shadow-md"
+            >
+              <h3 className="font-medium">{task.title}</h3>
+              <p className="mt-0.5 text-sm">{task.description}</p>
             </article>
           ))}
-        </>
+        </div>
       )}
     </section>
   );

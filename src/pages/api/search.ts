@@ -26,6 +26,6 @@ export default async function searchHandler(
       ],
     },
   });
-  console.log(searchResults);
+
   res.status(200).json(searchResults);
 }
