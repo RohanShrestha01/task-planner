@@ -8,7 +8,9 @@ import crossHoverAnimation from '../../public/lotties/crossHover.json';
 import dotsAnimation from '../../public/lotties/dots.json';
 import editAnimation from '../../public/lotties/edit.json';
 import emailAnimation from '../../public/lotties/email.json';
+import emptyAnimation from '../../public/lotties/empty.json';
 import eyeAnimation from '../../public/lotties/eye.json';
+import loadingAnimation from '../../public/lotties/loading.json';
 import lockAnimation from '../../public/lotties/lock.json';
 import logoutAnimation from '../../public/lotties/logout.json';
 import radioBtnAnimation from '../../public/lotties/radioButton.json';
@@ -46,7 +48,9 @@ export {
   dotsAnimation,
   editAnimation,
   emailAnimation,
+  emptyAnimation,
   eyeAnimation,
+  loadingAnimation,
   lockAnimation,
   logoutAnimation,
   radioBtnAnimation,
