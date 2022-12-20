@@ -9,7 +9,9 @@ interface Props {
 
 const DeleteAlertDialog = (props: Props) => (
   <AlertDialog.Root>
-    <AlertDialog.Trigger>{props.children}</AlertDialog.Trigger>
+    <AlertDialog.Trigger className="w-full">
+      {props.children}
+    </AlertDialog.Trigger>
     <AlertDialog.Portal>
       <AlertDialog.Overlay className="overlay" />
       <AlertDialog.Content className="flex flex-col gap-5 py-5 px-7 modal-content">

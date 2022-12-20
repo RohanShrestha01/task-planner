@@ -10,6 +10,7 @@ import editAnimation from '../../public/lotties/edit.json';
 import emailAnimation from '../../public/lotties/email.json';
 import emptyAnimation from '../../public/lotties/empty.json';
 import eyeAnimation from '../../public/lotties/eye.json';
+import filterAnimation from '../../public/lotties/filter.json';
 import loadingAnimation from '../../public/lotties/loading.json';
 import lockAnimation from '../../public/lotties/lock.json';
 import logoutAnimation from '../../public/lotties/logout.json';
@@ -32,6 +33,7 @@ export const dotsAnimationLight = convertToWhite(dotsAnimation);
 export const editAnimationLight = convertToWhite(editAnimation);
 export const emailAnimationLight = convertToWhite(emailAnimation);
 export const eyeAnimationLight = convertToWhite(eyeAnimation);
+export const filterAnimationLight = convertToWhite(filterAnimation);
 export const lockAnimationLight = convertToWhite(lockAnimation);
 export const logoutAnimationLight = convertToWhite(logoutAnimation);
 export const radioBtnAnimationLight = convertToWhite(radioBtnAnimation);
@@ -50,6 +52,7 @@ export {
   emailAnimation,
   emptyAnimation,
   eyeAnimation,
+  filterAnimation,
   loadingAnimation,
   lockAnimation,
   logoutAnimation,
