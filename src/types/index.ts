@@ -7,6 +7,7 @@ export interface Task {
   tagColor: string;
   isCompleted: boolean;
   taskListId: string;
+  userId: string;
 }
 
 export interface TaskList {
