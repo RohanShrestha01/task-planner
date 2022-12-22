@@ -21,7 +21,7 @@ const getServerSideProps: GetServerSideProps = async context => {
   const getTaskLists = async () => {
     const taskLists = await prisma.taskList.findMany({
       where: { userId: id },
-      include: { tasks: true },
+      include: { tasks: { orderBy: { orderIndex: 'asc' } } },
     });
     return JSON.parse(JSON.stringify(taskLists));
   };

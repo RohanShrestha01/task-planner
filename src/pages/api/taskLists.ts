@@ -15,7 +15,7 @@ export default async function taskListsHandler(
   if (req.method === 'GET') {
     const taskLists = await prisma.taskList.findMany({
       where: { userId: id },
-      include: { tasks: true },
+      include: { tasks: { orderBy: { orderIndex: 'asc' } } },
     });
 
     res.status(200).json(taskLists);

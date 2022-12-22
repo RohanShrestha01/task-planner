@@ -13,20 +13,46 @@ import {
 } from '../../icons/AllLotties';
 import { DotSvg } from '../../icons/AllSvgs';
 import DeleteAlertDialog from './DeleteAlertDialog';
+import { useTaskListsData } from '../../hooks/useQueryTasks';
+import useMutateSort from '../../hooks/useMutateSort';
 
 interface Props {
   heading: string;
   editHandler: () => void;
   deleteHandler: () => void;
+  listId?: string;
   modal?: boolean;
   children: ReactNode;
 }
 
-export default function DropdownOptions({ modal = true, ...props }: Props) {
+const sortByOptions = [
+  { label: 'Title', value: 'title' },
+  { label: 'Description', value: 'description' },
+  { label: 'Deadline', value: 'deadline' },
+  { label: 'Tag', value: 'tagTitle' },
+  { label: 'Completion', value: 'isCompleted' },
+];
+const sortOrderOptions = [
+  { label: 'Ascending', value: 'asc' },
+  { label: 'Descending', value: 'desc' },
+];
+
+export default function DropdownOptions({
+  modal = true,
+  listId = '',
+  ...props
+}: Props) {
   const { resolvedTheme } = useTheme();
-  const [sortBy, setSortBy] = useState('None');
-  const [sortOrder, setSortOrder] = useState('Ascending');
+
+  const { data } = useTaskListsData();
+  const taskList = data.find((list: { id: string }) => list.id === listId);
+
+  const [sortBy, setSortBy] = useState(taskList?.sortBy || 'deadline');
+  const [sortOrder, setSortOrder] = useState(taskList?.sortOrder || 'asc');
   const filterLottieRef = useRef<LottieRefCurrentProps>(null);
+
+  const mutation = useMutateSort();
+
   const dropdownItems = [
     {
       animation: editAnimation,
@@ -132,26 +158,22 @@ export default function DropdownOptions({ modal = true, ...props }: Props) {
                   >
                     <DropdownMenu.RadioGroup
                       value={sortBy}
-                      onValueChange={setSortBy}
+                      onValueChange={value => {
+                        mutation.mutate({ listId, sortBy: value, sortOrder });
+                        setSortBy(value);
+                      }}
                       className="relative"
                     >
-                      {[
-                        'Title',
-                        'Description',
-                        'Deadline',
-                        'Tag',
-                        'Completion',
-                        'None',
-                      ].map((title, i) => (
+                      {sortByOptions.map(({ value, label }, i) => (
                         <DropdownMenu.RadioItem
                           key={i}
-                          value={title}
+                          value={value}
                           className={itemStyles + ' pl-8'}
                         >
                           <DropdownMenu.ItemIndicator className="absolute left-2">
                             <DotSvg className="h-4" />
                           </DropdownMenu.ItemIndicator>
-                          <DropdownMenu.Item>{title}</DropdownMenu.Item>
+                          <DropdownMenu.Item>{label}</DropdownMenu.Item>
                         </DropdownMenu.RadioItem>
                       ))}
                     </DropdownMenu.RadioGroup>
@@ -164,19 +186,22 @@ export default function DropdownOptions({ modal = true, ...props }: Props) {
               </DropdownMenu.Label>
               <DropdownMenu.RadioGroup
                 value={sortOrder}
-                onValueChange={setSortOrder}
+                onValueChange={value => {
+                  mutation.mutate({ listId, sortBy, sortOrder: value });
+                  setSortOrder(value);
+                }}
                 className="relative"
               >
-                {['Ascending', 'Descending'].map((title, i) => (
+                {sortOrderOptions.map(({ label, value }, i) => (
                   <DropdownMenu.RadioItem
-                    value={title}
+                    value={value}
                     key={i}
                     className={itemStyles + ' pl-10'}
                   >
                     <DropdownMenu.ItemIndicator className="absolute left-3">
                       <DotSvg className="h-4" />
                     </DropdownMenu.ItemIndicator>
-                    <DropdownMenu.Item>{title}</DropdownMenu.Item>
+                    <DropdownMenu.Item>{label}</DropdownMenu.Item>
                   </DropdownMenu.RadioItem>
                 ))}
               </DropdownMenu.RadioGroup>

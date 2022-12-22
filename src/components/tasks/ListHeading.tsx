@@ -60,6 +60,7 @@ export default function ListHeading({ heading, listId }: Props) {
         heading="List Actions"
         editHandler={() => setShowInput(true)}
         deleteHandler={() => deleteMutation.mutate({ id: listId })}
+        listId={listId}
         modal={false}
       >
         <DotsLottie />

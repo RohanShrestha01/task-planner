@@ -65,11 +65,13 @@ model VerificationToken {
 
 // For storing tasks of user
 model TaskList {
-  id      String @id @default(cuid())
-  heading String
-  tasks   Task[]
-  User    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
+  id        String  @id @default(cuid())
+  heading   String
+  sortBy    String? @default("deadline")
+  sortOrder String? @default("asc")
+  tasks     Task[]
+  User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 
   @@index([userId])
 }
@@ -82,6 +84,7 @@ model Task {
   tagTitle    String   @default("Personal Task")
   tagColor    String   @default("#93c5fd")
   isCompleted Boolean  @default(false)
+  orderIndex  Int      @default(0)
   TaskList    TaskList @relation(fields: [taskListId], references: [id], onDelete: Cascade)
   taskListId  String
   User        User     @relation(fields: [userId], references: [id])

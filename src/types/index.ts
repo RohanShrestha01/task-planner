@@ -6,6 +6,7 @@ export interface Task {
   tagTitle: string;
   tagColor: string;
   isCompleted: boolean;
+  orderIndex: number;
   taskListId: string;
   userId: string;
 }
@@ -13,6 +14,8 @@ export interface Task {
 export interface TaskList {
   id: string;
   heading: string;
+  sortBy: string;
+  sortOrder: string;
   tasks: Task[];
   userId: string;
 }

@@ -1,14 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-
 import TaskCards from './TaskCards';
 import AddTask from './AddTask';
 import ListHeading from './ListHeading';
+import { useTaskListsData } from '../../hooks/useQueryTasks';
 
 export default function TaskList() {
-  const { data } = useQuery({
-    queryKey: ['taskLists'],
-    queryFn: () => fetch('/api/taskLists').then(res => res.json()),
-  });
+  const { data } = useTaskListsData();
 
   const headings = data.map(
     ({ heading }: { heading: string }) => heading
