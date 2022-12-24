@@ -4,4 +4,5 @@ export const useTaskListsData = () =>
   useQuery({
     queryKey: ['taskLists'],
     queryFn: () => fetch('/api/taskLists').then(res => res.json()),
+    refetchOnMount: false,
   });
