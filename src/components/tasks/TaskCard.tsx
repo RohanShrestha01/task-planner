@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
 import DotsLottie from '../DotsLottie';
@@ -13,6 +13,7 @@ interface Props {
   task: Task;
   listId: string;
 }
+let timeoutId: NodeJS.Timeout | null = null;
 
 export default function TaskCard({ task, listId }: Props) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
@@ -23,17 +24,19 @@ export default function TaskCard({ task, listId }: Props) {
   const deleteMutaion = useMutateTasks({ method: 'DELETE', url: 'api/tasks' });
   const patchMutation = useMutateTasks({ method: 'PATCH', url: 'api/tasks' });
 
+  useEffect(() => {
+    lottieRef.current?.goToAndStop(task.isCompleted ? 29 : 0, true);
+    setChecked(task.isCompleted);
+  }, [task.isCompleted]);
+
   const checkBoxClickHandler = () => {
-    if (checked) {
-      lottieRef.current?.setDirection(-1);
-      setChecked(false);
-      patchMutation.mutate({ ...task, isCompleted: false });
-    } else {
-      lottieRef.current?.setDirection(1);
-      setChecked(true);
-      patchMutation.mutate({ ...task, isCompleted: true });
-    }
+    lottieRef.current?.setDirection(checked ? -1 : 1);
     lottieRef.current?.play();
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      patchMutation.mutate({ ...task, isCompleted: !checked });
+    }, 1000);
+    setChecked(checked => !checked);
   };
 
   const deadline = new Date(task.deadline);
@@ -98,9 +101,6 @@ export default function TaskCard({ task, listId }: Props) {
           onClick={checkBoxClickHandler}
           onMouseEnter={() => setAllowHover(false)}
           onMouseLeave={() => setAllowHover(true)}
-          onDOMLoaded={() =>
-            checked === true && lottieRef.current?.goToAndStop(29, true)
-          }
           className="transition-transform duration-200 h-7 hover:scale-110"
         />
       </div>
