@@ -69,6 +69,18 @@ export default function TaskCardEditor({
     });
   };
 
+  const deadline = task ? new Date(task.deadline) : new Date();
+  const minDeadline =
+    deadline.getFullYear() +
+    '-' +
+    (deadline.getMonth() + 1) +
+    '-' +
+    deadline.getDate() +
+    'T' +
+    deadline.getHours() +
+    ':' +
+    deadline.getMinutes();
+
   return (
     <form
       ref={formRef}
@@ -109,12 +121,12 @@ export default function TaskCardEditor({
           required
           defaultValue={
             type === 'edit' && task
-              ? task.deadline.slice(0, 16)
+              ? minDeadline
               : now(getLocalTimeZone()).add({ days: 1 }).toString().slice(0, 16)
           }
           min={
             type === 'edit' && task
-              ? task.deadline.slice(0, 16)
+              ? minDeadline
               : now(getLocalTimeZone()).toString().slice(0, 16)
           }
           className="w-full px-2 py-1 input"
