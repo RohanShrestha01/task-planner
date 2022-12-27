@@ -37,17 +37,17 @@ export default function Search() {
           className="absolute right-3"
           onClick={() => setSearchValue('')}
         >
-          {searchValue && (
+          {searchValue ? (
             <Lottie
               animationData={crossIntroAnimation}
               loop={false}
               lottieRef={crossLottieRef}
               className="h-7"
             />
-          )}
+          ) : null}
         </button>
       </form>
-      {searchValue && <SearchResults search={searchValue} />}
+      {searchValue ? <SearchResults search={searchValue} /> : null}
     </div>
   );
 }

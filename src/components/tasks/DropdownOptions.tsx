@@ -127,7 +127,7 @@ export default function DropdownOptions({
               <DropdownMenuItem item={item} key={i} />
             )
           )}
-          {props.heading === 'List Actions' && (
+          {props.heading === 'List Actions' ? (
             <>
               <DropdownMenu.Sub>
                 <DropdownMenu.SubTrigger
@@ -206,7 +206,7 @@ export default function DropdownOptions({
                 ))}
               </DropdownMenu.RadioGroup>
             </>
-          )}
+          ) : null}
           <DropdownMenu.Arrow className="fill-violetHover dark:fill-neutralHover" />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

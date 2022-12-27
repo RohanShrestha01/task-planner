@@ -191,7 +191,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
               <span className="absolute left-0 py-1 transition-all duration-500 origin-left pointer-events-none text-neutral-500 peer-focus:-translate-y-5 peer-focus:text-violetText dark:peer-focus:text-violetTextLight peer-focus:scale-75 peer-valid:-translate-y-5 peer-valid:scale-75">
                 {input.title}
               </span>
-              {type === 'signup' && input.type === 'password' && (
+              {type === 'signup' && input.type === 'password' ? (
                 <Lottie
                   animationData={
                     resolvedTheme === 'dark' ? eyeAnimationLight : eyeAnimation
@@ -210,12 +210,12 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
                   onClick={eyeClickHandler.bind(null, input.title)}
                   className="h-6 cursor-pointer"
                 />
-              )}
+              ) : null}
             </div>
           </div>
           {errors?.fieldErrors[
             input.name as keyof typeof errors.fieldErrors
-          ] && (
+          ] ? (
             <span className="ml-10 text-xs text-red-500">
               {
                 errors.fieldErrors[
@@ -223,10 +223,10 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
                 ]
               }
             </span>
-          )}
+          ) : null}
         </div>
       ))}
-      {type === 'login' && (
+      {type === 'login' ? (
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={radioBtnClickHandler}
@@ -244,7 +244,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
           />
           <span className="text-sm">Show Password</span>
         </div>
-      )}
+      ) : null}
       <button className="justify-center w-56 py-3 mt-2 text-sm rounded-md btn-primary">
         {type === 'signup' ? 'SIGN UP' : 'LOG IN'}
       </button>

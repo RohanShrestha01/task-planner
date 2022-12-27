@@ -46,7 +46,9 @@ export default function ListHeading({ heading, listId }: Props) {
           maxLength={18}
           ref={inputRef}
           required
-          onKeyUp={e => e.key === 'Enter' && inputBlurHandler()}
+          onKeyUp={e => {
+            if (e.key === 'Enter') inputBlurHandler();
+          }}
         />
       ) : (
         <h2

@@ -47,7 +47,9 @@ export default function AddList({ setShowBtn }: Props) {
           ref={inputRef}
           spellCheck="false"
           required
-          onKeyUp={e => e.key === 'Enter' && addClickHandler()}
+          onKeyUp={e => {
+            if (e.key === 'Enter') addClickHandler();
+          }}
         />
         <CrossLottie clickHandler={() => setShowBtn(true)} />
       </div>
