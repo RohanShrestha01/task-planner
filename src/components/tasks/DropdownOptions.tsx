@@ -113,6 +113,7 @@ export default function DropdownOptions({
         <DropdownMenu.Content
           className={contentStyles}
           onCloseAutoFocus={e => e.preventDefault()}
+          data-no-dnd="true"
         >
           <DropdownMenu.Label className="px-5">
             {props.heading}

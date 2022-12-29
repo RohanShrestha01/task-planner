@@ -1,5 +1,8 @@
-import TaskCard from './TaskCard';
+import { useDroppable } from '@dnd-kit/core';
+import { SortableContext } from '@dnd-kit/sortable';
+
 import type { Task } from '../../types';
+import SortableTaskCard from './SortableTaskCard';
 
 interface Props {
   tasks: Task[];
@@ -7,11 +10,15 @@ interface Props {
 }
 
 export default function TaskCards({ tasks, listId }: Props) {
+  const { setNodeRef } = useDroppable({ id: listId });
+
   return (
-    <div className="flex flex-col gap-4 mr-4 w-72">
-      {tasks.map((task, i) => (
-        <TaskCard key={i} task={task} listId={listId} />
-      ))}
-    </div>
+    <SortableContext items={tasks} id={listId}>
+      <ul className="flex flex-col gap-4 mr-4 w-72" ref={setNodeRef}>
+        {tasks.map(task => (
+          <SortableTaskCard key={task.id} task={task} />
+        ))}
+      </ul>
+    </SortableContext>
   );
 }

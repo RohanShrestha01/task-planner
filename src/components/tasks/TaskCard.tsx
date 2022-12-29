@@ -11,11 +11,11 @@ import TaskCardEditor from './TaskCardEditor';
 
 interface Props {
   task: Task;
-  listId: string;
+  dragOverlay?: boolean;
 }
 let timeoutId: NodeJS.Timeout | null = null;
 
-export default function TaskCard({ task, listId }: Props) {
+export default function TaskCard({ task, dragOverlay }: Props) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [checked, setChecked] = useState(task.isCompleted);
   const [allowHover, setAllowHover] = useState(true);
@@ -54,7 +54,7 @@ export default function TaskCard({ task, listId }: Props) {
     return (
       <TaskCardEditor
         setShowEditor={setShowEditor}
-        listId={listId}
+        listId={task.taskListId}
         type="edit"
         task={task}
       />
@@ -62,8 +62,12 @@ export default function TaskCard({ task, listId }: Props) {
 
   return (
     <article
-      className={`bg-transition cursor-pointer rounded pl-4 pr-2 py-4 flex flex-col gap-3 shadow-md ${
-        allowHover && 'hover:bg-violetHover dark:hover:bg-neutralHover'
+      className={`bg-transition rounded pl-4 pr-2 py-4 flex flex-col gap-3 shadow-md ${
+        allowHover ? 'hover:bg-violetHover dark:hover:bg-neutralHover' : ''
+      } ${
+        dragOverlay
+          ? 'cursor-grabbing bg-violetHover dark:bg-neutralHover'
+          : 'cursor-grab'
       }`}
     >
       <div className="flex items-center justify-between">
@@ -79,7 +83,7 @@ export default function TaskCard({ task, listId }: Props) {
           heading="Card Actions"
           editHandler={() => setShowEditor(true)}
           deleteHandler={() =>
-            deleteMutaion.mutate({ id: task.id, taskListId: listId })
+            deleteMutaion.mutate({ id: task.id, taskListId: task.taskListId })
           }
         >
           <DotsLottie size="small" setCardHover={setAllowHover} />
@@ -101,7 +105,8 @@ export default function TaskCard({ task, listId }: Props) {
           onClick={checkBoxClickHandler}
           onMouseEnter={() => setAllowHover(false)}
           onMouseLeave={() => setAllowHover(true)}
-          className="transition-transform duration-200 h-7 hover:scale-110"
+          data-no-dnd="true"
+          className="transition-transform duration-200 cursor-pointer h-7 hover:scale-110"
         />
       </div>
     </article>
