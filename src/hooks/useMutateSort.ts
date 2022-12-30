@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { TaskList } from '../types';
 
 interface Body {
   sortBy: string;
@@ -18,8 +19,8 @@ export default function useMutateSort() {
       }),
     onSuccess: async (data, { listId }) => {
       const sortedTasks = await data.json();
-      queryClient.setQueryData(['taskLists'], (oldData: any) =>
-        oldData.map((taskList: any) =>
+      queryClient.setQueryData<TaskList[]>(['taskLists'], oldData =>
+        oldData?.map(taskList =>
           taskList.id === listId
             ? { ...taskList, tasks: sortedTasks }
             : taskList
