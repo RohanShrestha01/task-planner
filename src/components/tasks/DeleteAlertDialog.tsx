@@ -14,7 +14,10 @@ const DeleteAlertDialog = (props: Props) => (
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
       <AlertDialog.Overlay className="overlay" />
-      <AlertDialog.Content className="flex flex-col gap-5 py-5 px-7 modal-content">
+      <AlertDialog.Content
+        className="flex flex-col gap-5 py-5 px-7 modal-content"
+        data-no-dnd="true"
+      >
         <AlertDialog.Cancel className="absolute top-[22px] right-7">
           <CrossLottie />
         </AlertDialog.Cancel>

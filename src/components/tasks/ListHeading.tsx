@@ -38,7 +38,7 @@ export default function ListHeading({ heading, listId }: Props) {
         <input
           type="text"
           defaultValue={newHeading}
-          className="flex-grow py-0.5 text-lg font-semibold bg-transparent rounded outline-none caret-violetText dark:caret-violetTextLight outline-violetText dark:outline-violetTextLight"
+          className="flex-grow py-0.5 text-lg font-semibold bg-transparent rounded outline-none caret-violetText dark:caret-violetTextLight outline-violetText dark:outline-violetTextLight h-10"
           autoFocus
           spellCheck="false"
           onFocus={e => e.target.select()}

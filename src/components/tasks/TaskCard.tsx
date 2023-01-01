@@ -43,7 +43,7 @@ export default function TaskCard({ task, dragOverlay }: Props) {
   const formattedDeadline =
     deadline.getDate() +
     ' ' +
-    convertNumToMonth(deadline.getMonth()).slice(0, 3) +
+    convertNumToMonth(deadline.getMonth() + 1).slice(0, 3) +
     ' ' +
     deadline.toLocaleTimeString('en-US', {
       hour: '2-digit',

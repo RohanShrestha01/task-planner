@@ -45,7 +45,7 @@ export default function DropdownOptions({
   const { resolvedTheme } = useTheme();
 
   const { data } = useTaskListsData();
-  const taskList = data.find((list: { id: string }) => list.id === listId);
+  const taskList = data?.find(list => list.id === listId);
 
   const [sortBy, setSortBy] = useState(taskList?.sortBy || 'deadline');
   const [sortOrder, setSortOrder] = useState(taskList?.sortOrder || 'asc');

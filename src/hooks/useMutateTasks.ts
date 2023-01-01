@@ -10,7 +10,7 @@ interface Body extends Partial<Omit<Task, 'deadline'>> {
   heading?: string;
   tasks?: Task[];
   onMutateSuccess?: () => void;
-  deadline?: Date;
+  deadline?: Date | string;
 }
 
 export default function useMutateTasks({ url, method }: Props) {

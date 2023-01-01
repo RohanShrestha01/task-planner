@@ -32,7 +32,7 @@ export default function SearchResults({ search }: { search: string }) {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Task[]>({
     queryKey: ['search', debouncedSearch],
     queryFn: () => fetch('/api/search?query=' + search).then(res => res.json()),
     enabled: open,
@@ -60,7 +60,7 @@ export default function SearchResults({ search }: { search: string }) {
             Searching...
           </h2>
         </div>
-      ) : data.length === 0 ? (
+      ) : data?.length === 0 ? (
         <div className="flex flex-col items-center gap-2 pb-5">
           <Lottie animationData={emptyAnimation} />
           <div className="text-center">
@@ -72,7 +72,7 @@ export default function SearchResults({ search }: { search: string }) {
         </div>
       ) : (
         <div className="flex flex-col gap-2 p-2">
-          {data.map((task: Task) => (
+          {data?.map(task => (
             <article
               key={task.id}
               style={{ backgroundColor: task.tagColor }}
