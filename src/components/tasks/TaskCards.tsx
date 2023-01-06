@@ -4,12 +4,12 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import type { Task } from '../../types';
+import type { TaskType } from '../../types';
 import SortableTaskCard from './SortableTaskCard';
 import AddTask from './AddTask';
 
 interface Props {
-  tasks: Task[];
+  tasks: TaskType[];
   listId: string;
 }
 

@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { Task, TaskList } from '../types';
+import type { TaskType, TaskListType } from '../types';
 
 interface Props {
   url: string;
   method: 'POST' | 'PATCH' | 'DELETE';
 }
 
-interface Body extends Partial<Omit<Task, 'deadline'>> {
+interface Body extends Partial<Omit<TaskType, 'deadline'>> {
   heading?: string;
-  tasks?: Task[];
+  tasks?: TaskType[];
   onMutateSuccess?: () => void;
   deadline?: Date | string;
 }
@@ -16,22 +16,22 @@ interface Body extends Partial<Omit<Task, 'deadline'>> {
 export default function useMutateTasks({ url, method }: Props) {
   const queryClient = useQueryClient();
 
-  const updateTaskList = (oldData: TaskList[], newData: Body) => {
-    if (method === 'POST') return [...oldData, newData] as TaskList[];
+  const updateTaskList = (oldData: TaskListType[], newData: Body) => {
+    if (method === 'POST') return [...oldData, newData] as TaskListType[];
     else if (method === 'PATCH')
       return oldData.map(taskList =>
         taskList.id === newData.id
           ? { ...taskList, heading: newData.heading }
           : taskList
-      ) as TaskList[];
+      ) as TaskListType[];
     else return oldData.filter(taskList => taskList.id !== newData.id);
   };
 
-  const updateTask = (oldData: TaskList[], newData: Body) => {
+  const updateTask = (oldData: TaskListType[], newData: Body) => {
     if (method === 'POST')
       return oldData.map(taskList =>
         taskList.id === newData.taskListId
-          ? { ...taskList, tasks: [...taskList.tasks, newData] as Task[] }
+          ? { ...taskList, tasks: [...taskList.tasks, newData] as TaskType[] }
           : taskList
       );
     else if (method === 'PATCH')
@@ -41,7 +41,7 @@ export default function useMutateTasks({ url, method }: Props) {
               ...taskList,
               tasks: taskList.tasks.map(task =>
                 task.id === newData.id ? newData : task
-              ) as Task[],
+              ) as TaskType[],
             }
           : taskList
       );
@@ -69,11 +69,11 @@ export default function useMutateTasks({ url, method }: Props) {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: ['taskLists'] });
       // Snapshot the previous value
-      const previousTaskLists = queryClient.getQueryData<TaskList[]>([
+      const previousTaskLists = queryClient.getQueryData<TaskListType[]>([
         'taskLists',
       ]);
       // Optimistically update to the new value
-      queryClient.setQueryData<TaskList[]>(['taskLists'], oldData => {
+      queryClient.setQueryData<TaskListType[]>(['taskLists'], oldData => {
         if (oldData) return updateData(oldData, newData);
       });
       if (newData.onMutateSuccess) newData.onMutateSuccess();

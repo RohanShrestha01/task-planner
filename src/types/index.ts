@@ -1,4 +1,4 @@
-export interface Task {
+export interface TaskType {
   id: string;
   title: string;
   description: string;
@@ -11,11 +11,11 @@ export interface Task {
   userId: string;
 }
 
-export interface TaskList {
+export interface TaskListType {
   id: string;
   heading: string;
   sortBy: string;
   sortOrder: string;
-  tasks: Task[];
+  tasks: TaskType[];
   userId: string;
 }

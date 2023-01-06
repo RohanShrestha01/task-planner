@@ -7,7 +7,7 @@ import { tagAnimation, tagAnimationLight } from '../../icons/AllLotties';
 import { assertIsNode } from '../../utils';
 import CrossLottie from '../CrossLottie';
 import useMutateTasks from '../../hooks/useMutateTasks';
-import type { Task } from '../../types';
+import type { TaskType } from '../../types';
 
 /* prettier-ignore */
 const colors = ['#fda4af','#f9a8d4','#f0abfc','#d8b4fe','#c4b5fd','#a5b4fc','#93c5fd','#7dd3fc','#67e8f9','#5eead4','#6ee7b7','#86efac','#bef264','#fde047','#fcd34d','#fdba74','#fca5a5','#cbd5e1'];
@@ -15,7 +15,7 @@ const colors = ['#fda4af','#f9a8d4','#f0abfc','#d8b4fe','#c4b5fd','#a5b4fc','#93
 interface Props {
   setShowEditor: Dispatch<SetStateAction<boolean>>;
   listId: string;
-  task?: Task;
+  task?: TaskType;
   type?: string;
 }
 

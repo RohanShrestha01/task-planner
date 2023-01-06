@@ -4,16 +4,16 @@ import {
   type AnimateLayoutChanges,
 } from '@dnd-kit/sortable';
 
-import type { Task } from '../../types';
+import type { TaskType } from '../../types';
 import TaskCard from './TaskCard';
 
 const animateLayoutChanges: AnimateLayoutChanges = args => {
-  const { isSorting } = args;
-  if (isSorting) return defaultAnimateLayoutChanges(args);
+  const { isSorting, wasDragging } = args;
+  if (isSorting || wasDragging) return defaultAnimateLayoutChanges(args);
   return true;
 };
 
-export default function SortableTaskCard({ task }: { task: Task }) {
+export default function SortableTaskCard({ task }: { task: TaskType }) {
   const {
     setNodeRef,
     listeners,

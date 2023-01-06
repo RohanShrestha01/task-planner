@@ -4,13 +4,13 @@ import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import DotsLottie from '../DotsLottie';
 import checkBoxAnimation from '../../../public/lotties/checkBox.json';
 import DropdownOptions from './DropdownOptions';
-import type { Task } from '../../types';
+import type { TaskType } from '../../types';
 import { convertNumToMonth } from '../../utils';
 import useMutateTasks from '../../hooks/useMutateTasks';
 import TaskCardEditor from './TaskCardEditor';
 
 interface Props {
-  task: Task;
+  task: TaskType;
   dragOverlay?: boolean;
 }
 let timeoutId: NodeJS.Timeout | null = null;

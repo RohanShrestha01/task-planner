@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { Task, TaskList } from './types';
+import type { TaskType, TaskListType } from './types';
 
 export const convertNumToMonth = (num: number) => {
   switch (num) {
@@ -66,12 +66,12 @@ export const registerSchema = loginSchema
 export type FlattenedErrors = z.inferFlattenedErrors<typeof registerSchema>;
 
 export const moveBetweenLists = (
-  taskLists: TaskList[],
+  taskLists: TaskListType[],
   activeListId: string,
   activeIndex: number,
   overListId: string,
   overIndex: number,
-  task: Task
+  task: TaskType
 ) =>
   taskLists.map(taskList => {
     if (taskList.id === activeListId)

@@ -16,14 +16,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import TaskCards from './TaskCards';
 import ListHeading from './ListHeading';
 import { useTaskListsData } from '../../hooks/useQueryTasks';
-import type { Task, TaskList } from '../../types';
+import type { TaskType, TaskListType } from '../../types';
 import TaskCard from './TaskCard';
 import { KeyboardSensor, PointerSensor } from '../../lib/dndKitSensors';
 import { moveBetweenLists } from '../../utils';
 
 export default function TaskList() {
   const { data } = useTaskListsData();
-  const [activeCard, setActiveCard] = useState<Task | null>(null);
+  const [activeCard, setActiveCard] = useState<TaskType | null>(null);
 
   const queryClient = useQueryClient();
 
@@ -61,7 +61,7 @@ export default function TaskList() {
       ? taskList.tasks.length + 1
       : (over.data.current?.sortable.index as number);
 
-    queryClient.setQueryData<TaskList[]>(['taskLists'], oldData => {
+    queryClient.setQueryData<TaskListType[]>(['taskLists'], oldData => {
       if (oldData)
         return moveBetweenLists(
           oldData,
@@ -88,7 +88,7 @@ export default function TaskList() {
       ? taskList.tasks.length + 1
       : (over.data.current?.sortable.index as number);
 
-    queryClient.setQueryData<TaskList[]>(['taskLists'], oldData => {
+    queryClient.setQueryData<TaskListType[]>(['taskLists'], oldData => {
       if (!oldData) return;
 
       if (activeListId === overListId)

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 
-import type { Task } from '../types';
+import type { TaskType } from '../types';
 import { assertIsNode } from '../utils';
 import { loadingAnimation, emptyAnimation } from '../icons/AllLotties';
 
@@ -32,7 +32,7 @@ export default function SearchResults({ search }: { search: string }) {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const { data, isLoading } = useQuery<Task[]>({
+  const { data, isLoading } = useQuery<TaskType[]>({
     queryKey: ['search', debouncedSearch],
     queryFn: () => fetch('/api/search?query=' + search).then(res => res.json()),
     enabled: open,

@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import type { TaskList } from '../types';
+import type { TaskListType } from '../types';
 
 export const useTaskListsData = () =>
-  useQuery<TaskList[]>({
+  useQuery<TaskListType[]>({
     queryKey: ['taskLists'],
     queryFn: () => fetch('/api/taskLists').then(res => res.json()),
     refetchOnMount: false,
