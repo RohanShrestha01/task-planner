@@ -28,7 +28,7 @@ export default function CrossLottie({
       onMouseEnter={() => lottieRef.current?.play()}
       onComplete={() => lottieRef.current?.stop()}
       onClick={clickHandler}
-      className="h-6 cursor-pointer"
+      className="w-6 cursor-pointer"
     />
   );
 }

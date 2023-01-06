@@ -13,6 +13,7 @@ import {
 } from '@dnd-kit/core';
 import { sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import type { TaskType, TaskListType } from '../types';
 import { KeyboardSensor, PointerSensor } from '../lib/dndKitSensors';
@@ -31,6 +32,7 @@ export default function Home(
   const [activeCard, setActiveCard] = useState<TaskType | null>(null);
 
   const queryClient = useQueryClient();
+  const [animationParent] = useAutoAnimate<HTMLElement>();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -128,7 +130,10 @@ export default function Home(
       onDragEnd={handleDragEnd}
       measuring={{ droppable: { strategy: MeasuringStrategy.Always } }}
     >
-      <main className="flex gap-10 mx-auto py-8 h-[calc(100vh-56px)] w-[calc(100vw-96px)] overflow-y-auto">
+      <main
+        className="flex gap-10 mx-auto py-8 h-[calc(100vh-56px)] w-[calc(100vw-96px)] overflow-x-auto overflow-y-hidden"
+        ref={animationParent}
+      >
         {data.map((taskList, i) => (
           <TaskList taskList={taskList} key={i} />
         ))}

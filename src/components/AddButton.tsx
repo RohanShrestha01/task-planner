@@ -32,13 +32,13 @@ export default function AddButton({
         loop={false}
         lottieRef={lottieRef}
         onComplete={() => lottieRef.current?.stop()}
-        className={`self-center h-4 ${
+        className={`self-center w-4 ${
           lottieColor === 'white' ? 'stroke-white fill-white' : ''
         } ${
           lottieColor === 'black'
             ? 'stroke-black fill-black dark:stroke-white dark:fill-white'
             : ''
-        } `}
+        }`}
       />
       <span className={textStyle}>{text}</span>
     </button>
