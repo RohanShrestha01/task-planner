@@ -73,13 +73,13 @@ export default function TaskCardEditor({
   const minDeadline =
     deadline.getFullYear() +
     '-' +
-    (deadline.getMonth() + 1) +
+    (deadline.getMonth() + 1).toString().padStart(2, '0') +
     '-' +
-    deadline.getDate() +
+    deadline.getDate().toString().padStart(2, '0') +
     'T' +
-    deadline.getHours() +
+    deadline.getHours().toString().padStart(2, '0') +
     ':' +
-    deadline.getMinutes();
+    deadline.getMinutes().toString().padStart(2, '0');
 
   return (
     <form
