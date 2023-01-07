@@ -106,15 +106,8 @@ export default function Home(
             };
           else return taskList;
         });
-      else
-        return moveBetweenLists(
-          oldData,
-          activeListId,
-          activeIndex,
-          overListId,
-          overIndex,
-          active.data.current?.task
-        );
+
+      return oldData;
     });
 
     setActiveCard(null);

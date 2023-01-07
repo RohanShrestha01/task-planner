@@ -84,7 +84,9 @@ export default function TaskCardEditor({
   return (
     <form
       ref={formRef}
-      className="flex flex-col gap-3 px-4 py-4 mt-4 mr-4 rounded shadow-md bg-transition w-72"
+      className={`flex flex-col gap-3 px-4 py-4 mr-4 rounded shadow-md bg-transition w-72 ${
+        type === 'add' ? 'mt-4' : ''
+      }`}
       onSubmit={submitHandler}
       data-no-dnd="true"
     >
