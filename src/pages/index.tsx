@@ -24,6 +24,7 @@ import AddButton from '../components/AddButton';
 import AddList from '../components/tasks/AddList';
 import getServerSideProps from '../lib/serverProps';
 import { moveBetweenLists } from '../utils';
+import Error from '../components/Error';
 
 export default function Home(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -42,12 +43,7 @@ export default function Home(
   );
 
   const { data } = useTaskListsData();
-  if (!data)
-    return (
-      <h1 className="text-lg font-medium">
-        Error fetching data from the database. Please try again later.
-      </h1>
-    );
+  if (!data) return <Error />;
 
   const handleDragStart = (e: DragStartEvent) =>
     setActiveCard(e.active.data.current?.task);

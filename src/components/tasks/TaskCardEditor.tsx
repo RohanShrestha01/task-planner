@@ -86,7 +86,7 @@ export default function TaskCardEditor({
       ref={formRef}
       className={`flex flex-col gap-3 px-4 py-4 mr-4 rounded shadow-md bg-transition w-72 ${
         type === 'add' ? 'mt-4' : ''
-      }`}
+      } ${type === 'addCalendar' ? 'mr-0 w-[254px]' : ''}`}
       onSubmit={submitHandler}
       data-no-dnd="true"
     >
