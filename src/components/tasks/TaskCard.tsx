@@ -105,6 +105,9 @@ export default function TaskCard({ task, dragOverlay }: Props) {
           onClick={checkBoxClickHandler}
           onMouseEnter={() => setAllowHover(false)}
           onMouseLeave={() => setAllowHover(true)}
+          onDOMLoaded={() =>
+            lottieRef.current?.goToAndStop(checked ? 29 : 0, true)
+          }
           data-no-dnd="true"
           className="transition-transform duration-200 cursor-pointer h-7 hover:scale-110"
         />
