@@ -5,6 +5,7 @@ import calendarAnimation from '../../public/lotties/calendar.json';
 import chevronLeftAnimation from '../../public/lotties/chevronLeft.json';
 import chevronRightAnimation from '../../public/lotties/chevronRight.json';
 import crossHoverAnimation from '../../public/lotties/crossHover.json';
+import custom404Animation from '../../public/lotties/404.json';
 import dotsAnimation from '../../public/lotties/dots.json';
 import editAnimation from '../../public/lotties/edit.json';
 import emailAnimation from '../../public/lotties/email.json';
@@ -47,6 +48,7 @@ export {
   chevronLeftAnimation,
   chevronRightAnimation,
   crossHoverAnimation,
+  custom404Animation,
   dotsAnimation,
   editAnimation,
   emailAnimation,
