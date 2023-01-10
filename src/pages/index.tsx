@@ -12,7 +12,7 @@ import {
   closestCenter,
 } from '@dnd-kit/core';
 import { sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import type { TaskType, TaskListType } from '../types';
@@ -25,6 +25,12 @@ import AddList from '../components/tasks/AddList';
 import getServerSideProps from '../lib/serverProps';
 import { moveBetweenLists } from '../utils';
 import Error from '../components/Error';
+
+interface Body {
+  overListId: string;
+  task: TaskType;
+  updatedTasks: TaskType[];
+}
 
 export default function Home(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -41,6 +47,15 @@ export default function Home(
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  const mutation = useMutation({
+    mutationFn: (body: Body) =>
+      fetch('/api/arrange', {
+        method: 'PATCH',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+      }),
+  });
 
   const { data } = useTaskListsData();
   if (!data) return <Error />;
@@ -63,6 +78,7 @@ export default function Home(
       ? taskList.tasks.length + 1
       : (over.data.current?.sortable.index as number);
 
+    // Update the state of the taskLists query
     queryClient.setQueryData<TaskListType[]>(['taskLists'], oldData => {
       if (oldData)
         return moveBetweenLists(
@@ -77,10 +93,9 @@ export default function Home(
   };
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
-    if (!over || active.id === over.id) {
-      setActiveCard(null);
-      return;
-    }
+    setActiveCard(null);
+    if (!over) return;
+
     const activeListId = active.data.current?.sortable.containerId;
     const overListId = over.data.current?.sortable.containerId || over.id;
 
@@ -90,23 +105,32 @@ export default function Home(
       ? taskList.tasks.length + 1
       : (over.data.current?.sortable.index as number);
 
-    queryClient.setQueryData<TaskListType[]>(['taskLists'], oldData => {
-      if (!oldData) return;
+    // Update the state of the taskLists query
+    if (active.id !== over.id)
+      queryClient.setQueryData<TaskListType[]>(['taskLists'], oldData => {
+        if (!oldData) return;
 
-      if (activeListId === overListId)
+        if (activeListId !== overListId) return oldData;
+
         return oldData.map(taskList => {
-          if (taskList.id === activeListId)
-            return {
-              ...taskList,
-              tasks: arrayMove(taskList.tasks, activeIndex, overIndex),
-            };
-          else return taskList;
+          if (taskList.id !== activeListId) return taskList;
+
+          return {
+            ...taskList,
+            tasks: arrayMove(taskList.tasks, activeIndex, overIndex),
+          };
         });
+      });
 
-      return oldData;
-    });
-
-    setActiveCard(null);
+    // Update the database
+    const newData = queryClient.getQueryData<TaskListType[]>(['taskLists']);
+    const updatedTasks = newData?.find(list => list.id === overListId)?.tasks;
+    if (updatedTasks)
+      mutation.mutate({
+        overListId,
+        task: active.data.current?.task,
+        updatedTasks,
+      });
   };
 
   return (
