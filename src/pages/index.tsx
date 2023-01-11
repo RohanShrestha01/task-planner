@@ -142,6 +142,7 @@ export default function Home(
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
       measuring={{ droppable: { strategy: MeasuringStrategy.Always } }}
+      id="0"
     >
       <main
         className="flex gap-10 mx-auto py-8 h-[calc(100vh-56px)] w-[calc(100vw-96px)] overflow-x-auto overflow-y-hidden"
