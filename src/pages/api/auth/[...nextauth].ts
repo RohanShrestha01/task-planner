@@ -14,8 +14,13 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   callbacks: {
     // Include user.id on session
-    session({ session, user }) {
-      if (session.user) session.user.id = user.id;
+    session({ session, user, token }) {
+      if (session.user) {
+        session.user.id = token.sub || user.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+      }
       return session;
     },
   },
