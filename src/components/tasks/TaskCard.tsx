@@ -20,9 +20,12 @@ export default function TaskCard({ task, dragOverlay }: Props) {
   const [checked, setChecked] = useState(task.isCompleted);
   const [allowHover, setAllowHover] = useState(true);
   const [showEditor, setShowEditor] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   const deleteMutaion = useMutateTasks({ method: 'DELETE', url: 'api/tasks' });
   const patchMutation = useMutateTasks({ method: 'PATCH', url: 'api/tasks' });
+
+  useEffect(() => setHydrated(true), []);
 
   useEffect(() => {
     lottieRef.current?.goToAndStop(task.isCompleted ? 29 : 0, true);
@@ -95,7 +98,7 @@ export default function TaskCard({ task, dragOverlay }: Props) {
       </div>
       <div className="flex items-center justify-between pr-2">
         <span className="text-sm text-violet-700 dark:text-violetTextLight">
-          {formattedDeadline}
+          {hydrated ? formattedDeadline : ''}
         </span>
         <Lottie
           animationData={checkBoxAnimation}
