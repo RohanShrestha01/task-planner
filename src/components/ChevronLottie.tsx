@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 
@@ -16,7 +16,11 @@ interface Props {
 
 export default function ChevronLottie({ type, clickHandler }: Props) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   let animationData;
   if (resolvedTheme === 'dark') {

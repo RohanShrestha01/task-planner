@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
@@ -14,9 +14,12 @@ import {
 export default function Nav() {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);
   const calendarLottieRef = useRef<LottieRefCurrentProps>(null);
+  const [mounted, setMounted] = useState(false);
 
   const { pathname } = useRouter();
   const { resolvedTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
 
   const navItems = [
     {
@@ -52,17 +55,19 @@ export default function Nav() {
                   : 'border-lightVioletBg dark:border-lightNeutralBg'
               }`}
             >
-              <Lottie
-                animationData={
-                  resolvedTheme === 'dark'
-                    ? navItem.lottieLight
-                    : navItem.lottie
-                }
-                autoplay={false}
-                loop={false}
-                lottieRef={navItem.lottieRef}
-                className="h-7"
-              />
+              {mounted ? (
+                <Lottie
+                  animationData={
+                    resolvedTheme === 'dark'
+                      ? navItem.lottieLight
+                      : navItem.lottie
+                  }
+                  autoplay={false}
+                  loop={false}
+                  lottieRef={navItem.lottieRef}
+                  className="h-7"
+                />
+              ) : null}
               <span>{navItem.name}</span>
             </Link>
           </li>

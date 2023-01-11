@@ -9,10 +9,7 @@ export default function ThemeToggleButton() {
   const [mounted, setMounted] = useState(false);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  useEffect(() => setMounted(true), []);
   if (!mounted) return <div className="h-9 w-9" />;
 
   const themeToggleHandler = () => {

@@ -2,14 +2,18 @@ import * as Avatar from '@radix-ui/react-avatar';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useSession, signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import { logoutAnimation, logoutAnimationLight } from '../icons/AllLotties';
 
 export default function Profile() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const [mounted, setMounted] = useState(false);
+
   const { data } = useSession();
   const { resolvedTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
 
   return (
     <div className="flex items-center gap-2.5">
@@ -37,17 +41,19 @@ export default function Profile() {
           {data?.user?.email}
         </span>
       </article>
-      <Lottie
-        animationData={
-          resolvedTheme === 'dark' ? logoutAnimationLight : logoutAnimation
-        }
-        autoplay={false}
-        lottieRef={lottieRef}
-        onMouseEnter={() => lottieRef.current?.play()}
-        onMouseLeave={() => lottieRef.current?.stop()}
-        onClick={() => signOut()}
-        className="h-8 cursor-pointer"
-      />
+      {mounted ? (
+        <Lottie
+          animationData={
+            resolvedTheme === 'dark' ? logoutAnimationLight : logoutAnimation
+          }
+          autoplay={false}
+          lottieRef={lottieRef}
+          onMouseEnter={() => lottieRef.current?.play()}
+          onMouseLeave={() => lottieRef.current?.stop()}
+          onClick={() => signOut()}
+          className="h-8 cursor-pointer"
+        />
+      ) : null}
     </div>
   );
 }

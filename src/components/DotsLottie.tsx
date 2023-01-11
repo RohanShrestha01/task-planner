@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, SetStateAction, useRef, useState, useEffect } from 'react';
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
 import { useTheme } from 'next-themes';
 
@@ -13,8 +13,12 @@ export default function DotsLottie({
   size = 'normal',
   setCardHover = null,
 }: Props) {
+  const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
     <Lottie
