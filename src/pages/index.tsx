@@ -25,6 +25,7 @@ import AddList from '../components/tasks/AddList';
 import getServerSideProps from '../lib/serverProps';
 import { moveBetweenLists } from '../utils';
 import Error from '../components/Error';
+import { useToast } from '../contexts/ToastContext';
 
 interface Body {
   overListId: string;
@@ -56,6 +57,7 @@ export default function Home(
         headers: { 'Content-Type': 'application/json' },
       }),
   });
+  const { updateToast } = useToast();
 
   const { data } = useTaskListsData();
   if (!data) return <Error />;
@@ -125,12 +127,14 @@ export default function Home(
     // Update the database
     const newData = queryClient.getQueryData<TaskListType[]>(['taskLists']);
     const updatedTasks = newData?.find(list => list.id === overListId)?.tasks;
-    if (updatedTasks)
+    if (updatedTasks) {
       mutation.mutate({
         overListId,
         task: active.data.current?.task,
         updatedTasks,
       });
+      updateToast('Task Moved Successfully', 'info');
+    }
   };
 
   return (

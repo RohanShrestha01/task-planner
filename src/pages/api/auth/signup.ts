@@ -37,7 +37,7 @@ export default async function signupHandler(
     });
     await seedDefaultData(newUser.id);
 
-    res.status(201).json({ message: 'User created!' });
+    res.status(201).json({ message: 'Account Created Successfully' });
   } catch (err) {
     res.status(422).json({ message: 'Invalid form data' });
   }

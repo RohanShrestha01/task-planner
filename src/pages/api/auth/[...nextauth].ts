@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         });
         if (!user || !user.password) throw new Error('No user found!');
         const isValidPassword = await compare(creds.password, user.password);
-        if (!isValidPassword) throw new Error('Invalid password!');
+        if (!isValidPassword) throw new Error('Incorrect password!');
 
         return {
           id: user.id,

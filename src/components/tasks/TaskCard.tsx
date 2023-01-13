@@ -8,6 +8,7 @@ import type { TaskType } from '../../types';
 import { convertNumToMonth } from '../../utils';
 import useMutateTasks from '../../hooks/useMutateTasks';
 import TaskCardEditor from './TaskCardEditor';
+import { useToast } from '../../contexts/ToastContext';
 
 interface Props {
   task: TaskType;
@@ -21,6 +22,7 @@ export default function TaskCard({ task, dragOverlay }: Props) {
   const [allowHover, setAllowHover] = useState(true);
   const [showEditor, setShowEditor] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const { updateToast } = useToast();
 
   const deleteMutaion = useMutateTasks({ method: 'DELETE', url: 'api/tasks' });
   const patchMutation = useMutateTasks({ method: 'PATCH', url: 'api/tasks' });
@@ -85,9 +87,10 @@ export default function TaskCard({ task, dragOverlay }: Props) {
         <DropdownOptions
           heading="Card Actions"
           editHandler={() => setShowEditor(true)}
-          deleteHandler={() =>
-            deleteMutaion.mutate({ id: task.id, taskListId: task.taskListId })
-          }
+          deleteHandler={() => {
+            deleteMutaion.mutate({ id: task.id, taskListId: task.taskListId });
+            updateToast('Task Deleted Successfully', 'warning');
+          }}
         >
           <DotsLottie size="small" setCardHover={setAllowHover} />
         </DropdownOptions>

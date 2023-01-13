@@ -15,6 +15,7 @@ import { DotSvg } from '../../icons/AllSvgs';
 import DeleteAlertDialog from './DeleteAlertDialog';
 import { useTaskListsData } from '../../hooks/useQueryTasks';
 import useMutateSort from '../../hooks/useMutateSort';
+import { useToast } from '../../contexts/ToastContext';
 
 interface Props {
   heading: string;
@@ -52,6 +53,7 @@ export default function DropdownOptions({
   const filterLottieRef = useRef<LottieRefCurrentProps>(null);
 
   const mutation = useMutateSort();
+  const { updateToast } = useToast();
 
   const dropdownItems = [
     {
@@ -161,6 +163,7 @@ export default function DropdownOptions({
                       value={sortBy}
                       onValueChange={value => {
                         mutation.mutate({ listId, sortBy: value, sortOrder });
+                        updateToast('Task List Sorted Succesfully', 'info');
                         setSortBy(value);
                       }}
                       className="relative"
@@ -189,6 +192,7 @@ export default function DropdownOptions({
                 value={sortOrder}
                 onValueChange={value => {
                   mutation.mutate({ listId, sortBy, sortOrder: value });
+                  updateToast('Task List Sorted Succesfully', 'info');
                   setSortOrder(value);
                 }}
                 className="relative"

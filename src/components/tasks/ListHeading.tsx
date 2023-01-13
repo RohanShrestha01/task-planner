@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import DotsLottie from '../DotsLottie';
 import DropdownOptions from './DropdownOptions';
 import useMutateTasks from '../../hooks/useMutateTasks';
+import { useToast } from '../../contexts/ToastContext';
 
 interface Props {
   heading: string;
@@ -13,6 +14,7 @@ export default function ListHeading({ heading, listId }: Props) {
   const [showInput, setShowInput] = useState(false);
   const [newHeading, setNewHeading] = useState(heading);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { updateToast } = useToast();
 
   const patchMutation = useMutateTasks({
     url: 'api/taskLists',
@@ -28,6 +30,7 @@ export default function ListHeading({ heading, listId }: Props) {
     const validInput = inputRef.current?.reportValidity();
     if (!validInput) return;
     setNewHeading(inputRef.current?.value!);
+    updateToast('List Heading Updated Successfully', 'success');
     patchMutation.mutate({ heading: inputRef.current?.value!, id: listId });
     setShowInput(false);
   };
@@ -61,7 +64,10 @@ export default function ListHeading({ heading, listId }: Props) {
       <DropdownOptions
         heading="List Actions"
         editHandler={() => setShowInput(true)}
-        deleteHandler={() => deleteMutation.mutate({ id: listId })}
+        deleteHandler={() => {
+          deleteMutation.mutate({ id: listId });
+          updateToast('List Deleted Successfully', 'warning');
+        }}
         listId={listId}
         modal={false}
       >

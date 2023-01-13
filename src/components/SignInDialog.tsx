@@ -45,7 +45,7 @@ export default function SignInDialog() {
             onValueChange={setValue}
             className="flex flex-col items-center gap-10 pb-12 pt-6 px-[76px]"
           >
-            <Tabs.List className="w-full flex">
+            <Tabs.List className="flex w-full">
               <Tabs.Trigger value="signup" className={tabsTriggerStyles}>
                 Sign Up
               </Tabs.Trigger>
@@ -55,23 +55,23 @@ export default function SignInDialog() {
             </Tabs.List>
             <div className="flex gap-8">
               <button
-                className="btn-primary rounded-full p-2"
+                className="p-2 rounded-full btn-primary"
                 onClick={() => signIn('google')}
               >
-                <GoogleSvg className="fill-white h-6" />
+                <GoogleSvg className="h-6 fill-white" />
               </button>
               <button
-                className="btn-primary rounded-full p-2"
+                className="p-2 rounded-full btn-primary"
                 onClick={() => signIn('github')}
               >
                 <GithubSvg className="h-6" />
               </button>
             </div>
             <Tabs.Content value="signup" className="w-full">
-              <SignInForm type="signup" />
+              <SignInForm type="signup" setTabValue={setValue} />
             </Tabs.Content>
             <Tabs.Content value="login" className="w-full">
-              <SignInForm type="login" />
+              <SignInForm type="login" setTabValue={setValue} />
             </Tabs.Content>
           </Tabs.Root>
         </Dialog.Content>

@@ -15,6 +15,8 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import Header from '../components/Header';
+import { ToastProvider } from '../contexts/ToastContext';
+import ToastNotification from '../components/ToastNotification';
 
 const alegreya = Alegreya({ subsets: ['latin'] });
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -28,32 +30,35 @@ export default function App({ Component, pageProps }: AppProps) {
         <SessionProvider session={pageProps.session}>
           <SSRProvider>
             <ThemeProvider attribute="class">
-              <style jsx global>
-                {`
-                  :root {
-                    --font-alegreya: ${alegreya.style.fontFamily};
-                    --font-montserrat: ${montserrat.style.fontFamily};
-                  }
-                `}
-              </style>
-              <Head>
-                <link
-                  rel="icon"
-                  type="image/x-icon"
-                  media="(prefers-color-scheme: dark)"
-                  href="favicon.ico"
-                />
-                <link
-                  rel="icon"
-                  type="image/x-icon"
-                  media="(prefers-color-scheme: light)"
-                  href="favicon-black.ico"
-                />
-                <title>Task Planner Webapp</title>
-              </Head>
-              <Header />
-              <Component {...pageProps} />
-              <ReactQueryDevtools initialIsOpen={false} />
+              <ToastProvider>
+                <style jsx global>
+                  {`
+                    :root {
+                      --font-alegreya: ${alegreya.style.fontFamily};
+                      --font-montserrat: ${montserrat.style.fontFamily};
+                    }
+                  `}
+                </style>
+                <Head>
+                  <link
+                    rel="icon"
+                    type="image/x-icon"
+                    media="(prefers-color-scheme: dark)"
+                    href="favicon.ico"
+                  />
+                  <link
+                    rel="icon"
+                    type="image/x-icon"
+                    media="(prefers-color-scheme: light)"
+                    href="favicon-black.ico"
+                  />
+                  <title>Task Planner Webapp</title>
+                </Head>
+                <Header />
+                <Component {...pageProps} />
+                <ToastNotification />
+                <ReactQueryDevtools initialIsOpen={false} />
+              </ToastProvider>
             </ThemeProvider>
           </SSRProvider>
         </SessionProvider>

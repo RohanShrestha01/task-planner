@@ -4,6 +4,7 @@ import AddButton from '../../components/AddButton';
 import CrossLottie from '../../components/CrossLottie';
 import { assertIsNode } from '../../utils';
 import useMutateTasks from '../../hooks/useMutateTasks';
+import { useToast } from '../../contexts/ToastContext';
 
 interface Props {
   setShowBtn: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +25,7 @@ export default function AddList({ setShowBtn }: Props) {
     return () => document.body.removeEventListener('mousedown', closeAddList);
   }, [setShowBtn]);
 
+  const { updateToast } = useToast();
   const mutation = useMutateTasks({ method: 'POST', url: 'api/taskLists' });
 
   const addClickHandler = () => {
@@ -32,7 +34,10 @@ export default function AddList({ setShowBtn }: Props) {
     mutation.mutate({
       heading: inputRef.current?.value!,
       tasks: [],
-      onMutateSuccess: () => setShowBtn(true),
+      onMutateSuccess: () => {
+        setShowBtn(true);
+        updateToast('New List Added Successfully', 'success');
+      },
     });
   };
 

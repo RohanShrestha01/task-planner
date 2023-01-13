@@ -1,5 +1,5 @@
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react';
-import { useRef, useState } from 'react';
+import { type Dispatch, useRef, useState, type SetStateAction } from 'react';
 import { useTheme } from 'next-themes';
 import { z } from 'zod';
 import { signIn } from 'next-auth/react';
@@ -17,8 +17,14 @@ import {
   radioBtnAnimationLight,
 } from '../icons/AllLotties';
 import { loginSchema, registerSchema, FlattenedErrors } from '../utils';
+import { useToast } from '../contexts/ToastContext';
 
-export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
+interface Props {
+  type: 'login' | 'signup';
+  setTabValue: Dispatch<SetStateAction<string>>;
+}
+
+export default function SignInForm({ type, setTabValue }: Props) {
   const radioBtnLottieRef = useRef<LottieRefCurrentProps>(null);
   const passwordEyeLottieRef = useRef<LottieRefCurrentProps>(null);
   const confirmPasswordEyeLottieRef = useRef<LottieRefCurrentProps>(null);
@@ -32,6 +38,7 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
   const [confirmEyeClosed, setConfirmEyeClosed] = useState(true);
   const [errors, setErrors] = useState<FlattenedErrors>();
   const { resolvedTheme } = useTheme();
+  const { updateToast } = useToast();
 
   const loginInputs = [
     {
@@ -143,7 +150,11 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
           redirect: false,
           ...result,
         });
-        console.log(response);
+        if (response)
+          updateToast(
+            response.error ? response.error : 'Logged In Successfully',
+            response.error ? 'warning' : 'success'
+          );
       } else {
         const response = await fetch('/api/auth/signup', {
           method: 'POST',
@@ -151,7 +162,12 @@ export default function SignInForm({ type }: { type: 'login' | 'signup' }) {
           headers: { 'Content-Type': 'application/json' },
         });
         const data = await response.json();
-        if (!response.ok) console.log(data.message || 'Something Went Wrong!');
+        if (!response.ok)
+          updateToast(data.message || 'Something Went Wrong!', 'warning');
+        else {
+          updateToast(data.message, 'success');
+          setTabValue('login');
+        }
       }
     } catch (err) {
       if (err instanceof z.ZodError) setErrors(err.flatten());

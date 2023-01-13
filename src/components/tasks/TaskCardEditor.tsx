@@ -8,6 +8,7 @@ import { assertIsNode } from '../../utils';
 import CrossLottie from '../CrossLottie';
 import useMutateTasks from '../../hooks/useMutateTasks';
 import type { TaskType } from '../../types';
+import { useToast } from '../../contexts/ToastContext';
 
 /* prettier-ignore */
 const colors = ['#fda4af','#f9a8d4','#f0abfc','#d8b4fe','#c4b5fd','#a5b4fc','#93c5fd','#7dd3fc','#67e8f9','#5eead4','#6ee7b7','#86efac','#bef264','#fde047','#fcd34d','#fdba74','#fca5a5','#cbd5e1'];
@@ -45,6 +46,7 @@ export default function TaskCardEditor({
   const postMutation = useMutateTasks({ url: 'api/tasks', method: 'POST' });
   const patchMutation = useMutateTasks({ url: 'api/tasks', method: 'PATCH' });
   const mutation = type === 'edit' ? patchMutation : postMutation;
+  const { updateToast } = useToast();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,6 +69,11 @@ export default function TaskCardEditor({
       isCompleted: type === 'edit' && task ? task.isCompleted : false,
       onMutateSuccess: () => setShowEditor(false),
     });
+    const toastMessage =
+      type === 'edit'
+        ? 'Task Updated Successfully'
+        : 'New Task Added Successfully';
+    updateToast(toastMessage, 'success');
   };
 
   const deadline = task ? new Date(task.deadline) : new Date();
