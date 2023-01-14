@@ -10,7 +10,7 @@ export default function AddTask({ listId }: { listId: string }) {
     <TaskCardEditor setShowEditor={setShowEditor} listId={listId} />
   ) : (
     <AddButton
-      className="mt-4 mr-4 rounded w-72 btn-text"
+      className="mt-4 mr-4 rounded w-72 btn-text 2xl:w-[272px] xl:w-56"
       lottieColor="black"
       text="Add new task"
       textStyle="text-sm"

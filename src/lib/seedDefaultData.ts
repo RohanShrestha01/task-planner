@@ -11,8 +11,7 @@ const defaultData = [
     heading: 'To Do',
     task: {
       title: 'Support Small Screens',
-      description:
-        'Make website responsive for mobiles, tablets and other small screens',
+      description: 'Make website responsive for mobile and other small screens',
       tagTitle: 'Support',
       tagColor: '#86efac',
       deadline: getDate(3),
@@ -22,8 +21,7 @@ const defaultData = [
     heading: 'Doing',
     task: {
       title: 'Add Animations',
-      description:
-        'Animate dropdowns, modals, cards, page etc using Framer Motion',
+      description: 'Animate dropdowns, modals, page etc using Framer Motion',
       tagTitle: 'UX/UI Design',
       tagColor: '#93c5fd',
       deadline: getDate(2),
@@ -34,7 +32,7 @@ const defaultData = [
     task: {
       title: 'Calendar Features',
       description:
-        'Improve user experience in the calendar page by adding features',
+        'Improve user experience in calendar page by adding features',
       tagTitle: 'Features',
       tagColor: '#f9a8d4',
       deadline: getDate(1),

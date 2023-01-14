@@ -15,14 +15,14 @@ export default function Header() {
   const { data: sessionData } = useSession();
 
   return (
-    <header className="flex px-10 py-1 font-medium shadow-md bg-transition">
+    <header className="flex px-10 py-1 font-medium shadow-md bg-transition 2xl:px-6 xl:px-4">
       <div className="flex items-center justify-between flex-grow">
-        <div className="flex items-center gap-14">
+        <div className="flex items-center gap-14 xl:gap-8">
           <Link
             href="/"
             onMouseEnter={() => lottieRef.current?.setSpeed(3)}
             onMouseLeave={() => lottieRef.current?.setSpeed(1)}
-            className="flex items-center gap-4 group"
+            className="flex items-center gap-4 group xl:gap-2"
           >
             <Lottie
               animationData={calendarAnimation}
@@ -37,7 +37,7 @@ export default function Header() {
         </div>
         <Search />
       </div>
-      <div className="flex items-center gap-10 pl-20">
+      <div className="flex items-center gap-10 pl-20 2xl:pl-10 xl:pl-6 xl:gap-6">
         <ThemeToggleButton />
         {sessionData ? <Profile /> : <SignInDialog />}
       </div>

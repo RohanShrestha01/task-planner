@@ -43,9 +43,9 @@ export default function AddList({ setShowBtn }: Props) {
 
   return (
     <section className="self-start" ref={listRef}>
-      <div className="flex items-center h-10 gap-10 w-72">
+      <div className="flex items-center h-10 gap-10 w-72 2xl:w-[272px] xl:w-56 xl:gap-6">
         <input
-          className="flex-grow px-2 py-1 rounded input"
+          className="flex-grow px-2 py-1 rounded input xl:w-44"
           type="text"
           placeholder="Enter list title"
           autoFocus

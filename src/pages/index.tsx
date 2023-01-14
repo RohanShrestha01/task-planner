@@ -149,7 +149,7 @@ export default function Home(
       id="0"
     >
       <main
-        className="flex gap-10 mx-auto py-8 h-[calc(100vh-56px)] w-[calc(100vw-96px)] overflow-x-auto overflow-y-hidden"
+        className="flex gap-10 px-12 py-8 h-[calc(100vh-56px)] overflow-x-auto overflow-y-hidden 2xl:px-8 2xl:gap-6 xl:px-6 xl:gap-4"
         ref={animationParent}
       >
         {data.map((taskList, i) => (
@@ -157,7 +157,7 @@ export default function Home(
         ))}
         {showBtn ? (
           <AddButton
-            className="self-start rounded shadow-md w-72 btn-primary shrink-0"
+            className="self-start rounded shadow-md w-72 btn-primary shrink-0 2xl:w-[272px] xl:w-56"
             lottieColor="white"
             text="Add another list"
             textStyle="font-medium"

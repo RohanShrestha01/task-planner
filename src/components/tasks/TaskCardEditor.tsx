@@ -93,7 +93,7 @@ export default function TaskCardEditor({
       ref={formRef}
       className={`flex flex-col gap-3 px-4 py-4 mr-4 rounded shadow-md bg-transition w-72 ${
         type === 'add' ? 'mt-4' : ''
-      } ${type === 'addCalendar' ? 'mr-0 w-[254px]' : ''}`}
+      } ${type === 'addCalendar' ? 'mr-0 w-[254px]' : '2xl:w-[272px] xl:w-56'}`}
       onSubmit={submitHandler}
       data-no-dnd="true"
     >
@@ -158,7 +158,9 @@ export default function TaskCardEditor({
           onClick={() => tagLottieRef.current?.play()}
           placeholder="Enter Tag"
           maxLength={18}
-          className="pl-8 py-0.5 input w-44 pr-2"
+          className={`pl-8 py-0.5 input w-44 pr-2 ${
+            type === 'addCalendar' ? 'w-40' : 'xl:w-32 xl:pr-1.5 xl:pl-6'
+          }`}
           required
           onFocus={e => e.target.select()}
           defaultValue={

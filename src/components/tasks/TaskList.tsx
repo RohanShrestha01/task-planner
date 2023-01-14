@@ -19,10 +19,13 @@ export default function TaskList({ taskList }: { taskList: TaskListType }) {
       id={id}
       strategy={verticalListSortingStrategy}
     >
-      <section className="flex flex-col w-[304px]" ref={setNodeRef}>
+      <section
+        className="flex flex-col w-[304px] 2xl:w-72 xl:w-60"
+        ref={setNodeRef}
+      >
         <ListHeading heading={heading} listId={id} />
         <div className="overflow-hidden hover:overflow-y-auto mt-1.5 pb-1.5">
-          <ul className="flex flex-col gap-4 mr-4 w-72">
+          <ul className="flex flex-col gap-4 mr-4 w-72 2xl:w-[272px] xl:w-56">
             {tasks.map(task => (
               <SortableTaskCard key={task.id} task={task} />
             ))}
