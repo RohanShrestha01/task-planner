@@ -35,7 +35,7 @@ export default function Header() {
 
   return (
     <header className="relative flex items-center px-10 py-1 font-medium shadow-md bg-transition 2xl:px-6 xl:px-4">
-      <div className="flex items-center justify-between flex-grow">
+      <div className="flex items-center justify-between flex-grow sm:justify-start sm:gap-6">
         <div className="flex items-center gap-14 xl:gap-8">
           <Link
             href="/"
@@ -48,7 +48,7 @@ export default function Header() {
               lottieRef={lottieRef}
               className="h-12"
             />
-            <h1 className="font-serif text-xl font-bold text-violetText dark:text-violetTextLight group-hover:text-violet-700 dark:group-hover:text-violet-300">
+            <h1 className="font-serif text-xl font-bold text-violetText dark:text-violetTextLight group-hover:text-violet-700 dark:group-hover:text-violet-300 sm:hidden">
               Task Planner
             </h1>
           </Link>

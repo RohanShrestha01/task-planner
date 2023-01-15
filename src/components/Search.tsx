@@ -11,10 +11,10 @@ export default function Search() {
   const crossLottieRef = useRef<LottieRefCurrentProps>(null);
 
   return (
-    <div className="relative">
+    <div className="relative sm:flex-grow">
       <form
         onMouseEnter={() => searchLottieRef.current?.play()}
-        className="relative flex items-center"
+        className="relative flex items-center sm:basis-full"
       >
         <Lottie
           animationData={searchAnimation}
@@ -30,7 +30,7 @@ export default function Search() {
           spellCheck="false"
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
-          className="px-12 py-2 rounded-full input lgxl:w-40 lgxl:pl-10 lgxl:pr-8"
+          className="px-12 py-2 rounded-full input lgxl:w-40 lgxl:pl-10 lgxl:pr-8 sm:flex-grow sm:w-40"
         />
         <button
           type="reset"
