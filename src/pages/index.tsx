@@ -149,7 +149,7 @@ export default function Home(
       id="0"
     >
       <main
-        className="flex gap-10 px-12 py-8 h-[calc(100vh-56px)] overflow-x-auto overflow-y-hidden 2xl:px-8 2xl:gap-6 xl:px-6 xl:gap-4"
+        className="flex gap-10 px-12 py-8 h-[calc(100vh-56px)] overflow-x-auto overflow-y-hidden 2xl:px-8 2xl:gap-6 xl:px-6 xl:gap-4 lg:px-4 lg:gap-2 xs:gap-1"
         ref={animationParent}
       >
         {data.map((taskList, i) => (

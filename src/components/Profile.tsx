@@ -17,7 +17,7 @@ export default function Profile() {
 
   return (
     <div className="flex items-center gap-2.5 lg:self-center">
-      <Avatar.Root className="w-10 h-10 rounded-full shadow">
+      <Avatar.Root className="w-10 h-10 rounded-full shadow-md">
         <Avatar.Image
           src={data?.user?.image!}
           alt={data?.user?.name!}

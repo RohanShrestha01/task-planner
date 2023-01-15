@@ -17,13 +17,13 @@ export default function ToastNotification() {
             : toast.type === 'info'
             ? 'bg-blue-100 text-blue-800'
             : ''
-        }`}
+        } sm:py-3 sm:px-6 xs:text-center xs:px-0`}
         id="ToastRoot"
       >
         <Toast.Title className="font-medium">{toast.message}</Toast.Title>
       </Toast.Root>
 
-      <Toast.Viewport className="fixed bottom-0 right-0 p-10 z-[99999]" />
+      <Toast.Viewport className="fixed bottom-0 right-0 p-10 z-[99999] lg:p-6 md:p-5 sm:p-4 xs:left-0" />
     </Toast.Provider>
   );
 }

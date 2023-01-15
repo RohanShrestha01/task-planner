@@ -25,7 +25,7 @@ export default function ThemeToggleButton() {
 
   return (
     <Lottie
-      className="transition-transform duration-200 cursor-pointer h-9 hover:scale-110"
+      className="transition-transform duration-200 cursor-pointer h-9 hover:scale-110 xs:h-8"
       animationData={themeToggleAnimation}
       autoplay={false}
       loop={false}

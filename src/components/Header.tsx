@@ -21,7 +21,7 @@ export default function Header() {
   const { resolvedTheme } = useTheme();
 
   const menuClickHandler = () => {
-    menuLottieRef.current?.setSpeed(2.5);
+    menuLottieRef.current?.setSpeed(10);
     setShowMenu(prev => !prev);
     if (showMenu) menuLottieRef.current?.setDirection(-1);
     else menuLottieRef.current?.setDirection(1);
@@ -34,8 +34,8 @@ export default function Header() {
   };
 
   return (
-    <header className="relative flex items-center px-10 py-1 font-medium shadow-md bg-transition 2xl:px-6 xl:px-4">
-      <div className="flex items-center justify-between flex-grow sm:justify-start sm:gap-6">
+    <header className="relative flex items-center px-10 py-1 font-medium shadow-md bg-transition 2xl:px-6 xl:px-4 lg:px-2 h-14">
+      <div className="flex items-center justify-between flex-grow sm:justify-start sm:gap-6 xs:gap-2">
         <div className="flex items-center gap-14 xl:gap-8">
           <Link
             href="/"
@@ -46,7 +46,7 @@ export default function Header() {
             <Lottie
               animationData={calendarAnimation}
               lottieRef={lottieRef}
-              className="h-12"
+              className="h-12 xs:h-11"
             />
             <h1 className="font-serif text-xl font-bold text-violetText dark:text-violetTextLight group-hover:text-violet-700 dark:group-hover:text-violet-300 sm:hidden">
               Task Planner
@@ -58,7 +58,7 @@ export default function Header() {
         </div>
         <Search />
       </div>
-      <div className="flex items-center gap-10 pl-20 2xl:pl-10 xl:pl-6 xl:gap-6">
+      <div className="flex items-center gap-10 pl-20 2xl:pl-10 xl:pl-6 xl:gap-6 xs:pl-2">
         <ThemeToggleButton />
         <div className="lg:hidden">
           {sessionData ? <Profile /> : <SignInDialog />}
@@ -72,11 +72,11 @@ export default function Header() {
         loop={false}
         autoplay={false}
         lottieRef={menuLottieRef}
-        className="hidden h-10 ml-6 cursor-pointer lg:block"
+        className="hidden h-10 ml-6 cursor-pointer lg:block xs:ml-2 xs:h-9"
         onClick={menuClickHandler}
       />
       {showMenu ? (
-        <div className="absolute z-20 hidden p-2 rounded shadow-md w-72 right-4 bg-transition top-16 lg:flex lg:flex-col">
+        <div className="absolute z-20 hidden p-4 rounded shadow-md w-72 right-4 bg-transition top-16 lg:flex lg:flex-col xs:right-0 xs:top-14 xs:w-full xs:rounded-none">
           <Nav clickHandler={menuOptionClickHandler} />
           <hr className="h-px my-4 border-none bg-blackText dark:bg-whiteText" />
           {sessionData ? <Profile /> : <SignInDialog />}

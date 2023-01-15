@@ -43,7 +43,7 @@ export default function SignInDialog() {
           <Tabs.Root
             value={value}
             onValueChange={setValue}
-            className="flex flex-col items-center gap-10 pb-12 pt-6 px-[76px]"
+            className="flex flex-col items-center gap-10 pb-12 pt-6 px-[76px] sm:pt-4 sm:gap-8 sm:pb-8 sm:px-14 xs:px-6"
           >
             <Tabs.List className="flex w-full">
               <Tabs.Trigger value="signup" className={tabsTriggerStyles}>
