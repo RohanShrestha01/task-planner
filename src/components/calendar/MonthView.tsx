@@ -24,7 +24,7 @@ export default function MonthView({ selectedValue }: Props) {
         return (
           <td
             key={i}
-            className="px-2 py-1 border border-b-0 border-neutral-500"
+            className="px-2 py-1 border border-b-0 border-neutral-500 sm:text-center"
           >
             {date.day}
           </td>
@@ -34,7 +34,7 @@ export default function MonthView({ selectedValue }: Props) {
   ));
 
   return (
-    <table className="w-full h-full table-fixed">
+    <table className="w-full h-full table-fixed md:text-sm sm:text-xs">
       <thead className="text-center">
         <tr>
           {days.map((day, i) => (

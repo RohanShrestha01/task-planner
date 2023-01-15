@@ -36,9 +36,12 @@ export default function CalendarHeader({
     });
 
   return (
-    <div className="flex justify-between basis-[300px]">
-      <h2 className="text-xl font-bold">{`${selectedMonth} ${selectedValue.day}, ${selectedValue.year}`}</h2>
-      <div className="flex gap-2">
+    <div className="flex justify-between items-center basis-[300px] xl:basis-[265px] md:basis-[232px] sm:basis-40 xs:hidden">
+      <h2 className="text-xl font-bold xl:text-lg md:text-base sm:text-sm">
+        {`${selectedMonth} ${selectedValue.day}`}
+        <span className="sm:hidden">{`, ${selectedValue.year}`}</span>
+      </h2>
+      <div className="flex gap-2 xl:gap-1 sm:gap-0">
         <ChevronLottie type="left" clickHandler={chevronLeftClickHandler} />
         <ChevronLottie type="right" clickHandler={chevronRightClickHandler} />
       </div>

@@ -40,21 +40,21 @@ export default function MainCalendar(props: Props) {
 
   return (
     <Tabs.Root value={viewValue} onValueChange={setViewValue}>
-      <section className="flex items-center justify-between">
+      <section className="flex items-center justify-between xs:justify-center">
         <CalendarHeader {...props} viewValue={viewValue} />
         <Tabs.List className="flex rounded shadow-md bg-transition">
           {tabs.map(({ trigger, value }, i) => (
             <Tabs.Trigger
               value={value}
               key={i}
-              className="data-[state=active]:bg-primary data-[state=active]:hover:bg-primaryHover dark:data-[state=active]:bg-primaryDark dark:data-[state=active]:hover:bg-primaryHover data-[state=active]:text-whiteText hover:bg-violetHover dark:hover:bg-neutralHover px-8 py-2 rounded"
+              className="data-[state=active]:bg-primary data-[state=active]:hover:bg-primaryHover dark:data-[state=active]:bg-primaryDark dark:data-[state=active]:hover:bg-primaryHover data-[state=active]:text-whiteText hover:bg-violetHover dark:hover:bg-neutralHover px-8 py-2 rounded xl:px-6 md:px-4 md:text-sm sm:text-xs"
             >
               {trigger}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
         <button
-          className="rounded shadow-md btn-primary"
+          className="rounded shadow-md btn-primary md:text-sm sm:hidden"
           onClick={todayClickHandler}
         >
           <Lottie
@@ -63,12 +63,12 @@ export default function MainCalendar(props: Props) {
             loop={false}
             lottieRef={lottieRef}
             onComplete={() => lottieRef.current?.stop()}
-            className="h-6"
+            className="h-6 md:h-5"
           />
           <span>Today</span>
         </button>
       </section>
-      <section className="mt-4 overflow-y-auto h-[calc(100vh-145px)] rounded bg-transition shadow-md">
+      <section className="mt-4 overflow-y-auto h-[calc(100vh-145px)] md:h-[calc(100vh-141px)] sm:h-[calc(100vh-137px)] rounded bg-transition shadow-md">
         {tabs.map(({ value, View }, i) => (
           <Tabs.Content value={value} key={i} className="h-full">
             <View {...props} />

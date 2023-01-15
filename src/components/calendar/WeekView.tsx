@@ -33,8 +33,12 @@ export default function WeekView({
           setFocusedValue(dateIndividual);
         }}
       >
-        <div className="text-sm">{day}</div>
-        <div className="text-xl font-medium">{date.day}</div>
+        <div className="text-sm md:text-[13px] sm:text-xs xs:text-[10px]">
+          {day}
+        </div>
+        <div className="text-xl font-semibold md:text-lg sm:text-base xs:text-sm">
+          {date.day}
+        </div>
       </td>
     );
   });
@@ -43,16 +47,16 @@ export default function WeekView({
     <table className="w-full text-center table-fixed">
       <thead className="sticky top-0 z-10 shadow-md bg-transition">
         <tr>
-          <td className="w-16"></td>
+          <td className="w-16 2xl:w-11 xs:w-10"></td>
           {weekViewHead}
-          <td className="w-8"></td>
+          <td className="w-4 2xl:w-2"></td>
         </tr>
       </thead>
       <tbody>
         <tr className="h-5"></tr>
         {hours.map((time, i) => (
           <tr key={i} className="h-12">
-            <td className="px-2 text-sm -translate-y-1/2 border-r border-neutral-500">
+            <td className="px-2 text-sm -translate-y-1/2 border-r border-neutral-500 2xl:text-xs 2xl:px-1 xs:text-[11px]">
               {time}
             </td>
             {days.map((_day, j) => (

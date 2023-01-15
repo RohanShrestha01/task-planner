@@ -24,7 +24,7 @@ export default function CalendarPage(
   if (!data) return <Error />;
 
   return (
-    <main className="flex gap-12 px-6 pt-8 2xl:gap-6">
+    <main className="flex gap-12 px-6 pt-8 2xl:gap-6 xl:gap-4 xl:px-4">
       <aside className="flex-grow">
         <MainCalendar
           selectedValue={value}
@@ -32,7 +32,7 @@ export default function CalendarPage(
           setFocusedValue={setFocusedValue}
         />
       </aside>
-      <aside className="flex flex-col gap-8" ref={animationParent}>
+      <aside className="flex flex-col gap-8 lg:hidden" ref={animationParent}>
         <MonthCalendar
           aria-label="Event date"
           value={value}
