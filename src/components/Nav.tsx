@@ -11,7 +11,7 @@ import {
   tasksAnimationLight,
 } from '../icons/AllLotties';
 
-export default function Nav() {
+export default function Nav({ clickHandler }: { clickHandler?: () => void }) {
   const tasksLottieRef = useRef<LottieRefCurrentProps>(null);
   const calendarLottieRef = useRef<LottieRefCurrentProps>(null);
   const [mounted, setMounted] = useState(false);
@@ -40,12 +40,13 @@ export default function Nav() {
 
   return (
     <nav>
-      <ul className="flex gap-8 xl:gap-4">
+      <ul className="flex gap-8 xl:gap-4 lg:flex-col lg:gap-0">
         {navItems.map((navItem, i) => (
           <li
             key={i}
             onMouseEnter={() => navItem.lottieRef.current?.play()}
             onMouseLeave={() => navItem.lottieRef.current?.stop()}
+            onClick={() => clickHandler && clickHandler()}
           >
             <Link
               href={navItem.link}
@@ -53,7 +54,7 @@ export default function Nav() {
                 pathname === navItem.link
                   ? 'border-violet-600 dark:border-violet-400'
                   : 'border-lightVioletBg dark:border-lightNeutralBg'
-              }`}
+              } lg:rounded`}
             >
               {mounted ? (
                 <Lottie

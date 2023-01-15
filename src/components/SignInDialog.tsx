@@ -22,7 +22,7 @@ export default function SignInDialog() {
         <button
           onMouseEnter={() => avatarLottieRef.current?.play()}
           onMouseLeave={() => avatarLottieRef.current?.stop()}
-          className="rounded-full shadow-md btn-primary"
+          className="rounded-full shadow-md btn-primary lg:rounded"
         >
           <Lottie
             animationData={avatarAnimation}
@@ -35,8 +35,8 @@ export default function SignInDialog() {
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="overlay" />
-        <Dialog.Content className="modal-content">
+        <Dialog.Overlay className="z-40 overlay" />
+        <Dialog.Content className="z-50 modal-content">
           <Dialog.Close className="absolute top-4 right-4">
             <CrossLottie />
           </Dialog.Close>

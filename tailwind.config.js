@@ -11,6 +11,7 @@ module.exports = {
       '2xl': { max: '1439px' },
       xl: { max: '1279px' },
       lg: { max: '1023px' },
+      lgxl: { min: '1024px', max: '1279px' },
     },
     extend: {
       fontFamily: {

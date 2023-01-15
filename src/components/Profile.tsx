@@ -16,7 +16,7 @@ export default function Profile() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center gap-2.5 lg:self-center">
       <Avatar.Root className="w-10 h-10 rounded-full shadow">
         <Avatar.Image
           src={data?.user?.image!}

@@ -15,6 +15,7 @@ import filterAnimation from '../../public/lotties/filter.json';
 import loadingAnimation from '../../public/lotties/loading.json';
 import lockAnimation from '../../public/lotties/lock.json';
 import logoutAnimation from '../../public/lotties/logout.json';
+import menuAnimation from '../../public/lotties/menu.json';
 import radioBtnAnimation from '../../public/lotties/radioButton.json';
 import tasksAnimation from '../../public/lotties/tasks.json';
 import tagAnimation from '../../public/lotties/tag.json';
@@ -37,6 +38,7 @@ export const eyeAnimationLight = convertToWhite(eyeAnimation);
 export const filterAnimationLight = convertToWhite(filterAnimation);
 export const lockAnimationLight = convertToWhite(lockAnimation);
 export const logoutAnimationLight = convertToWhite(logoutAnimation);
+export const menuAnimationLight = convertToWhite(menuAnimation);
 export const radioBtnAnimationLight = convertToWhite(radioBtnAnimation);
 export const tasksAnimationLight = convertToWhite(tasksAnimation);
 export const tagAnimationLight = convertToWhite(tagAnimation);
@@ -58,6 +60,7 @@ export {
   loadingAnimation,
   lockAnimation,
   logoutAnimation,
+  menuAnimation,
   radioBtnAnimation,
   tasksAnimation,
   tagAnimation,

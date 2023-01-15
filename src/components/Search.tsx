@@ -22,7 +22,7 @@ export default function Search() {
           autoplay={false}
           lottieRef={searchLottieRef}
           onComplete={() => searchLottieRef.current?.stop()}
-          className="absolute h-7 left-3 xl:h-6 xl:left-2.5"
+          className="absolute h-7 left-3 lgxl:h-6 lgxl:left-2.5"
         />
         <input
           type="text"
@@ -30,11 +30,11 @@ export default function Search() {
           spellCheck="false"
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
-          className="px-12 py-2 rounded-full input xl:w-40 xl:pl-10 xl:pr-8"
+          className="px-12 py-2 rounded-full input lgxl:w-40 lgxl:pl-10 lgxl:pr-8"
         />
         <button
           type="reset"
-          className="absolute right-3 xl:right-1"
+          className="absolute right-3 lgxl:right-1"
           onClick={() => setSearchValue('')}
         >
           {searchValue ? (
@@ -42,7 +42,7 @@ export default function Search() {
               animationData={crossIntroAnimation}
               loop={false}
               lottieRef={crossLottieRef}
-              className="h-7 xl:h-6"
+              className="h-7 lgxl:h-6"
             />
           ) : null}
         </button>

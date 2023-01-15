@@ -43,7 +43,7 @@ export default function SearchResults({ search }: { search: string }) {
 
   return (
     <section
-      className="absolute top-14 w-[274px] rounded dark:bg-lightNeutralBg bg-lightVioletBg border border-violetText dark:border-violetTextLight shadow-md z-50 overflow-hidden"
+      className="absolute top-14 left-1/2 -translate-x-1/2 w-[274px] rounded dark:bg-lightNeutralBg bg-lightVioletBg border border-violetText dark:border-violetTextLight shadow-md z-30 overflow-hidden"
       ref={sectionRef}
     >
       {isLoading ? (
