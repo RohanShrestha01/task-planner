@@ -6,11 +6,10 @@ interface Props {
   method: 'POST' | 'PATCH' | 'DELETE';
 }
 
-interface Body extends Partial<Omit<TaskType, 'deadline'>> {
+interface Body extends Partial<TaskType> {
   heading?: string;
   tasks?: TaskType[];
   onMutateSuccess?: () => void;
-  deadline?: Date | string;
 }
 
 export default function useMutateTasks({ url, method }: Props) {

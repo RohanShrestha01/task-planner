@@ -21,7 +21,7 @@ export interface Props {
 }
 
 export default function MainCalendar(props: Props) {
-  const [viewValue, setViewValue] = useState('day');
+  const [viewValue, setViewValue] = useState('month');
 
   const tabs = [
     { trigger: 'Day', value: 'day', View: DayView },

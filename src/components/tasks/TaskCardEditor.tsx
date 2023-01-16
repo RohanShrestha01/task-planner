@@ -61,7 +61,7 @@ export default function TaskCardEditor({
     mutation.mutate({
       title: target.title.value,
       description: target.description.value,
-      deadline: new Date(target.deadline.value),
+      deadline: new Date(target.deadline.value).toISOString(),
       tagTitle: target.tagTitle.value,
       tagColor: target.tagColor.value,
       taskListId: listId,
