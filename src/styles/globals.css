@@ -60,7 +60,7 @@
 }
 
 html {
-  @apply overflow-hidden select-none;
+  @apply select-none;
 }
 
 #ToastRoot[data-state='open'] {
