@@ -14,6 +14,9 @@ interface Props {
 export default function MonthView({ selectedValue }: Props) {
   const { data } = useTaskListsData();
   const tasks = data?.map(taskList => taskList.tasks).flat();
+  const tasksOfMonth = tasks?.filter(
+    task => task.deadline.slice(0, 7) === selectedValue.toString().slice(0, 7)
+  );
 
   const weeksInMonth = getWeeksInMonth(selectedValue, 'en-US');
   let date = startOfWeek(startOfMonth(selectedValue), 'en-US');
@@ -38,17 +41,19 @@ export default function MonthView({ selectedValue }: Props) {
               >
                 {date.day}
               </li>
-              {tasks?.map(task =>
-                task.deadline.slice(0, 10) === date.toString() ? (
-                  <li
-                    key={task.id}
-                    style={{ backgroundColor: task.tagColor }}
-                    className="px-1 text-xs font-medium text-black rounded-sm single-line-text md:text-[11px] sm:text-[10px] xs:text-[9px]"
-                  >
-                    {task.title}
-                  </li>
-                ) : null
-              )}
+              {tasksOfMonth?.length !== 0
+                ? tasksOfMonth?.map(task =>
+                    task.deadline.slice(0, 10) === date.toString() ? (
+                      <li
+                        key={task.id}
+                        style={{ backgroundColor: task.tagColor }}
+                        className="px-1 text-xs font-medium text-black rounded-sm single-line-text md:text-[11px] sm:text-[10px] xs:text-[9px]"
+                      >
+                        {task.title}
+                      </li>
+                    ) : null
+                  )
+                : null}
             </ul>
           </td>
         );
