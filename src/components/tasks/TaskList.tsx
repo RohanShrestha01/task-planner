@@ -24,7 +24,7 @@ export default function TaskList({ taskList }: { taskList: TaskListType }) {
         ref={setNodeRef}
       >
         <ListHeading heading={heading} listId={id} />
-        <div className="overflow-hidden hover:overflow-y-auto mt-1.5 pb-1.5 md:overflow-y-auto">
+        <div className="overflow-hidden hover:overflow-y-auto mt-1.5 pb-1.5 lg:overflow-y-auto">
           <ul className="flex flex-col gap-4 mr-4 w-72 2xl:w-[272px] xl:w-56">
             {tasks.map(task => (
               <SortableTaskCard key={task.id} task={task} />

@@ -32,7 +32,13 @@ export default function SortableTaskCard({ task }: { task: TaskType }) {
   };
 
   return (
-    <li style={cardStyle} ref={setNodeRef} {...listeners} {...attributes}>
+    <li
+      style={cardStyle}
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
+      className="touch-none"
+    >
       <TaskCard task={task} />
     </li>
   );

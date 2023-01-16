@@ -4,6 +4,7 @@ import DotsLottie from '../DotsLottie';
 import DropdownOptions from './DropdownOptions';
 import useMutateTasks from '../../hooks/useMutateTasks';
 import { useToast } from '../../contexts/ToastContext';
+import { useTaskListsData } from '../../hooks/useQueryTasks';
 
 interface Props {
   heading: string;
@@ -15,6 +16,7 @@ export default function ListHeading({ heading, listId }: Props) {
   const [newHeading, setNewHeading] = useState(heading);
   const inputRef = useRef<HTMLInputElement>(null);
   const { updateToast } = useToast();
+  const { data } = useTaskListsData();
 
   const patchMutation = useMutateTasks({
     url: 'api/taskLists',
@@ -65,6 +67,8 @@ export default function ListHeading({ heading, listId }: Props) {
         heading="List Actions"
         editHandler={() => setShowInput(true)}
         deleteHandler={() => {
+          if (data && data[0].id === listId)
+            return updateToast('Cannot Delete Last List', 'warning');
           deleteMutation.mutate({ id: listId });
           updateToast('List Deleted Successfully', 'warning');
         }}
