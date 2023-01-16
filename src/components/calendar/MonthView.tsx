@@ -5,12 +5,16 @@ import {
   startOfMonth,
 } from '@internationalized/date';
 import { days } from './WeekView';
+import { useTaskListsData } from '../../hooks/useQueryTasks';
 
 interface Props {
   selectedValue: CalendarDate;
 }
 
 export default function MonthView({ selectedValue }: Props) {
+  const { data } = useTaskListsData();
+  const tasks = data?.map(taskList => taskList.tasks).flat();
+
   const weeksInMonth = getWeeksInMonth(selectedValue, 'en-US');
   let date = startOfWeek(startOfMonth(selectedValue), 'en-US');
   let daysNum = 0;
@@ -24,9 +28,28 @@ export default function MonthView({ selectedValue }: Props) {
         return (
           <td
             key={i}
-            className="px-2 py-1 border border-b-0 border-neutral-500 sm:text-center"
+            className="px-2 py-1 border border-b-0 border-neutral-500 sm:px-1 xs:px-0"
           >
-            {date.day}
+            <ul className="flex flex-col gap-1">
+              <li
+                className={`self-start rounded-full px-2 py-1 ${
+                  date.compare(selectedValue) === 0 ? 'select-color' : ''
+                } sm:self-center`}
+              >
+                {date.day}
+              </li>
+              {tasks?.map(task =>
+                task.deadline.slice(0, 10) === date.toString() ? (
+                  <li
+                    key={task.id}
+                    style={{ backgroundColor: task.tagColor }}
+                    className="px-1 text-xs font-medium text-black rounded-sm single-line-text md:text-[11px] sm:text-[10px] xs:text-[9px]"
+                  >
+                    {task.title}
+                  </li>
+                ) : null
+              )}
+            </ul>
           </td>
         );
       })}

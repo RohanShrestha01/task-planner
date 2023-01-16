@@ -30,6 +30,13 @@
   .modal-content {
     @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-lightVioletBg dark:bg-lightNeutralBg rounded-md shadow-lg w-[90vw] max-w-md max-h-[85vh];
   }
+
+  .single-line-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 ::selection {
