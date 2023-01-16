@@ -25,41 +25,46 @@ export default function DayView({ selectedValue }: Props) {
             <td
               className={`border-t border-neutral-500 ${
                 i === hours.length - 1 ? 'border-b' : ''
-              } text-black p-1 text-left flex flex-col gap-1`}
+              } text-black p-1 text-left`}
             >
-              {tasksOfDay?.length !== 0
-                ? tasksOfDay?.map((task, i) =>
-                    new Date(task.deadline).toLocaleTimeString('en-US', {
-                      hour: 'numeric',
-                      hour12: true,
-                    }) === time ? (
-                      <div
-                        key={task.id}
-                        style={{ backgroundColor: task.tagColor }}
-                        className="px-4 py-1 rounded-md sm:px-2"
-                        ref={
-                          i === 0
-                            ? el => el?.scrollIntoView({ behavior: 'smooth' })
-                            : null
-                        }
-                      >
-                        <p className="font-medium xs:text-[15px]">
-                          {new Date(task.deadline).toLocaleTimeString('en-US', {
-                            hour12: true,
-                            hour: 'numeric',
-                            minute: 'numeric',
-                          })}
-                        </p>
-                        <h3 className="font-medium xs:text-[15px]">
-                          {task.title}
-                        </h3>
-                        <p className="text-sm single-line-text">
-                          {task.description}
-                        </p>
-                      </div>
-                    ) : null
-                  )
-                : null}
+              <div className="flex flex-col gap-1">
+                {tasksOfDay?.length !== 0
+                  ? tasksOfDay?.map((task, i) =>
+                      new Date(task.deadline).toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        hour12: true,
+                      }) === time ? (
+                        <div
+                          key={task.id}
+                          style={{ backgroundColor: task.tagColor }}
+                          className="px-4 py-1 rounded-md sm:px-2"
+                          ref={
+                            i === 0
+                              ? el => el?.scrollIntoView({ behavior: 'smooth' })
+                              : null
+                          }
+                        >
+                          <p className="font-medium xs:text-[15px]">
+                            {new Date(task.deadline).toLocaleTimeString(
+                              'en-US',
+                              {
+                                hour12: true,
+                                hour: 'numeric',
+                                minute: 'numeric',
+                              }
+                            )}
+                          </p>
+                          <h3 className="font-medium xs:text-[15px]">
+                            {task.title}
+                          </h3>
+                          <p className="text-sm single-line-text">
+                            {task.description}
+                          </p>
+                        </div>
+                      ) : null
+                    )
+                  : null}
+              </div>
             </td>
             <td className="w-8 border-l border-neutral-500 sm:w-4 xs:w-2"></td>
           </tr>
