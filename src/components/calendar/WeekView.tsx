@@ -1,4 +1,5 @@
-import { startOfWeek } from '@internationalized/date';
+import { type CalendarDate, startOfWeek } from '@internationalized/date';
+import { useTaskListsData } from '../../hooks/useQueryTasks';
 
 import { type Props } from './MainCalendar';
 
@@ -11,11 +12,16 @@ export default function WeekView({
   setSelectedValue,
   setFocusedValue,
 }: Props) {
+  const { data } = useTaskListsData();
+  const tasks = data?.map(taskList => taskList.tasks).flat();
+
   let date = startOfWeek(selectedValue, 'en-US');
   let daysNum = 0;
+  const dates: CalendarDate[] = [];
 
   const weekViewHead = days.map((day, i) => {
     date = date.add({ days: daysNum });
+    dates.push(date);
     daysNum = 1;
 
     const dateIndividual = date;
@@ -56,18 +62,47 @@ export default function WeekView({
         <tr className="h-5"></tr>
         {hours.map((time, i) => (
           <tr key={i} className="h-12">
-            <td className="px-2 text-sm -translate-y-1/2 border-r border-neutral-500 2xl:text-xs 2xl:px-1 xs:text-[11px]">
+            <td className="px-2 text-sm -translate-y-1/2 2xl:text-xs 2xl:px-1 xs:text-[11px]">
               {time}
             </td>
-            {days.map((_day, j) => (
+            {dates.map((date, j) => (
               <td
                 key={j}
-                className={`border-t border-neutral-500 ${
-                  i === hours.length - 1 ? 'border-b' : ''
-                }`}
-              ></td>
+                className="p-1 text-left text-black border border-neutral-500"
+              >
+                <div className="flex flex-col gap-1">
+                  {tasks?.map(task =>
+                    task.deadline.slice(0, 10) === date.toString() &&
+                    new Date(task.deadline).toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      hour12: true,
+                    }) === time ? (
+                      <div
+                        key={task.id}
+                        style={{ backgroundColor: task.tagColor }}
+                        className="px-2 py-1 rounded-md sm:px-1"
+                        ref={el => el?.scrollIntoView({ behavior: 'smooth' })}
+                      >
+                        <p className="font-medium single-line-text md:text-sm sm:text-xs">
+                          {new Date(task.deadline).toLocaleTimeString('en-US', {
+                            hour12: true,
+                            hour: 'numeric',
+                            minute: 'numeric',
+                          })}
+                        </p>
+                        <h3 className="font-medium single-line-text sm:text-sm xs:text-xs">
+                          {task.title}
+                        </h3>
+                        <p className="text-sm single-line-text xs:text-xs">
+                          {task.description}
+                        </p>
+                      </div>
+                    ) : null
+                  )}
+                </div>
+              </td>
             ))}
-            <td className="border-l border-neutral-500"></td>
+            <td></td>
           </tr>
         ))}
       </tbody>
