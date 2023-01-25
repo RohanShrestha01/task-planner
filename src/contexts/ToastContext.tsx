@@ -1,6 +1,10 @@
 import { createContext, useState, useContext, type ReactNode } from 'react';
 
-const initialState = { show: false, message: '', type: '' };
+const initialState = {
+  show: true,
+  message: 'NOTE: Guest Account will be created in database if not signed in.',
+  type: 'info',
+};
 
 const ToastContext = createContext({
   toast: initialState,
