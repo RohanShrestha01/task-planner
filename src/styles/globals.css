@@ -19,6 +19,10 @@
     @apply transition-[background-color] duration-500 dark:bg-lightNeutralBg bg-lightVioletBg;
   }
 
+  .bg-transition-body {
+    @apply bg-darkVioletBg dark:bg-darkNeutralBg text-blackText dark:text-whiteText transition-[background-color] duration-500;
+  }
+
   .input {
     @apply text-sm border border-neutral-500 placeholder:text-neutral-500 bg-inherit focus:outline-none focus:border-violetText dark:focus:border-violetTextLight caret-violetText dark:caret-violetTextLight;
   }

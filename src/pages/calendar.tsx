@@ -24,7 +24,7 @@ export default function CalendarPage(
   if (!data) return <Error />;
 
   return (
-    <main className="flex gap-12 px-6 pt-8 2xl:gap-6 xl:gap-4 xl:px-4">
+    <main className="flex gap-12 px-6 pt-8 bg-transition-body 2xl:gap-6 xl:gap-4 xl:px-4">
       <aside className="flex-grow">
         <MainCalendar
           selectedValue={value}
