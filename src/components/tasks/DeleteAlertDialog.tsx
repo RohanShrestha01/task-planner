@@ -13,7 +13,7 @@ const DeleteAlertDialog = (props: Props) => (
       {props.children}
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
-      <AlertDialog.Overlay className="overlay" />
+      <AlertDialog.Overlay className="overlay" data-no-dnd="true" />
       <AlertDialog.Content
         className="flex flex-col gap-5 py-5 px-7 modal-content"
         data-no-dnd="true"
