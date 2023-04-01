@@ -1,23 +1,29 @@
-import { createContext, useState, useContext, type ReactNode } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 const initialState = {
-  show: true,
-  message: 'NOTE: Guest Account will be created in database if not signed in.',
-  type: 'info',
+  show: false,
+  message: '',
+  type: '' as 'success' | 'warning' | 'error' | 'info',
 };
 
 const ToastContext = createContext({
   toast: initialState,
-  updateToast: (message: string, type: string) => {},
+  updateToast: (
+    message: string,
+    type: 'success' | 'warning' | 'error' | 'info'
+  ) => {},
   setOpen: (open: boolean) => {},
 });
 
 let timerId: NodeJS.Timeout | null = null;
 
-export const ToastProvider = ({ children }: { children: ReactNode }) => {
+export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toast, setToast] = useState(initialState);
 
-  const updateToast = (message: string, type: string) => {
+  const updateToast = (
+    message: string,
+    type: 'success' | 'warning' | 'error' | 'info'
+  ) => {
     setToast({ show: false, message, type });
     if (timerId) clearTimeout(timerId);
     timerId = setTimeout(() => {
