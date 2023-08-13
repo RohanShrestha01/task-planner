@@ -34,7 +34,7 @@ export default function ToastNotification() {
             : toast.type === 'info'
             ? 'bg-blue-100 text-blue-800'
             : 'bg-red-100 text-red-800'
-        } sm:py-3 sm:px-6 xs:text-center xs:px-0`}
+        } sm:py-3 sm:px-6 xs:justify-center xs:px-0`}
         id="ToastRoot"
       >
         <ToastSvg className="h-6" />
